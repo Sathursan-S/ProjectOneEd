@@ -137,7 +137,8 @@ const LandingPage = () => {
         <span>What our users say</span>
         <hr />
         <div className="testimonials">
-            <Testimonial/>
+          <Testimonial />
+          <Testimonial/>
         </div>
         <div className="slide-move">
           <span>&lt;</span>

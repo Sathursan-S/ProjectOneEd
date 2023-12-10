@@ -5,23 +5,19 @@ import './Testimonial.css'
 const Testimonial = () => {
   return (
       <div className='testimonial'>
-        <div className="account-icon">
+        <div className="profile-icon">
                 <FaUser/>
         </div>
-        
-          <div className="invertedcommo">
-              <span>"</span>
-          </div>
-          <div className="comments">
+
+      <div className="comments">
+                <span>"</span>
               <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. 
                   Ut enim ad minim veniam, quis nostrud exercitation
-              </span>
+        </span>
+        <span>"</span>
           </div>
-          <div className="invertedcommo">
-              <span>"</span>
-              
-          </div>
+
 
     </div>
   )
