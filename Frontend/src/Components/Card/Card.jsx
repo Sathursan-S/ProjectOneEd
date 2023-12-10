@@ -5,7 +5,7 @@ import './Card.css'
 const Card = ({image,subject,grade,teacher,medium,enrolls,fee}) => {
   return (
       <div className='Card'>
-          abv
+         
           <div className="card-image">
               <img src={image} alt="" />
           </div>

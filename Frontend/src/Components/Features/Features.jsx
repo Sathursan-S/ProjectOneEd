@@ -8,10 +8,7 @@ import feature4 from '../../Images/Untitled-4.png'
 const Features = () => {
   return (
         <div className='features'>
-          <div className="feature-title">
-              <span>What's new!</span>
-              <hr  />
-          </div>
+
           <div className="feature-items">
               
                   <div className="rectangle">
@@ -63,7 +60,7 @@ const Features = () => {
                 </div>
           </div>
           <div className="feature-button">
-              <button className='Button feature-but'>EXPLORE CLASSES</button>
+              <button className='Button feature-but'>Explore Classes</button>
           </div>
         </div>
   )
