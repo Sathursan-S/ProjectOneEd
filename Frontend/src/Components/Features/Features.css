@@ -1,0 +1,101 @@
+.rectangle {
+    width: 100%;
+    height: 100%;
+    
+    background: #F5F3F8;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+  }
+
+  .fectImg>img {
+    width: 14vw;
+    padding-top: 2rem;
+    
+    
+    
+  }
+  .txt{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+
+  .txt>span:nth-child(1){
+    text-align: center;
+    
+    font-size: 3vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background: linear-gradient(269deg, #7926C7 -1.05%, #290D44 102.34%);
+    background-clip: text;
+    margin-top: 25px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .txt>span:nth-child(2){
+    color: #7C27CB;
+    text-align: center;
+    
+    font-size: 1.75vw;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-top: 25px;
+  }
+
+  .feature-items{
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+    gap: 10px; /* Adjust the gap as needed */
+
+    align-items: center;
+    justify-content: center;
+
+
+  }
+  @media  sceen and (min-width:100px) {
+    .rectangle{
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  
+  }
+
+  .feature-title{
+    
+    background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 5vw;
+    font-weight: bolder;
+    margin-top: 5vh;
+    
+  }
+
+   .feature-title>hr{
+    background-color: #611E9E;
+    height:  5px;
+    border: none;
+    border-radius: 3px;
+    width: 50px;
+   }
+
+   .feature-but{
+    height: 6vh;
+    width: 20vw;
+    border-radius: 4vh;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    cursor: pointer;
+   }

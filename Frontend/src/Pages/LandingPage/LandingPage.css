@@ -1,0 +1,23 @@
+.landing-page{
+padding-top: 10vh;
+}
+
+.cards{
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+    gap: 10px; /* Adjust the gap as needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-title{
+        
+    background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 5vw;
+    font-weight: bolder;
+    margin-top: 5vh;
+}
