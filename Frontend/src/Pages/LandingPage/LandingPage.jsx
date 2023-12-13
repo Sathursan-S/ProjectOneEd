@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './LandingPage.css'
 import Hero from '../../Components/Hero/Hero';
 import Features from '../../Components/Features/Features';
@@ -9,10 +9,32 @@ import feature4 from '../../Images/Untitled-4.png'
 import createclass from '../../Images/createclass.png'
 import getadmission from '../../Images/getadmition.png'
 import Testimonial from '../../Components/Testimonial/Testimonial';
-
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const LandingPage = () => {
-  return (
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 2
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+};
+
+return (
     <div className='landing-page' >
       <div className="hero">
         <Hero />
@@ -136,21 +158,16 @@ const LandingPage = () => {
       <div className="testimonial-container">
         <span>What our users say</span>
         <hr />
-        <div className="testimonials">
-          <Testimonial />
-          <Testimonial/>
-        </div>
-        <div className="slide-move">
-          <span>&lt;</span>
-          <div className="dot">
-            <span className="small-circle"></span>
-            <span className="small-circle"></span>
-            <span className="small-circle"></span>
-            <span className="small-circle"></span>
-            <span className="small-circle"></span>
-          </div>
-          <span>&gt;</span>
-        </div>
+        
+        
+    </div>
+    <div className="Testimonials">
+          <Carousel responsive={responsive}>
+            <div><Testimonial/></div>
+            <div><Testimonial/></div>
+            <div><Testimonial/></div>
+            <div><Testimonial/></div>
+        </Carousel>;
       </div>
       
     </div>

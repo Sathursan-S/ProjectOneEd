@@ -111,16 +111,7 @@ color: #611E9E;
 
 }
 
-.testimonials{
-    padding-bottom: 5vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
-    gap: 10px; /* Adjust the gap as needed */
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    justify-content: center;
-}
+
 .testimonial-container{
     display: flex;
     flex-direction: column;
@@ -129,3 +120,4 @@ color: #611E9E;
     margin-left: auto;
     margin-right: auto;
 }
+
