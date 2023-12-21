@@ -1,0 +1,119 @@
+
+.login-right{
+    width: 662px;
+    height: 918px;
+    flex-shrink: 0;
+    border-radius: 34px;
+    border: 1px solid #451671;
+    background: #F5F3F8;    
+ 
+}
+
+.login-right-header{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.login-right-header>span:nth-child(1){
+    display: flex;
+    font-weight: bolder;
+    font-size: larger;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #290D44 1.82%, #7C27CB 97.86%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-right-header>span:nth-child(2){
+    
+   margin-left: auto;
+}
+
+.right-title{
+    display: flex;
+    color: #1E1E1E;
+    /* font-family: Poppins; */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 3rem;
+    justify-content: center;
+    
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+   
+}
+.name{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+   
+}
+
+
+.form-labels{
+    color: #000;
+    /* font-family: Poppins; */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-right: auto;
+    margin-bottom: 10px;
+    /* margin-top: 3rem; */
+
+}
+.login-inputs{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.name{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    margin-right: auto;
+}
+
+.login-btn-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.login-btn{
+    width: 543px;
+    height: 53px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: linear-gradient(270deg, #6B21AF -9.33%, #49177A 112.44%);
+    color: #fff;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Optional: Add styles for focus state */
+.form-control:focus {
+    border-color: #6B21AF; /* Change the color as needed */
+    outline: 0; /* Remove the default focus outline */
+    box-shadow: 0 0 0 0.2rem rgba(107, 33, 175, 0.25); /* Add a subtle box-shadow on focus */
+}
