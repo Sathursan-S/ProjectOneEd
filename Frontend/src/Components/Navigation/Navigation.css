@@ -8,7 +8,7 @@
     background-color: #FFFFFF;
 }
 
-.company-name>span{
+.company-name-span{
     padding-left:5vw;
     background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
     -webkit-background-clip: text;
@@ -39,7 +39,7 @@
     flex-direction: row;
     margin-right: 1rem;
 }
-.login-button>button{
+.signin-button{
     margin-right: 1rem;
     cursor: pointer;
     color: #FFFFFF;
