@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaStar } from 'react-icons/fa';
 import './Card.css'
+import { Link } from "react-router-dom";
 
 const Card = ({image,subject,grade,teacher,medium,enrolls,fee}) => {
   return (
@@ -42,7 +43,10 @@ const Card = ({image,subject,grade,teacher,medium,enrolls,fee}) => {
               </div>
           </div>
           <div className=" card-button">
-              <button className='Button card-butt'>Show details</button>
+              <Link to='/class-view'>
+                  <button className='Button card-butt'>Show details</button>
+              </Link>
+              
               <div className="card-stars">
                   <FaStar />
                   <FaStar />
