@@ -11,6 +11,7 @@ import getadmission from '../../Images/getadmition.png'
 import Testimonial from '../../Components/Testimonial/Testimonial';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import FreeClassCard from '../../Components/FreeClassCard/FreeClassCard';
 
 const LandingPage = () => {
 
@@ -43,6 +44,32 @@ return (
         <span>For empowering students</span>
         <hr />
         <Features/>
+      </div>
+      <div className="free-classes">
+        <span className='card-title'>Free classes for you </span>
+        
+        <div className="free-cards">
+          <FreeClassCard
+              image={image}
+              subject="A/L ICT - Paper class"
+              grade='2024 Batch - Advanced Level'
+              teacher='Himosh  '
+          qualification='Bsc Engineering(Reading)'
+          date='20.12.2022 Thursday'
+          timeFrom='7.00pm'
+          timeTo='8.00pm'
+        />
+          <FreeClassCard
+              image={image}
+              subject="A/L ICT - Paper class"
+              grade='2024 Batch - Advanced Level'
+              teacher='Himosh  '
+          qualification='Bsc Engineering(Reading)'
+          date='20.12.2022 Thursday'
+          timeFrom='7.00pm'
+          timeTo='8.00pm'
+        />
+        </div>
       </div>
             
       
