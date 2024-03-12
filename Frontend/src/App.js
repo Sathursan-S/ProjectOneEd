@@ -13,6 +13,7 @@ import LandingPage from './Pages/LandingPage/LandingPage';
 import InstructorAuthPage from './Pages/InstructorAuthPage/InstructorAuthPage';
 // import Card from './Components/Card/Card';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ExploreClassesPage from './Pages/ExploreClassesPage/ExploreClassesPage';
 
 function App() {
   return (
@@ -23,10 +24,11 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
+          <Route path="/explore-classes" element={<ExploreClassesPage />} />
         </Routes>
       </BrowserRouter>
 
-
+      {/* <ExploreClassesPage/> */}
       {/* <LoginCard/> */}
       {/* <Navigation /> */}
       {/* <Navbar/> */}

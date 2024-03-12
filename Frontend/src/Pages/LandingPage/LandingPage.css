@@ -121,3 +121,16 @@ color: #611E9E;
     margin-right: auto;
 }
 
+.free-classes{
+
+
+}
+.free-cards{
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));  
+    gap: 10px; /* Adjust the gap as needed */
+    margin-left: 7rem;
+    margin-right: auto;
+}
