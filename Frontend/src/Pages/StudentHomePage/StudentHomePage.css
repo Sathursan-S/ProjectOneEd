@@ -1,3 +1,11 @@
+.StudentHomePage{
+    background-color: #F5F5F5;
+}
+
+.My-classes-bacgroundcolo{
+    background-color: #fff;
+}
+
 .student-home-page-title{
         background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
     -webkit-background-clip: text;
@@ -15,9 +23,63 @@
     justify-content: flex-start;
     align-items: start;
     
+    
 }
 .student-home-page-navbar>button{
     width: auto;
+    background-color: transparent;
+    border-radius: 0;
+    color: #451671;
+    font-weight: 400;
     
 
+}
+
+.enrolled-classes{
+        align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  
+    gap: 10px; /* Adjust the gap as needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.underline{
+    border-bottom: 3px solid #7C27CB;
+    font-weight: bolder;
+}
+.greeting{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.my-claases{
+    display: flex;
+    flex-direction: row;
+    
+}
+.my-classes-right{
+    background-color: #F5F5F5;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    border-radius: 15px;
+    width: 50vw;
+    
+    padding: 10px;
+}
+.upcoming-classes{
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    /* justify-content: flex-start; */
+}
+.upcoming-classes-title{
+     background: linear-gradient(to left, #290D44, #7C27CB); /* Adjust the colors as needed */
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    font-size: 1.25rem;
 }
