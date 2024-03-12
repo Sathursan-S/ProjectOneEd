@@ -1,0 +1,23 @@
+.student-home-page-title{
+        background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 5vw;
+    font-weight: bolder;
+    margin-top: 5vh;
+    
+}
+.student-home-page-header{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: auto;
+    justify-content: flex-start;
+    align-items: start;
+    
+}
+.student-home-page-navbar>button{
+    width: auto;
+    
+
+}
