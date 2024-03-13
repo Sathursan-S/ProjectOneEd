@@ -19,7 +19,7 @@ import StudentHomePage from './Pages/StudentHomePage/StudentHomePage';
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Navigation/>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -27,8 +27,8 @@ function App() {
           <Route path="/class-view" element={<ClassViewPage />} />
           <Route path="/explore-classes" element={<ExploreClassesPage />} />
         </Routes>
-      </BrowserRouter> */}
-      <StudentHomePage/>
+      </BrowserRouter>
+      {/* <StudentHomePage/> */}
 
       {/* <ExploreClassesPage/> */}
       {/* <LoginCard/> */}
