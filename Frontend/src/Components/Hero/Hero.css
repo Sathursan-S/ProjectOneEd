@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: column;
     background: linear-gradient(to right, #290D44, #7C27CB); /* Adjust the colors as needed */
+    background: linear-gradient(to right, #37115a, #8a2be2); /* Adjust the colors as needed */
     -webkit-background-clip: text;
     color: transparent;
     font-size: 30px;
@@ -60,7 +61,7 @@ h3{
     font-size: 38px;
     font-family: 'Lexend', sans-serif;
     font-weight: 500;
-    background: linear-gradient(to right, #290D44, #7C27CB);
+    background: linear-gradient(to right, #37115a, #8a2be2);
     -webkit-background-clip: text;
     color: transparent;
     margin-top: 20px;
