@@ -26,7 +26,7 @@ function App() {
       <Navbar/>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signin" element={<StudentAuthPage />} />
+          <Route path="/login" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
           <Route path="/explore-classes" element={<ExploreClassesPage />} />
         </Routes>
