@@ -1,0 +1,18 @@
+.EnrolledClassCard{
+    width: 45vh;
+    margin: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.card-image>img{
+    height: 20vh;
+}
+
+.card-subject{
+    font-weight: bolder;
+}
+
+.card-grade{
+    font: weight 500;
+}

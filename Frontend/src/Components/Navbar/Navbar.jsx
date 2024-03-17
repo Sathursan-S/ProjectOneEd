@@ -9,8 +9,9 @@ const Navbar = () => {
     const [menu, setMenu] = useState("home");
   return (
     <div className='navbar'>
-        <div className='navbar-logo'>
-            <p>SpaceEd</p>
+          <div className='navbar-logo'>
+             <Link to='/' ><p>SpaceEd</p></Link>
+            
         </div>     
         <ul className='navbar-menu'>
             <li onClick={()=>{setMenu("home")}}>Explore classes{menu==="home"?<hr/>:<></>}</li>
@@ -21,12 +22,12 @@ const Navbar = () => {
         </ul>
         <div className='navbar-button'>
     
-                    <button className='navbar-login'>
-                      Logout
-                    </button>
                     {/* <button className='navbar-login'>
-                        <Link style={{ textDecoration: 'none', color: '#626262' }} to='/login'>Login</Link>
+                      Logout
                     </button> */}
+                    <button className='navbar-login'>
+                        <Link style={{ textDecoration: 'none', color: '#626262' }} to='/login'>Login</Link>
+                    </button>
 
             {/* <button className='navbar-myevent'><Link style={{ textDecoration: 'none', color: 'white' }} to='/myevent'>My Event</Link></button> */}
             <button className='navbar-profile'>

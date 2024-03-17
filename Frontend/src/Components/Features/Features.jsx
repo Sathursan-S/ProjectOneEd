@@ -4,6 +4,8 @@ import feature1 from '../../Images/Untitled-1.png'
 import feature2 from '../../Images/Untitled-2.png'
 import feature3 from '../../Images/Untitled-3.png'
 import feature4 from '../../Images/Untitled-4.png'
+import { Link } from "react-router-dom";
+
 
 const Features = () => {
   return (
@@ -60,7 +62,9 @@ const Features = () => {
                 </div>
           </div>
           <div className="feature-button">
-              <button className='Button feature-but'>Explore Classes</button>
+              <Link to='/explore-classes'>
+                  <button className='Button feature-but'>Explore Classes</button>
+                </Link>
           </div>
         </div>
   )

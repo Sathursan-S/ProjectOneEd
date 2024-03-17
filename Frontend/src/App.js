@@ -14,18 +14,35 @@ import LandingPage from './Pages/LandingPage/LandingPage';
 import InstructorAuthPage from './Pages/InstructorAuthPage/InstructorAuthPage';
 // import Card from './Components/Card/Card';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ExploreClassesPage from './Pages/ExploreClassesPage/ExploreClassesPage';
+import StudentHomePage from './Pages/StudentHomePage/StudentHomePage';
 
 function App() {
   return (
     <div className="App">
-      <Navbar/>
+      
+      
       <BrowserRouter>
+      <Navbar/>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signin" element={<StudentAuthPage />} />
+          <Route path="/login" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
+          <Route path="/explore-classes" element={<ExploreClassesPage />} />
         </Routes>
       </BrowserRouter>
+      {/* <StudentHomePage/> */}
+
+      {/* <ExploreClassesPage/> */}
+      {/* <LoginCard/> */}
+      {/* <Navigation /> */}
+      {/* <Navbar/> */}
+
+      {/* <ClassViewPage />  */}
+      
+      {/* <LandingPage/> */}
+      {/* <AuthPage/> */}
+      
     </div>
   );
 }
