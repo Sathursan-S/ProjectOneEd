@@ -1,4 +1,4 @@
-package com.projectoneed.usermanagementservice.model;
+package com.projectoneed.authservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
