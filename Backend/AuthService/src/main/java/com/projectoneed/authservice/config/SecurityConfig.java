@@ -1,5 +1,6 @@
 package com.projectoneed.authservice.config;
 
+import com.projectoneed.authservice.model.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static com.projectoneed.authservice.model.user.Permissions.*;
+import static com.projectoneed.authservice.model.user.Role.INSTRUCTOR;
+import static com.projectoneed.authservice.model.user.Role.STUDENT;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.HttpMethod.DELETE;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +44,18 @@ public class SecurityConfig {
                                 "/webjars/**",
                                 "/swagger-ui.html")
                         .permitAll()
+
+                        .requestMatchers("/api/v1/landig-page/**").hasAnyRole(STUDENT.name(), INSTRUCTOR.name())
+                        .requestMatchers(GET,"api/v1/student/**").hasAuthority(STUDENT_READ.name())
+                        .requestMatchers(POST,"api/v1/student/**").hasAuthority(STUDENT_WRITE.name())
+                        .requestMatchers(PUT,"api/v1/student/**").hasAuthority(STUDENT_UPDATE.name())
+                        .requestMatchers(DELETE,"api/v1/student/**").hasAuthority(STUDENT_DELETE.name())
+
+                        .requestMatchers("api/v1/instructor/**").hasRole(INSTRUCTOR.name())
+                        .requestMatchers(GET,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_READ.name())
+                        .requestMatchers(POST,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_WRITE.name())
+                        .requestMatchers(PUT,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_UPDATE.name())
+                        .requestMatchers(DELETE,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_DELETE.name())
                         .anyRequest()
                         .authenticated()
                 )

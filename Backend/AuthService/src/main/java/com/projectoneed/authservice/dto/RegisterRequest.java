@@ -1,6 +1,6 @@
 package com.projectoneed.authservice.dto;
 
-import com.projectoneed.authservice.model.Role;
+import com.projectoneed.authservice.model.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
