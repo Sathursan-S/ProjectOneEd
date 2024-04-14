@@ -16,6 +16,7 @@ import InstructorAuthPage from './Pages/InstructorAuthPage/InstructorAuthPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ExploreClassesPage from './Pages/ExploreClassesPage/ExploreClassesPage';
 import StudentHomePage from './Pages/StudentHomePage/StudentHomePage';
+import AuthPage from './Pages/StudentAuthPage/StudentAuthPage';
 
 function App() {
   return (
@@ -29,9 +30,12 @@ function App() {
           <Route path="/login" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
           <Route path="/explore-classes" element={<ExploreClassesPage />} />
+          <Route path="/instructor-signup" element={<InstructorAuthPage />} />
+          <Route path="/student-home" element={<StudentHomePage />} />
         </Routes>
       </BrowserRouter>
       {/* <StudentHomePage/> */}
+      {/* <InstructorAuthPage/> */}
 
       {/* <ExploreClassesPage/> */}
       {/* <LoginCard/> */}

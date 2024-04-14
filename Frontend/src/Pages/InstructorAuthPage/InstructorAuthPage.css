@@ -1,0 +1,83 @@
+.login-card-h1{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 2rem;
+    margin-bottom: none;
+}
+.login-card-h1-span-2{
+    font-size: 10px;
+    margin-bottom: 1rem;
+}
+.login-card-h1-span-1{
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 1rem;
+
+}
+.signup-instroctor-01{
+    display: flex;
+    flex-direction: row;
+   
+}
+.signup-institution-name,
+ .signup-capacity, 
+ .signup-instructor-position,
+ .signup-location{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+}
+.signup-instructor-position{
+    margin-top: 1rem;
+}
+.signup-instructor-position>select{
+    height: 2rem;
+    border: 1px solid #000000 ;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding:0.2rem 0.4rem;
+    margin-top: 0.5rem;
+}
+.signup-institution-name>input{
+    width: 100%;
+    margin-top: 0.5rem;
+}
+.signup-location>select{
+    height: 2rem;
+    border: 1px solid #000000 ;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding:0.2rem 0.4rem;
+    margin-top: 0.5rem;
+}
+.signup-capacity
+{
+
+    margin-left: auto;
+}
+.signup-capacity>select
+{
+    
+    height: 1.95rem;
+    border: 1px solid #000000 ;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding:0.2rem 0.4rem;
+    margin-top: 0.5rem;
+    
+    
+}
+
+
+.signup-institution-name>input
+
+{
+    height: 1.5rem;
+    border: 1px solid #000000 ;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding:0.2rem 0.4rem;
+}
