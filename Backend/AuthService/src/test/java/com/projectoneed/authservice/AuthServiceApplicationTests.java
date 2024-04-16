@@ -1,4 +1,4 @@
-package org.projectoneed.authservice;
+package com.projectoneed.authservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
