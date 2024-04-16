@@ -37,18 +37,18 @@ public class StudentController {
         );
     }
 
-    @DeleteMapping("delete")
-    public ResponseEntity<?> deleteStudent(DeleteStudentRequest request) {
-        return studentService.deleteStudent(request);
-    }
-
-    @GetMapping("get-by-id")
-    public GetStudentByIdResponse getStudentById(GetStudentByIdRequest request) {
-        return studentService.getStudentById(request);
-    }
-
-    @GetMapping("get-by-username")
-    public GetStudentByUsernameResponse getStudentByUsername(GetStudentByUsernameRequest request) {
-        return studentService.getStudentByUsername(request);
-    }
+//    @DeleteMapping("delete")
+//    public ResponseEntity<?> deleteStudent(DeleteStudentRequest request) {
+//        return studentService.deleteStudent(request);
+//    }
+//
+//    @GetMapping("get-by-id")
+//    public GetStudentByIdResponse getStudentById(GetStudentByIdRequest request) {
+//        return studentService.getStudentById(request);
+//    }
+//
+//    @GetMapping("get-by-username")
+//    public GetStudentByUsernameResponse getStudentByUsername(GetStudentByUsernameRequest request) {
+//        return studentService.getStudentByUsername(request);
+//    }
 }
