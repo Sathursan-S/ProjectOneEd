@@ -1,11 +1,9 @@
 package com.projectoneed.userandclassmanagementservice.models.classspace;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Document(collection = "ClassSpaces")
 public class ClassSpace {
     @Id

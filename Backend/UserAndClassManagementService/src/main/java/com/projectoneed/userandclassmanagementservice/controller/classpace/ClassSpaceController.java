@@ -1,5 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.controller.classpace;
 
+import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import com.projectoneed.userandclassmanagementservice.service.ClassSpaceService;
@@ -30,7 +31,7 @@ public class ClassSpaceController {
     }
 
     @PostMapping("/createClassSpace")
-    public ClassSpace createClassSpace(@RequestBody ClassSpace classSpace) {
+    public ClassSpace createClassSpace(@RequestBody CreateClassSpaceRequest classSpace) {
         return classSpaceService.createClassSpace(classSpace);
     }
 
@@ -39,11 +40,7 @@ public class ClassSpaceController {
         ClassSpace classSpace = classSpaceService.getClassSpaceById(classSpaceId);
 
         if (classSpace != null) {
-            List<Class> classes = classSpace.getClasses();
-            classes.add(classDetails);
-            classSpace.setClasses(classes);
-
-            return classSpaceService.createClassSpace(classSpace);
+            return classSpaceService.addClassToClassSpace(classSpaceId, classDetails);
         } else {
             throw new RuntimeException("Class space with id " + classSpaceId + " not found");
         }
