@@ -18,10 +18,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public List<GetAllStudentsResponse> getAllStudents() {
-        List<Student> students = studentRepository.getAllStudents()
-                .orElseThrow(
-                        () -> new RuntimeException("No students found")
-                );
+        List<Student> students = studentRepository.findAll();
 
         return students.stream().map(student -> GetAllStudentsResponse.builder()
                         .userId(student.getUserId())
