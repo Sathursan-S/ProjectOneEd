@@ -3,7 +3,7 @@
     background-color: #F5F5F5;
 }
 
-.My-classes-bacgroundcolo{
+.My-classes-bacgroundcolor{
     background-color: #fff;
 }
 
@@ -123,4 +123,10 @@ background-color: #F5F5F5;
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem;
+}
+.join-classes{
+    background: #fff;
+}
+.joinClassCards{
+    margin-top: 3rem;
 }

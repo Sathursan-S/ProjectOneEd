@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import './StudentHomePage.css';
+import './InstructorHomePage.css';
 import image from '../../Images/Card.png'
-
+import { FaSearch } from 'react-icons/fa';
 import EnrolledClassCard from '../../Components/EnrolledClassCard/EnrolledClassCard';
 import Greeting from '../../Components/Greeting/Greeting';
 import UpComingClass from '../../Components/UpComingClass/UpComingClass';
@@ -9,58 +9,84 @@ import PendingFee from '../../Components/PendingFee/PendingFee';
 import { FaArrowRight } from 'react-icons/fa';
 import RecentlyAccesedClasses from '../../Components/RecentlyAccesedClasses/RecentlyAccesedClasses';
 import StudentJoinClassCard from '../../Components/StudentJoinClassCard/StudentJoinClassCard';
-const StudentHomePage = () => {
-    const [isLearningSpace, setLearningSpace] = useState(true);
+import InstructorUpcomingClassCard from '../../Components/InstructorUpcomingClassCard/InstructorUpcomingClassCard';
+import InstructorJoinClassCard from '../../Components/InstructorJoinClassCard/InstructorJoinClassCard';
+const InstructorHomePage = () => {
+    const [isDashboard, setDashboard] = useState(true);
     const [isJoinClasses, setJoinClasses] = useState(false);
-    const [isEnrolledClasses, setEnrolledClasses] = useState(false);
+    const [isMyClassSpace, setMyClassSpace] = useState(false);
     const [isPayments, setPayments] = useState(false);
+    const [isUserGroups, setUserGroups] = useState(false);
 
     const openEnrolledClasses = () => {
         setJoinClasses(false);
-        setLearningSpace(false);
+        setUserGroups(false);
+        setDashboard(false);
         setPayments(false);
-        setEnrolledClasses(true);
+        setMyClassSpace(true);
+       
+    };
+    const openUserGroups = () => {
+        setJoinClasses(false);
+        setDashboard(false);
+        setPayments(false);
+        setMyClassSpace(false);
+        setUserGroups(true);
        
     };
     const openLearningSpace = () => {
         setJoinClasses(false);
+        setUserGroups(false);
         setPayments(false);
-        setEnrolledClasses(false);
-        setLearningSpace(true);
+        setMyClassSpace(false);
+        setDashboard(true);
        
     };
     const openJoinClasses = () => {
-        
+        setUserGroups(false);
         setPayments(false);
-        setEnrolledClasses(false);
-        setLearningSpace(false);
+        setMyClassSpace(false);
+        setDashboard(false);
         setJoinClasses(true);
        
     };
     const openPayment = () => {
         setJoinClasses(false);
-        setLearningSpace(false);
-        setEnrolledClasses(false);
+        setUserGroups(false);
+        setDashboard(false);
+        setMyClassSpace(false);
         setPayments(true);
        
     };
   return (
-      <div className={isLearningSpace || isJoinClasses ? "My-classes-bacgroundcolor":'StudentHomePage'}>
+      <div className={isDashboard || isJoinClasses ? "My-classes-bacgroundcolor":'StudentHomePage'}>
           <div className="student-home-page-header">
-              <div className='student-home-page-title'>
-                  <span >Learning Space</span>
+              <div className='instructor-home-page-title'>
+                  {isDashboard && <span >Dashboard</span>}
+                  {isJoinClasses && <span >Join Classes</span>}
+                  {isMyClassSpace && <span >My Class Space</span>}
+                  {isUserGroups && <span >User Groups</span>}
+                  {isPayments && <span >Payments</span>}
+                  <div className="search">
+                      <input type="text" placeholder='Search class spaces'  />
+                      <button   ><FaSearch /></button>
+                  </div>
+                  <div className="create">
+                      <button className='Button'>+ Create</button>
+                  </div>
               </div>
             
             <div className="student-home-page-navbar">
-                  <button className={isLearningSpace ? "underline" :""} onClick={openLearningSpace}>Learning Space</button>
+                  <button className={isDashboard ? "underline" :""} onClick={openLearningSpace}>Dashboard</button>
                   <button className={isJoinClasses ? "underline" :""} onClick={openJoinClasses}>Join Classes</button>
-              <button className={isEnrolledClasses ? "underline" :""} onClick={openEnrolledClasses}>Entrolled Classes</button>
+              <button className={isMyClassSpace ? "underline" :""} onClick={openEnrolledClasses}>My Class Space</button>
+              <button className={isUserGroups ? "underline" :""} onClick={openUserGroups}>User Groups</button>
               <button className={isPayments ? "underline" :""} onClick={openPayment}>Payments</button>
               </div>
               
           </div>
           <hr />
-          {isLearningSpace && <div className="my-claases">
+          {isDashboard && <div className="my-claases">
               <div className="my-classes-left">
                   <div className="greeting">
                   <Greeting name="Himosh Ravithas"/>
@@ -77,35 +103,35 @@ const StudentHomePage = () => {
               <div className="my-classes-right">
                   <div className="upcoming-classes">
                       <span className='upcoming-classes-title'>Upcoming classes</span>
-                      <UpComingClass
+                      <InstructorUpcomingClassCard
                           subject='Combined Mathematics'
                           timeFrom="01.00 PM"
                           timeTo="02.00 PM"
                           day='Monday'
                           date='30/03/2024'
                       />
-                      <UpComingClass
+                      <InstructorUpcomingClassCard
                           subject='Combined Mathematics'
                           timeFrom="01.00 PM"
                           timeTo="02.00 PM"
                           day='Monday'
                           date='30/03/2024'
                       />
-                      <UpComingClass
+                      <InstructorUpcomingClassCard
                           subject='Combined Mathematics'
                           timeFrom="01.00 PM"
                           timeTo="02.00 PM"
                           day='Monday'
                           date='30/03/2024'
                       />
-                      <UpComingClass
+                      <InstructorUpcomingClassCard
                           subject='Combined Mathematics'
                           timeFrom="01.00 PM"
                           timeTo="02.00 PM"
                           day='Monday'
                           date='30/03/2024'
                       />
-                      <UpComingClass
+                      <InstructorUpcomingClassCard
                           subject='Combined Mathematics'
                           timeFrom="01.00 PM"
                           timeTo="02.00 PM"
@@ -116,23 +142,12 @@ const StudentHomePage = () => {
                           <button>View all   <FaArrowRight/></button>
                       </div>
                   </div>
-                  <div className="pending-fee">
-                    <span className='upcoming-classes-title'>Pending Fee</span>
-
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500' />
-                      
-                      <div className="view-all-button">
-                          <button>View all   <FaArrowRight/></button>
-                      </div>
-                  </div>
+                  
               </div>
           </div>}
 
 
-          {isEnrolledClasses && <div className="enrolled-classes">
+          {isMyClassSpace && <div className="enrolled-classes">
               <EnrolledClassCard
                   image={image}
               subject="A/L ICT - Paper class"
@@ -185,28 +200,63 @@ const StudentHomePage = () => {
                   
               </div>
               <div className="joinClassCards">
-                  <StudentJoinClassCard
+                  <InstructorJoinClassCard
                       subject="Combined Maths"
                       date="30/04/2024"
                       day="Monday"
                       timeFrom="7.00PM"
                       timeTo="8.00PM"
                   />
-                  <StudentJoinClassCard
+                  <InstructorJoinClassCard
                       subject="Combined Maths"
                       date="30/04/2024"
                       day="Monday"
                       timeFrom="7.00PM"
                       timeTo="8.00PM"
                   />
-                  <StudentJoinClassCard
+                  <InstructorJoinClassCard
                       subject="Combined Maths"
                       date="30/04/2024"
                       day="Monday"
                       timeFrom="7.00PM"
                       timeTo="8.00PM"
                   />
-                  <StudentJoinClassCard
+                  <InstructorJoinClassCard
+                      subject="Combined Maths"
+                      date="30/04/2024"
+                      day="Monday"
+                      timeFrom="7.00PM"
+                      timeTo="8.00PM"
+                  />
+                  <InstructorJoinClassCard
+                      subject="Combined Maths"
+                      date="30/04/2024"
+                      day="Monday"
+                      timeFrom="7.00PM"
+                      timeTo="8.00PM"
+                  />
+                  <InstructorJoinClassCard
+                      subject="Combined Maths"
+                      date="30/04/2024"
+                      day="Monday"
+                      timeFrom="7.00PM"
+                      timeTo="8.00PM"
+                  />
+                  <InstructorJoinClassCard
+                      subject="Combined Maths"
+                      date="30/04/2024"
+                      day="Monday"
+                      timeFrom="7.00PM"
+                      timeTo="8.00PM"
+                  />
+                  <InstructorJoinClassCard
+                      subject="Combined Maths"
+                      date="30/04/2024"
+                      day="Monday"
+                      timeFrom="7.00PM"
+                      timeTo="8.00PM"
+                  />
+                  <InstructorJoinClassCard
                       subject="Combined Maths"
                       date="30/04/2024"
                       day="Monday"
@@ -215,6 +265,11 @@ const StudentHomePage = () => {
                   />
               </div>
           </div>}
+          {isUserGroups && (
+              <div className="user-groups">
+                  USER GROUPS
+            </div>
+          )}
           
 
           
@@ -222,4 +277,4 @@ const StudentHomePage = () => {
   )
 }
 
-export default StudentHomePage
+export default InstructorHomePage
