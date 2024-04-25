@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: UserAndClassManagementService
+  datasource:
+    # PostgreSQL database configuration
+    url: jdbc:postgresql://localhost:5432/auth_service
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    mongodb:
+      # MongoDB database configuration
+      uri: mongodb://localhost:27017/projectSpaceEd
+      database: ProjectSpaceEd
+      username:
+      password:
+
+server:
+  port: 8082
+
+eureka:
+    client:
+        service-url:
+          defaultZone: http://eureka:password@localhost:8761/eureka
+        fetch-registry: true
+        register-with-eureka: true
