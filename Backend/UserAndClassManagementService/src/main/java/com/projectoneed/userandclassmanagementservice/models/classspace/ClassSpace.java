@@ -21,4 +21,5 @@ public class ClassSpace {
     private String classSpaceDescription;
     private String instructorId;
     private List<Class> classes;
+    private List<String> students;
 }

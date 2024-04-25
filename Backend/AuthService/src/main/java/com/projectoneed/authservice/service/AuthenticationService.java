@@ -3,20 +3,25 @@ package com.projectoneed.authservice.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
 import com.projectoneed.authservice.dto.AuthenticationResponce;
+import com.projectoneed.authservice.dto.CreateUserRequest;
 import com.projectoneed.authservice.dto.RegisterRequest;
 import com.projectoneed.authservice.model.token.Token;
 import com.projectoneed.authservice.model.token.TokenType;
+import com.projectoneed.authservice.model.user.Role;
 import com.projectoneed.authservice.repository.TokenRepository;
 import com.projectoneed.authservice.repository.UserRepository;
 import com.projectoneed.authservice.model.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -28,6 +33,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
+    private final RestTemplate restTemplate;
 
     public AuthenticationResponce register(RegisterRequest registerRequest) {
         var user = User.builder()
@@ -37,6 +43,21 @@ public class AuthenticationService {
                 .role(registerRequest.getRole())
                 .build();
         var savedUser = userRepository.save(user);
+        if(registerRequest.getRole().equals(Role.STUDENT)){
+            try{
+                createStudent(savedUser, registerRequest);
+            }catch (Exception e){
+                userRepository.delete(savedUser);
+                throw new RuntimeException("Failed to create student");
+            }
+        }else if(registerRequest.getRole().equals(Role.INSTRUCTOR)){
+            try {
+                createInstructor(savedUser, registerRequest);
+            }catch (Exception e){
+                userRepository.delete(savedUser);
+                throw new RuntimeException("Failed to create instructor");
+            }
+        }
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser,jwtToken);
@@ -44,6 +65,38 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    public void createStudent(User user, RegisterRequest registerRequest){
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .firstName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
+                .build();
+        HttpEntity<CreateUserRequest> request = new HttpEntity<>(createUserRequest);
+        ResponseEntity<CreateUserRequest> response = restTemplate.postForEntity(
+                "http://UserAndClassManagementService/api/v1/student/create",
+                request,
+                CreateUserRequest.class
+        );
+    }
+
+    public void createInstructor(User user, RegisterRequest registerRequest){
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .firstName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
+                .build();
+        HttpEntity<CreateUserRequest> request = new HttpEntity<>(createUserRequest);
+        ResponseEntity<CreateUserRequest> response = restTemplate.postForEntity(
+                "http://UserAndClassManagementService/api/v1/instructor/create",
+                request,
+                CreateUserRequest.class
+        );
     }
 
     public AuthenticationResponce authenticate(AuthenticationRequest authenticationRequest) {

@@ -1,14 +1,17 @@
-package com.projectoneed.userandclassmanagementservice.dto.student;
+package com.projectoneed.authservice.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 @Getter
 @Setter
-public class CreateAndUpdateStudentRequest {
+public class CreateUserRequest {
     private String userId;
-    private String firstName;
+    private String username;
     private String email;
+    private String firstName;
     private String lastName;
     private int phone;
 }

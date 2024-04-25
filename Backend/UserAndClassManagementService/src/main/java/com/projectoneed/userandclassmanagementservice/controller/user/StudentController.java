@@ -1,10 +1,12 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
+import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateAndUpdateStudentRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateStudentResponse;
 import com.projectoneed.userandclassmanagementservice.dto.student.GetAllStudentsResponse;
 import com.projectoneed.userandclassmanagementservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/student")
 @RequiredArgsConstructor
+@Slf4j
 public class StudentController {
     private final StudentService studentService;
 
@@ -22,33 +25,34 @@ public class StudentController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<CreateStudentResponse> createStudent(CreateAndUpdateStudentRequest request) {
+    public ResponseEntity<CreateUserRequest> createStudent(
+            @RequestBody CreateUserRequest request) {
         try{
             return ResponseEntity.ok(studentService.createStudent(request));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            throw new RuntimeException("Failed to create student");
         }
     }
 
     @PostMapping("update")
-    public ResponseEntity<?> updateStudent(CreateAndUpdateStudentRequest request) {
+    public ResponseEntity<?> updateStudent(@RequestBody CreateAndUpdateStudentRequest request) {
         return ResponseEntity.ok().body(
                 studentService.updateStudent(request)
         );
     }
 
 //    @DeleteMapping("delete")
-//    public ResponseEntity<?> deleteStudent(DeleteStudentRequest request) {
+//    public ResponseEntity<?> deleteStudent(@RequestBody DeleteStudentRequest request) {
 //        return studentService.deleteStudent(request);
 //    }
 //
 //    @GetMapping("get-by-id")
-//    public GetStudentByIdResponse getStudentById(GetStudentByIdRequest request) {
+//    public GetStudentByIdResponse getStudentById(@RequestBody GetStudentByIdRequest request) {
 //        return studentService.getStudentById(request);
 //    }
 //
 //    @GetMapping("get-by-username")
-//    public GetStudentByUsernameResponse getStudentByUsername(GetStudentByUsernameRequest request) {
+//    public GetStudentByUsernameResponse getStudentByUsername(@RequestBody GetStudentByUsernameRequest request) {
 //        return studentService.getStudentByUsername(request);
 //    }
 }

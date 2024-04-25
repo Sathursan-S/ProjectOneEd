@@ -8,7 +8,6 @@ public record CreateStudentResponse(
         String studentId,
         String studentName,
         String studentEmail,
-        String studentPassword,
         String studentClassId) {
 
 }

@@ -7,6 +7,7 @@ import com.projectoneed.authservice.dto.AuthenticationRequest;
 import com.projectoneed.authservice.dto.AuthenticationResponce;
 import com.projectoneed.authservice.service.AuthenticationService;
 import com.projectoneed.authservice.dto.RegisterRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationController {
     private final AuthenticationService authService;
 
