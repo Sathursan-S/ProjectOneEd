@@ -17,6 +17,7 @@ import java.util.List;
 public class Class {
     @MongoId
     private String classId;
+    private String classSpaceId;
     private String className;
     private String classDescription;
     private double classFee;
