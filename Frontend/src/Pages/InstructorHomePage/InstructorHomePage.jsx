@@ -12,6 +12,7 @@ import StudentJoinClassCard from '../../Components/StudentJoinClassCard/StudentJ
 import InstructorUpcomingClassCard from '../../Components/InstructorUpcomingClassCard/InstructorUpcomingClassCard';
 import InstructorJoinClassCard from '../../Components/InstructorJoinClassCard/InstructorJoinClassCard';
 import MyClassSpaceCard from '../../Components/MyClassSpaceCard/MyClassSpaceCard';
+import CreateClassSpaceModal from '../../Components/CreateClassSpaceModel/CreateClassSpaceModal';
 
 
 const InstructorHomePage = () => {
@@ -24,6 +25,11 @@ const InstructorHomePage = () => {
     const [recentlyAccessedClasses, setRecentlyAccessedClasses] = useState([]); 
     const [instructorJoinClasses, setInstructorJoinClasses] = useState([]); 
     const [classSpaces, setClassSpaces] = useState([]); 
+        const [isModalOpen, setModalOpen] = useState(false);
+
+    const toggleModal = () => {
+        setModalOpen(!isModalOpen);
+    };
 
     useEffect(() => {
         // Simulate fetching data from the DB
@@ -36,9 +42,9 @@ const InstructorHomePage = () => {
     const fetchClassSpaces = async () => {
 
         setClassSpaces([ // Uncomment to test data scenario
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
  
         ]);
     };
@@ -202,12 +208,25 @@ const InstructorHomePage = () => {
               ))
               
               ) : (
-                      <div className="new-to-class-space">
-                              <img src={newToClassSpaceImage} alt="" />
-                              <span className='ready-to-go'>Woah! Ready to go...</span>
-                              <span className='create-your-first-class-space'>create your first class space in few more steps</span>
-                              <button className='create-button Button'>+ Create</button>
-                        </div>
+                     <div>
+            {/* Existing content... */}
+
+            <div className="new-to-class-space">
+                <img src={newToClassSpaceImage} alt="" />
+                <span className='ready-to-go'>Woah! Ready to go...</span>
+                <span className='create-your-first-class-space'>create your first class space in a few more steps</span>
+                <button className='create-button Button' onClick={toggleModal}>+ Create</button>
+            </div>
+
+            
+            {isModalOpen && (
+                <CreateClassSpaceModal onClose={toggleModal}>
+                    
+                    <h4>Create class space</h4>
+                   
+                </CreateClassSpaceModal>
+            )} 
+        </div>
                   
               )}
               
