@@ -1,6 +1,6 @@
 import React from 'react'
-import './UpComingClass.css'
-const UpComingClass = ({subject, timeFrom, timeTo,day , date }) => {
+import './InstructorUpcomingClassCard.css'
+const InstructorUpcomingClassCard = ({subject, timeFrom, timeTo,day , date }) => {
   return (
       <div className='UpComingClass'>
           <div className="subject-time">
@@ -9,10 +9,10 @@ const UpComingClass = ({subject, timeFrom, timeTo,day , date }) => {
               <span className='time'>{day}  { date}</span>
           </div>
           <div className=" join-now-button">
-              <button className='Button'>Join now</button>
+              <button className='Button'>Start now</button>
           </div>
     </div>
   )
 }
 
-export default UpComingClass
+export default InstructorUpcomingClassCard

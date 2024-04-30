@@ -12,9 +12,12 @@ import Testimonial from '../../Components/Testimonial/Testimonial';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import FreeClassCard from '../../Components/FreeClassCard/FreeClassCard';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
-
+  const demo = {
+  
+}
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -122,8 +125,10 @@ return (
       </div>
       <div className="instructor-features">
         <span>Are you an instructor?</span>
-        <hr />
-        <div className="feature-items">
+      <hr />
+      
+      <div className="feature-items">
+        <Link to='/instructor-signup'>
           <div className="rectangle">
             <div className="fectImg">
               <img src={createclass} />
@@ -135,6 +140,8 @@ return (
             </div>
     
           </div>
+        </Link>
+          
 
           <div className="rectangle">
             <div className="fectImg">
@@ -178,8 +185,11 @@ return (
     
           </div>
         </div>
-        <div className="explore-button">
-            <button className='Button'>Create classes</button>
+      <div className="explore-button">
+        <Link to='/instructor-signup'>
+          <button className='Button explore-butt'>Create classes</button>
+
+        </Link>
         </div>
       </div>
       <div className="testimonial-container">
