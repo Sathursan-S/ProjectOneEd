@@ -22,8 +22,6 @@ import InstructorHomePage from './Pages/InstructorHomePage/InstructorHomePage';
 function App() {
   return (
     <div className="App">
-      
-      
       {/* <BrowserRouter>
       <Navbar/>
         <Routes>
@@ -34,20 +32,20 @@ function App() {
           <Route path="/instructor-signup" element={<InstructorAuthPage />} />
           <Route path="/student-home" element={<StudentHomePage />} />
         </Routes>
-      </BrowserRouter> */}
-      {/* <StudentHomePage/> */}
+      </BrowserRouter> 
+      <StudentHomePage/>
       <InstructorHomePage/>
-      {/* <InstructorAuthPage/> */}
+      <InstructorAuthPage/> 
 
-      {/* <ExploreClassesPage/> */}
-      {/* <LoginCard/> */}
-      {/* <Navigation /> */}
-      {/* <Navbar/> */}
+      <ExploreClassesPage/>
+      <LoginCard/>
+      <Navigation />
+      <Navbar/>
 
-      {/* <ClassViewPage />  */}
+      <ClassViewPage /> 
       
-      {/* <LandingPage/> */}
-      {/* <AuthPage/> */}
+       <LandingPage/>
+       <AuthPage/> */}
       
     </div>
   );
