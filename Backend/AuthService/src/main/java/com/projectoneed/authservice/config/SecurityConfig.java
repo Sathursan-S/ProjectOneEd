@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -24,40 +25,31 @@ import static org.springframework.http.HttpMethod.DELETE;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+//@EnableMethodSecurity
 public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authProvider;
     private final LogoutHandler logoutHandler;
+    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger-ui.html"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("api/v1/auth/**",
-                                "/v2/api-docs",
-                                "/v3/api-docs",
-                                "/v3/api-docs/**",
-                                "/swagger-resources",
-                                "/swagger-resources/**",
-                                "/configuration/ui",
-                                "/configuration/security",
-                                "/swagger-ui/**",
-                                "/webjars/**",
-                                "/swagger-ui.html")
+                        .requestMatchers(WHITE_LIST_URL)
                         .permitAll()
 
-                        .requestMatchers("/api/v1/landig-page/**").hasAnyRole(STUDENT.name(), INSTRUCTOR.name())
-                        .requestMatchers(GET,"api/v1/student/**").hasAuthority(STUDENT_READ.name())
-                        .requestMatchers(POST,"api/v1/student/**").hasAuthority(STUDENT_WRITE.name())
-                        .requestMatchers(PUT,"api/v1/student/**").hasAuthority(STUDENT_UPDATE.name())
-                        .requestMatchers(DELETE,"api/v1/student/**").hasAuthority(STUDENT_DELETE.name())
-
-                        .requestMatchers("api/v1/instructor/**").hasRole(INSTRUCTOR.name())
-                        .requestMatchers(GET,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_READ.name())
-                        .requestMatchers(POST,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_WRITE.name())
-                        .requestMatchers(PUT,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_UPDATE.name())
-                        .requestMatchers(DELETE,"api/v1/instructor/**").hasAuthority(INSTRUCTOR_DELETE.name())
                         .anyRequest()
                         .authenticated()
                 )

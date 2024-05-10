@@ -58,8 +58,8 @@ public class AuthenticationService {
                 throw new RuntimeException("Failed to create instructor");
             }
         }
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+        var jwtToken = jwtService.generateToken(savedUser);
+        var refreshToken = jwtService.generateRefreshToken(savedUser);
         saveUserToken(savedUser,jwtToken);
         return AuthenticationResponce.builder()
                 .accessToken(jwtToken)
@@ -167,5 +167,13 @@ public class AuthenticationService {
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    public Object getUserById(String id) {
+        User user = userRepository.findByUserId(id);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+        return user;
     }
 }

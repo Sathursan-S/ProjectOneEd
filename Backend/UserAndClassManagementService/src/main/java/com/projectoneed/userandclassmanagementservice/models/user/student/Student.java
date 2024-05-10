@@ -1,7 +1,9 @@
 package com.projectoneed.userandclassmanagementservice.models.user.student;
 
+import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.*;
 
@@ -20,5 +22,5 @@ public class Student {
     private String lastName;
     private String email;
     private int age;
-    private int phoneNumber;
+    private String phoneNumber;
 }

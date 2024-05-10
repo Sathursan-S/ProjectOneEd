@@ -10,5 +10,5 @@ public class CreateAndUpdateStudentRequest {
     private String firstName;
     private String email;
     private String lastName;
-    private int phone;
+    private String phone;
 }

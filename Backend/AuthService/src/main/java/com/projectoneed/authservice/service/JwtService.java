@@ -1,5 +1,6 @@
 package com.projectoneed.authservice.service;
 
+import com.projectoneed.authservice.model.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -53,14 +54,16 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(User userDetails){
         return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails
+            User userDetails
     ){
+        extraClaims.put("userId", userDetails.getUserId());
+        extraClaims.put("username", userDetails.getUsername());
         extraClaims.put("scopes", getScopes(userDetails));
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }

@@ -1,9 +1,20 @@
 spring:
   application:
     name: APIGateway
-  # Route
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://192.168.77.82:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
       routes:
         - id: UserAndClassManagementService
           uri: lb://UserAndClassManagementService
