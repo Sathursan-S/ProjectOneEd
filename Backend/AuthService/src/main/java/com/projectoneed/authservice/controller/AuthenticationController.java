@@ -1,11 +1,10 @@
 package com.projectoneed.authservice.controller;
 
-import com.projectoneed.authservice.service.LogoutService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
-import com.projectoneed.authservice.dto.AuthenticationResponce;
+import com.projectoneed.authservice.dto.AuthenticationResponse;
 import com.projectoneed.authservice.service.AuthenticationService;
 import com.projectoneed.authservice.dto.RegisterRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -24,18 +23,18 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponce> register(
+    public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest registerRequest
     ) {
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponce> authenticate(
+    public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest authenticationRequest
     ) {
         try {
-            AuthenticationResponce response = authService.authenticate(authenticationRequest);
+            AuthenticationResponse response = authService.authenticate(authenticationRequest);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Failed to authenticate user", e);

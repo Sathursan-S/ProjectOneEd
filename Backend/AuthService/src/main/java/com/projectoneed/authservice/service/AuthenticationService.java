@@ -2,7 +2,7 @@ package com.projectoneed.authservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
-import com.projectoneed.authservice.dto.AuthenticationResponce;
+import com.projectoneed.authservice.dto.AuthenticationResponse;
 import com.projectoneed.authservice.dto.CreateUserRequest;
 import com.projectoneed.authservice.dto.RegisterRequest;
 import com.projectoneed.authservice.model.token.Token;
@@ -35,7 +35,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final RestTemplate restTemplate;
 
-    public AuthenticationResponce register(RegisterRequest registerRequest) {
+    public AuthenticationResponse register(RegisterRequest registerRequest) {
         var user = User.builder()
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
@@ -61,7 +61,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(savedUser);
         var refreshToken = jwtService.generateRefreshToken(savedUser);
         saveUserToken(savedUser,jwtToken);
-        return AuthenticationResponce.builder()
+        return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -99,7 +99,7 @@ public class AuthenticationService {
         );
     }
 
-    public AuthenticationResponce authenticate(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
@@ -113,7 +113,7 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return AuthenticationResponce.builder()
+        return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -138,7 +138,7 @@ public class AuthenticationService {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
-                var authResponse = AuthenticationResponce.builder()
+                var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
