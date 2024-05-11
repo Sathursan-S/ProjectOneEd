@@ -24,14 +24,19 @@ function App() {
       
       <BrowserRouter>
       <Navbar/>
-        <Routes>
+      <InstructorAuthPage/>
+        {/* <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
           <Route path="/explore-classes" element={<ExploreClassesPage />} />
+          <Route path="/instructor-signup" element={<InstructorAuthPage />} />
+          <Route path="/student-home" element={<StudentHomePage />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
       {/* <StudentHomePage/> */}
+      <InstructorHomePage/>
+      {/* <InstructorAuthPage/> */}
 
       {/* <ExploreClassesPage/> */}
       {/* <LoginCard/> */}

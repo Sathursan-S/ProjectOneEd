@@ -2,10 +2,8 @@
     display: flex;
     position: fixed;
     justify-content: space-around;
-    /* padding: px; */
-    box-shadow: 0 1px 3px -2px black;
     width: 100%;
-    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    background: #F5F3F8;
     backdrop-filter: blur(10px);
 }
 .navbar-logo{
@@ -15,8 +13,9 @@
 }
 .navbar-logo p{
     font-size: 25px;
-    font-family: 'Lexend', sans-serif;
-    font-weight: 500;
+    font-family: poppins;
+    font-weight: 700;
+    text-decoration: none;
     background: linear-gradient(to right, #290D44, #7C27CB);
     -webkit-background-clip: text;
     color: transparent;
@@ -32,25 +31,23 @@
     font-size: 12px;
     font-weight: 200px;
     font-family:poppins;  
-    text-decoration: none; 
 }
 .navbar-menu li {
     display: flex;
     flex-direction: column ;
-    text-decoration: none;
     align-items: center;
     justify-content: center;
     gap: 3px;
-    cursor: pointer;
-    
+    cursor: pointer;   
 }
-.navbar-menu hr{
-    width: 30px;
-    height: 2.5px;
-    background-color: #290D44;
-    border: none;
-    border-radius: 10px;
+.navbar-menu a {
+    color: #626262;
+  text-decoration: none;
+}
 
+.navbar-menu .active {
+  color: #290d44;
+  text-decoration: none;
 }
 
 .navbar-button{
@@ -73,26 +70,10 @@
    cursor: pointer;
  
 }
-.navbar-myevent{
-    width: 90px;
-    height: 28px;
-    outline: none;
-    /* border: 1px solid #626262; */
-    border: none;
-    border-radius: 75px;
-    color: white;
-    background-color:#290D44;
-    font-size: 12px;
-    font-weight: 400;
-    font-family:poppins;
-    cursor: pointer;
-  
- }
  .navbar-profile{
     width: 28px;
     height: 28px;
     outline: none;
-    /* border: 1px solid #626262; */
     border: none;
     border-radius: 75px;
     color: white;
@@ -110,21 +91,6 @@
     color: white;
     border: 1px solid #290D44;
 }
-/* .nav-event-count{
-    position: relative;
-    top: -10px;
-    left: -22px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #C9184A;
-    color: white;
-    font-size: 12px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 
 @media (max-width: 500px) {
     .navbar {
