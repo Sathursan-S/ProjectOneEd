@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import './StudentAuthPage.css';
 import img from '../../Images/Login.svg';
 import { FaArrowLeft } from 'react-icons/fa';
+import { Navigate } from "react-router-dom";
 
 const AuthPage = () => {
     const [isStudentSignUp, setIsStudentSignUp] = useState(false);
@@ -40,7 +41,7 @@ const AuthPage = () => {
                 // Placeholder function for signing up user
                 await signUpUser(formData);
                 // Navigate to student home page upon successful sign up
-                navigate('/student-home');
+                Navigate('/student-home');
                 setFormData('');
             } catch (error) {
                 console.error('Error signing up:', error);
@@ -53,7 +54,7 @@ const AuthPage = () => {
                 const user = users.find(user => user.email === formData.email && user.password === formData.password);
                 if (user) {
                     // Navigate to student home page upon successful login
-                    navigate('/student-home');
+                    Navigate('/student-home');
                     setFormData('');
                 } else {
                     // Display alert if user doesn't exist
