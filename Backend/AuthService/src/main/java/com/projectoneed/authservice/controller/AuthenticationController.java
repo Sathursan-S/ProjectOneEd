@@ -2,6 +2,7 @@ package com.projectoneed.authservice.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
 import com.projectoneed.authservice.dto.AuthenticationResponse;
@@ -23,10 +24,13 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest registerRequest
-    ) {
-        return ResponseEntity.ok(authService.register(registerRequest));
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
+        try {
+            return ResponseEntity.ok(authService.register(registerRequest));
+        } catch (Exception e) {
+            log.error("Failed to register user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(AuthenticationResponse.builder().error(e.getMessage()).build());
+        }
     }
 
     @PostMapping("/authenticate")

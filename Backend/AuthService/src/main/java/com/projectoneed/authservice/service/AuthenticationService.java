@@ -36,6 +36,13 @@ public class AuthenticationService {
     private final RestTemplate restTemplate;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
+        if (userRepository.existsByUsername(registerRequest.getUsername())) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+        if (userRepository.existsByEmail(registerRequest.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
         var user = User.builder()
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
@@ -43,31 +50,31 @@ public class AuthenticationService {
                 .role(registerRequest.getRole())
                 .build();
         var savedUser = userRepository.save(user);
-        if(registerRequest.getRole().equals(Role.STUDENT)){
-            try{
-                createStudent(savedUser, registerRequest);
-            }catch (Exception e){
-                userRepository.delete(savedUser);
-                throw new RuntimeException("Failed to create student");
+
+        try {
+            switch (registerRequest.getRole()) {
+                case STUDENT:
+                    createStudent(savedUser, registerRequest);
+                    break;
+                case INSTRUCTOR:
+                    createInstructor(savedUser, registerRequest);
+                    break;
             }
-        }else if(registerRequest.getRole().equals(Role.INSTRUCTOR)){
-            try {
-                createInstructor(savedUser, registerRequest);
-            }catch (Exception e){
-                userRepository.delete(savedUser);
-                throw new RuntimeException("Failed to create instructor");
-            }
+        } catch (Exception e) {
+            userRepository.delete(savedUser);
+            throw new RuntimeException("Failed to create user profile: " + e.getMessage(), e);
         }
+
         var jwtToken = jwtService.generateToken(savedUser);
         var refreshToken = jwtService.generateRefreshToken(savedUser);
-        saveUserToken(savedUser,jwtToken);
+        saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
-    public void createStudent(User user, RegisterRequest registerRequest){
+    public void createStudent(User user, RegisterRequest registerRequest) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
@@ -83,7 +90,7 @@ public class AuthenticationService {
         );
     }
 
-    public void createInstructor(User user, RegisterRequest registerRequest){
+    public void createInstructor(User user, RegisterRequest registerRequest) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
@@ -126,7 +133,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String username;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
@@ -171,7 +178,7 @@ public class AuthenticationService {
 
     public Object getUserById(String id) {
         User user = userRepository.findByUserId(id);
-        if(user == null){
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
         return user;
