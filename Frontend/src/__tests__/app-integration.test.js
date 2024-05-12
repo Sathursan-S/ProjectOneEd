@@ -26,4 +26,3 @@ describe('Application Integration Tests', () => {
     // Add your test logic here
   });
 });
-
