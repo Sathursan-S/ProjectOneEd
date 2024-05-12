@@ -42,9 +42,9 @@ const InstructorHomePage = () => {
     const fetchClassSpaces = async () => {
 
         setClassSpaces([ // Uncomment to test data scenario
-            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
+            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
  
         ]);
     };

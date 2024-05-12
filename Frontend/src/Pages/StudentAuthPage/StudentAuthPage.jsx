@@ -73,6 +73,9 @@ const AuthPage = () => {
                 </div>
             </div>
             <div className='login-card'>
+                <div className="login-card-content">
+
+                
                 <div className="login-card-header">
                     <span>SpaceEd</span>
                     <span onClick={() => {
@@ -156,13 +159,14 @@ const AuthPage = () => {
                         </button>
                     </div>
                     
-                </form>
+                    </form>
+                    </div>
             </div>
-            <div className="auth-page-home-button">
+            {/* <div className="auth-page-home-button">
                 <Link to='/'>
                     <button className="auth-page-details-home-butt"><FaArrowLeft /> Go home</button>
                 </Link>
-            </div>
+            </div> */}
         </div>
     )
 }

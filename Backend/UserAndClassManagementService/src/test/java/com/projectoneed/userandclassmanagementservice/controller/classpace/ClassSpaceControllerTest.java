@@ -4,6 +4,7 @@ import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassS
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import com.projectoneed.userandclassmanagementservice.service.ClassSpaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

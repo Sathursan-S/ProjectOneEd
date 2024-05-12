@@ -44,13 +44,16 @@ function App() {
       
       
       <Navbar/>
-        <Routes>
+         <Routes>
         <Route path="/" element={user ? (user.role==="STUDENT" ? <Navigate to={`/student-home/${user.userId}`} />:<Navigate to ={`/instructor-home/${user.userId}`}/> ): <LandingPage/>} />
         <Route path="/home" element={user ? (user.role==="STUDENT" ? <Navigate to={`/student-home/${user.userId}`} />:<Navigate to ={`/instructor-home/${user.userId}`}/> ): <LandingPage/>} />
         <Route path="/login" element={user ? (user.role==="STUDENT" ? <Navigate to={`/student-home/${user.userId}`} />:<Navigate to ={`/instructor-home/${user.userId}`}/> ): <StudentAuthPage />} />
         <Route path="/class-view" element={<ClassViewPage />} />
         <Route path="/explore-classes" element={<ExploreClassesPage />} />
-        <Route path="/instructor-signup" element={<InstructorAuthPage />} />
+          <Route path="/teachon-spaceed" element={<InstructorAuthPage />} />
+          <Route path="/instructor-signup" element={<InstructorAuthPage />} />
+          <Route path="/student-home" element={<StudentHomePage />} />
+          <Route path="/instructor-signup" element={<InstructorAuthPage />} />
         <Route path="/student-home/:id" element={user ? <StudentHomePage /> : <Navigate to="/home" />} />
         <Route path="/instructor-home/:id" element={user ? (user.role==="STUDENT" ? <Navigate to={`/student-home/${user.userId}`} />:<Navigate to ={`/instructor-home/${user.userId}`}/> ) : <Navigate to="/home" />} />
       </Routes>
