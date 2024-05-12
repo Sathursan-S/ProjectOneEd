@@ -86,4 +86,15 @@ instructor.setFirstName(request.getFirstName());
 
         return instructorRepository.save(instructor);
     }
+
+    public CreateInstructorResponse getInstructorById(String id) {
+        Instructor instructor = instructorRepository.findByUserId(id)
+                .orElseThrow(
+                        () -> new RuntimeException("Instructor not found")
+                );
+
+        return CreateInstructorResponse.builder()
+                .instructorId(instructor.getUserId())
+                .build();
+    }
 }

@@ -36,9 +36,6 @@ public class AuthenticationService {
     private final RestTemplate restTemplate;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
-        if (userRepository.existsByUsername(registerRequest.getUsername())) {
-            throw new IllegalArgumentException("Username already exists");
-        }
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }

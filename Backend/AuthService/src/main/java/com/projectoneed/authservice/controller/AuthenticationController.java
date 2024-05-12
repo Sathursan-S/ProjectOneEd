@@ -42,7 +42,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Failed to authenticate user", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.badRequest().body(AuthenticationResponse.builder().error(e.getMessage()).build());
         }
     }
 

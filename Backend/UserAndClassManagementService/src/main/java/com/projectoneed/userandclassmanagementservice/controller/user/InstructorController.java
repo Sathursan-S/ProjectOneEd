@@ -19,6 +19,15 @@ import java.util.List;
 public class InstructorController {
     private final InstructorService instructorService;
 
+    @GetMapping("/instructor/{id}")
+    public ResponseEntity<CreateInstructorResponse> getInstructorById(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(instructorService.getInstructorById(id));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get instructor");
+        }
+    }
+
     @GetMapping("/instructors")
     public List<GetAllInstructorsResponse> getAllInstructors() {
         return instructorService.getAllInstructors();
