@@ -7,6 +7,15 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 
 const InstructorAuthPage = () => {
+    const initialState = {
+        username:"",
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: "" ,
+        password: "",
+        role: "INSTRUCTOR"
+    };
     const [isStudentSignUp, setIsStudentSignUp] = useState(true);
     const [isStudentSignUpPage_02, setIsStudentSignUpPage_02] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
