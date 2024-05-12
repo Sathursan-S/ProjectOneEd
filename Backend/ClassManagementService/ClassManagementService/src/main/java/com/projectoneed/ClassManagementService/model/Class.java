@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 
 @Getter
@@ -13,7 +16,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "Classes")
 public class Class {
-    private int id;
+    @Id
+    private String id;
     private String className;
     private double fee;
+    private List<ClassTimeSlot> classTimeSlots;
+//    private List<EntrolledStudentId> entrolledStudentIds;
 }

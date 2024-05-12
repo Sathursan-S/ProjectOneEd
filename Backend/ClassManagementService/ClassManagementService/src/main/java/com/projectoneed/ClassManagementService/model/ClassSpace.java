@@ -17,7 +17,7 @@ import java.util.List;
 public class ClassSpace {
 
     @Id
-    private int id;
+    private String id;
     private String name;
     private int userId;
     private List<Class> classes;
