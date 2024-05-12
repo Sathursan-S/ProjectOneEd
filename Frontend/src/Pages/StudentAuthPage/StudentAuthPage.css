@@ -77,8 +77,9 @@
 }
 .auth-page-details-home-button{
     display: flex;
+    flex-direction: row;
     margin-left: 10vw;
-      border: none;
+    border: none;
     color: #611E9E;
     background: none;
 }

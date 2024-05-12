@@ -29,6 +29,7 @@ function App() {
           <Route path="/login" element={<StudentAuthPage />} />
           <Route path="/class-view" element={<ClassViewPage />} />
           <Route path="/explore-classes" element={<ExploreClassesPage />} />
+          <Route path="/teachon-spaceed" element={<InstructorAuthPage />} />
           <Route path="/instructor-signup" element={<InstructorAuthPage />} />
           <Route path="/student-home" element={<StudentHomePage />} />
           </Routes>
