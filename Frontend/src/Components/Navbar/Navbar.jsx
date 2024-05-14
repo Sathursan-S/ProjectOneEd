@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
         <div className='navbar-logo'>
-             <Link style={{ textDecoration: 'none' }} to='/' ><p>SpaceEd</p></Link>           
+             <Link style={{ textDecoration: 'none' }} to='/home' ><p>SpaceEd</p></Link>           
         </div>     
         <ul className='navbar-menu'>
         <li>
