@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ClassSchedule> should render component 1`] = `
+<div
+  className="ClassSchedule"
+>
+  <div
+    className="schedule-day"
+  >
+    <span>
+      Every
+    </span>
+    <span />
+  </div>
+  <div
+    className="schedule-start-time"
+  >
+    <span>
+      from
+    </span>
+    <span />
+  </div>
+  <div
+    className="schedule-end-time"
+  >
+    <span>
+      to
+    </span>
+    <span />
+  </div>
+</div>
+`;
