@@ -190,8 +190,6 @@
     font-family: poppins;
 }
 
-
-
 @media screen and (max-width:900px) {
     .AuthPage{
     display: flex;

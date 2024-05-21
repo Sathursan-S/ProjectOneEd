@@ -44,9 +44,9 @@ input[type="file"] {
 
 }
 
-input[type="text"], textarea {
-    width: 100%;
-    padding: 8px;
+input[type="text"] {
+    width: 95%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
 }
@@ -60,4 +60,8 @@ input[type="text"], textarea {
 
 .submit-button:hover {
     background-color: #5a4dad;
+}
+
+.description-textarea {
+    
 }

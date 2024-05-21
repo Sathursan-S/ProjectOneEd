@@ -1,52 +1,81 @@
+import * as AuthApi from "../Api/AuthRequest";
+import { useNavigate } from "react-router-dom";
 
-import * as AuthApi from '../Api/AuthRequest'
-import { useNavigate } from 'react-router-dom';
-
-
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 export const logIn = (formData, navigate) => async (dispatch) => {
-    dispatch({type: "AUTH_START"});
+  dispatch({ type: "AUTH_START" });
 
-    try {
-        const { data } = await AuthApi.logIn(formData); 
-        const user = jwtDecode(data.access_token);
-        dispatch({type: "AUTH_SUCCESS", data: user});
-        console.log(user.role);
+  try {
+    const { data } = await AuthApi.logIn(formData);
+    const user = jwtDecode(data.access_token);
 
-        // Navigate based on the user's role
-        if (user.role === 'STUDENT') {
-            navigate(`/student-home/${user.userId}`);  // Correct usage of template literal
-        } else if (user.role === 'INSTRUCTOR') {
-            navigate(`/instructor-home/${user.userId}`); // Correct usage of template literal
-        }
-    } catch (error) {
-        console.log(error);
-        dispatch({type: "AUTH_FAIL"});
+    if (user.role === "STUDENT") {
+      const detailsResponse = await AuthApi.fetchStudentDetails(user.userId);
+      const userDetails = detailsResponse.data;
+      const combinedUserData = { ...user, details: userDetails };
+
+      dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
+
+      navigate(`/student-home`);
+    } else if (user.role === "INSTRUCTOR") {
+      const detailsResponse = await AuthApi.fetchInstructorDetails(user.userId);
+      const userDetails = detailsResponse.data;
+      const combinedUserData = { ...user, details: userDetails };
+
+      dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
+      navigate(`/instructor-home`);
     }
-}
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "AUTH_FAIL" });
+  }
+};
 
-export const signUp =(formData)=> async(dispatch)=>{
-    
+export const signUp = (formData) => async (dispatch) => {
+  dispatch({ type: "AUTH_START" });
 
-    dispatch({type: "AUTH_START"})
+  try {
+    const { data } = await AuthApi.signUp(formData);
 
-    try {
-        const { data } = await AuthApi.signUp(formData) 
-        
-       const user = jwtDecode(data.access_token);
-        dispatch({type: "AUTH_SUCCESS", data: user});
-       console.log(data)
-    } catch (error) {
-        console.log(error)
-        dispatch({type: "AUTH_FAIL"})
+    const user = jwtDecode(data.access_token);
 
+    dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
+    console.log(data);
+    if (user.role === "STUDENT") {
+      const detailsResponse = await AuthApi.fetchStudentDetails(user.userId);
+      const userDetails = detailsResponse.data;
+      const combinedUserData = { ...user, details: userDetails };
+
+      dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
+      navigate(`/student-home`);
+    } else if (user.role === "INSTRUCTOR") {
+      const detailsResponse = await AuthApi.fetchInstructorDetails(user.userId);
+      const userDetails = detailsResponse.data;
+      const combinedUserData = { ...user, details: userDetails };
+
+      dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
+      navigate(`/instructor-home`);
     }
-    
-}
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "AUTH_FAIL" });
+  }
+};
 
-export const logout =()=> async(dispatch)=> {
-    dispatch({type: "LOG_OUT"})
+export const logOut = () => async (dispatch) => {
+  dispatch({ type: "LOG_OUT" });
+};
 
+// export const fetchUserDetails =(id)=> async(dispatch)=> {
+//     dispatch({type: "FETCHING_START"})
+//     console.log(id)
+//     try {
+//         const { data } = await AuthApi.fetchUserDetails(id)
+//         dispatch({ type: "FETCHING_SUCCESS", data: data })
 
-}
+//     } catch (error) {
+//         console.log(error)
+//         dispatch({type: "FETCHING_FAIL"})
+//     }
+// }

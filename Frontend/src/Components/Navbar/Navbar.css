@@ -128,3 +128,36 @@
         padding-top: 20px;
     }
   }
+
+
+  .modal {
+    z-index: 9999;
+    margin-top:5rem ;
+    position: fixed;
+    
+    top: 100%;
+    left: 25%;
+    background-color:none; /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.modal-content {
+ 
+    background: #F5F3F8;
+    padding: 20px;
+    border-radius: 5px;
+    height: auto;
+    text-align: center;
+}
+.button-no{
+  margin-left: 1rem;
+  height: auto;
+  width: 5rem;
+}
+.button-yes{
+  height: auto;
+  width: 5rem;
+}

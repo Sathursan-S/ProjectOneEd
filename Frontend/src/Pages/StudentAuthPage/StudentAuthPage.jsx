@@ -30,8 +30,23 @@ const AuthPage = () => {
     
   };
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+    const { name, value } = e.target;
+
+    if (name === "username") {
+        // Update both username and email when username input changes
+        setData(prevData => ({
+            ...prevData,
+            username: value,
+            email: value  // Sync the username with email
+        }));
+    } else {
+        // Handle changes for other inputs normally
+        setData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+};
 
 
     const handleSubmit = async (e) => {
@@ -73,6 +88,9 @@ const AuthPage = () => {
                 </div>
             </div>
             <div className='login-card'>
+                <div className="login-card-content">
+
+                
                 <div className="login-card-header">
                     <span>SpaceEd</span>
                     <span onClick={() => {
@@ -91,8 +109,8 @@ const AuthPage = () => {
                         <input
                             required
                             type="email"
-                            name="email"
-                            value={data.email || data.username}
+                            name="username"
+                            value={data.username}
                             
                             onChange={handleChange}
                         />
@@ -156,13 +174,14 @@ const AuthPage = () => {
                         </button>
                     </div>
                     
-                </form>
+                    </form>
+                    </div>
             </div>
-            <div className="auth-page-home-button">
+            {/* <div className="auth-page-home-button">
                 <Link to='/'>
                     <button className="auth-page-details-home-butt"><FaArrowLeft /> Go home</button>
                 </Link>
-            </div>
+            </div> */}
         </div>
     )
 }
