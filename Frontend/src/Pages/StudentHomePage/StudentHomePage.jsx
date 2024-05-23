@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './StudentHomePage.css';
 import image from '../../Images/Card.png'
-
+import { useSelector } from 'react-redux';
 import EnrolledClassCard from '../../Components/EnrolledClassCard/EnrolledClassCard';
 import Greeting from '../../Components/Greeting/Greeting';
 import UpComingClass from '../../Components/UpComingClass/UpComingClass';
@@ -14,7 +14,8 @@ const StudentHomePage = () => {
     const [isJoinClasses, setJoinClasses] = useState(false);
     const [isEnrolledClasses, setEnrolledClasses] = useState(false);
     const [isPayments, setPayments] = useState(false);
-
+    const user = useSelector((state) => state.authReducer.authData.details);
+    
     const openEnrolledClasses = () => {
         setJoinClasses(false);
         setLearningSpace(false);
@@ -63,7 +64,7 @@ const StudentHomePage = () => {
           {isLearningSpace && <div className="my-claases">
               <div className="my-classes-left">
                   <div className="greeting">
-                  <Greeting name="Himosh Ravithas"/>
+                      <Greeting firstName={user.userFirstName} lastName={user.userLastName} />
                   </div>
                   <div className="recently-accesed-classes">
                       <span className='upcoming-classes-title'>Recently accesed classes</span>

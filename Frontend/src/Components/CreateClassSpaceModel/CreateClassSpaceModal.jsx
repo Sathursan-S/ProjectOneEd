@@ -40,7 +40,8 @@ const CreateClassSpaceModal = ({ onClose }) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="description">Description</label>
-                        <textarea 
+                        <input className='description-textarea'
+                            type="text"
                             id="description" 
                             value={description} 
                             onChange={(e) => setDescription(e.target.value)} 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Greeting.css';
 
-const Greeting = ({ name }) => {
+const Greeting = ({ firstName, lastName }) => {
   // Get the current hour
   const currentHour = new Date().getHours();
   
@@ -20,7 +20,7 @@ const Greeting = ({ name }) => {
     <div className='Greeting'>
       <span>{getGreeting()}</span>
        
-          <span>{ name}!</span>
+      <span>{firstName} {lastName}!</span>
     </div>
   );
 };

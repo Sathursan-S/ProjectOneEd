@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './InstructorHomePage.css';
+import { useSelector } from 'react-redux';
+
 import newToClassSpaceImage from '../../Images/new-to-class-space.png'
 import { FaSearch } from 'react-icons/fa';
 import EnrolledClassCard from '../../Components/EnrolledClassCard/EnrolledClassCard';
@@ -25,7 +27,9 @@ const InstructorHomePage = () => {
     const [recentlyAccessedClasses, setRecentlyAccessedClasses] = useState([]); 
     const [instructorJoinClasses, setInstructorJoinClasses] = useState([]); 
     const [classSpaces, setClassSpaces] = useState([]); 
-        const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const user = useSelector((state) => state.authReducer.authData.details);
 
     const toggleModal = () => {
         setModalOpen(!isModalOpen);
@@ -127,8 +131,8 @@ const InstructorHomePage = () => {
                   {isUserGroups && <span >User Groups</span>}
                   {isWallet && <span >Wallet</span>}
                   <div className="search">
-                      <input type="text" placeholder='Search class spaces'  />
-                      <button   ><FaSearch /></button>
+                      <input className='search-input' type="text" placeholder='Search class spaces'  />
+                      <button className='search-button'  ><FaSearch /></button>
                   </div>
                   <div className="create">
                       <button className='Button'>+ Create</button>
@@ -148,7 +152,7 @@ const InstructorHomePage = () => {
           {isDashboard && <div className="my-claases">
               <div className="my-classes-left">
                   <div className="greeting">
-                  <Greeting name="Himosh Ravithas"/>
+                      <Greeting firstName={user.userFirstName} lastName={user.userLastName} />
                   </div>
                   <div className="recently-accesed-classes">
                       <span className='upcoming-classes-title'>Recently accesed classes</span>
