@@ -11,31 +11,11 @@ spring:
             - Path=/api/v1/class/**
           filters:
             - SetPath=/
-          metadata:
-            cors:
-              allowedOrigins: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-              allowedHeaders: "*"
-              maxAge: 3600
 
         - id: AuthService
           uri: lb://AuthService
           predicates:
             - Path=/api/v1/auth/**
-          metadata:
-            cors:
-              allowedOrigins: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-              allowedHeaders: "*"
-              maxAge: 3600
 
         - id: DiscoveryServer
           uri: http://localhost:8761
@@ -43,43 +23,11 @@ spring:
             - Path=/eureka/web
           filters:
             - SetPath=/
-          metadata:
-            cors:
-              allowedOrigins: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-              allowedHeaders: "*"
-              maxAge: 3600
 
         - id: DiscoveryServer-static
           uri: http://localhost:8761
           predicates:
             - Path=/eureka/**
-          metadata:
-            cors:
-              allowedOrigins: "*"
-              allowedMethods:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-              allowedHeaders: "*"
-              maxAge: 3600
-
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-            allowedHeaders: "*"
-            maxAge: 3600
 
 eureka:
   client:

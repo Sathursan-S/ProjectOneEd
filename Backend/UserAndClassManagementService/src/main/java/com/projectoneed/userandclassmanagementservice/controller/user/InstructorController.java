@@ -50,4 +50,11 @@ public class InstructorController {
                 instructorService.updateInstructor(request)
         );
     }
+
+    @GetMapping("dashboard/{instructorId}")
+    public ResponseEntity<?> getInstructorDashboard(@PathVariable String instructorId) {
+        return ResponseEntity.ok().body(
+                instructorService.getInstructorDashboard(instructorId)
+        );
+    }
 }

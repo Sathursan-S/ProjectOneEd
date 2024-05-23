@@ -2,7 +2,7 @@ package com.projectoneed.userandclassmanagementservice.controller.user;
 
 import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateAndUpdateStudentRequest;
-import com.projectoneed.userandclassmanagementservice.dto.student.CreateStudentResponse;
+import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.student.GetAllStudentsResponse;
 import com.projectoneed.userandclassmanagementservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -41,4 +41,10 @@ public class StudentController {
         );
     }
 
+    @GetMapping("dashboard/{studentId}")
+    public ResponseEntity<DashboardResponse> getStudentDashboard(@PathVariable String studentId) {
+        return ResponseEntity.ok().body(
+                studentService.getStudentDashboard(studentId)
+        );
+    }
 }

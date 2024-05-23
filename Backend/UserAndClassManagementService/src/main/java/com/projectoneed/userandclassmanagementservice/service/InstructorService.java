@@ -1,6 +1,7 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
 import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateInstructorResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
@@ -95,6 +96,20 @@ instructor.setFirstName(request.getFirstName());
 
         return CreateInstructorResponse.builder()
                 .instructorId(instructor.getUserId())
+                .build();
+    }
+
+    public DashboardResponse getInstructorDashboard(String instructorId) {
+        Instructor instructor = instructorRepository.findByUserId(instructorId)
+                .orElseThrow(
+                        () -> new RuntimeException("Instructor not found")
+                );
+
+        return DashboardResponse.builder()
+                .userId(instructor.getUserId())
+                .userFirstName(instructor.getFirstName())
+                .userLastName(instructor.getLastName())
+                .userEmail(instructor.getEmail())
                 .build();
     }
 }
