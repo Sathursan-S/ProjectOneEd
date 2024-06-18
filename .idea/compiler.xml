@@ -7,7 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SharedLibs" />
+        <module name="shared-lib" />
         <module name="UserAndClassManagementService" />
         <module name="DiscoveryServer" />
         <module name="APIGateway" />
@@ -16,18 +16,19 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ClassManagementService" target="21" />
+      <module name="SharedLibs" target="21" />
       <module name="UserManagementService" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="APIGateway" options="-parameters" />
+      <module name="APIGateway" options="" />
       <module name="ClassManagementService" options="-parameters" />
-      <module name="DiscoveryServer" options="-parameters" />
+      <module name="DiscoveryServer" options="" />
       <module name="SharedLibs" options="-parameters" />
-      <module name="UserAndClassManagementService" options="-parameters" />
+      <module name="UserAndClassManagementService" options="" />
       <module name="UserManagementService" options="-parameters" />
-      <module name="authservice" options="-parameters" />
+      <module name="authservice" options="" />
     </option>
   </component>
 </project>

@@ -1,6 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
-import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.sharedlib.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateInstructorResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
