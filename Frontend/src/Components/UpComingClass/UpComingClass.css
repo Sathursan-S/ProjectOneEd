@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     
-    margin-top: 10px;
+    margin: 10px;
 }
 
 .subject-time{
@@ -16,6 +16,7 @@
 }
 .subject{
     font-weight: 600;
+    font-size: 2vw;
 }
 
 .time{
@@ -24,7 +25,10 @@
 }
 
 .join-now-button{
+    display: flex;
     margin-left: auto;
+    justify-content: center;
+    align-items: center;
     
     
     

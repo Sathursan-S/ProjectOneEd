@@ -1,8 +1,8 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
-import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.sharedlib.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateAndUpdateStudentRequest;
-import com.projectoneed.userandclassmanagementservice.dto.student.CreateStudentResponse;
+import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.student.GetAllStudentsResponse;
 import com.projectoneed.userandclassmanagementservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -41,18 +41,10 @@ public class StudentController {
         );
     }
 
-//    @DeleteMapping("delete")
-//    public ResponseEntity<?> deleteStudent(@RequestBody DeleteStudentRequest request) {
-//        return studentService.deleteStudent(request);
-//    }
-//
-//    @GetMapping("get-by-id")
-//    public GetStudentByIdResponse getStudentById(@RequestBody GetStudentByIdRequest request) {
-//        return studentService.getStudentById(request);
-//    }
-//
-//    @GetMapping("get-by-username")
-//    public GetStudentByUsernameResponse getStudentByUsername(@RequestBody GetStudentByUsernameRequest request) {
-//        return studentService.getStudentByUsername(request);
-//    }
+    @GetMapping("dashboard/{studentId}")
+    public ResponseEntity<DashboardResponse> getStudentDashboard(@PathVariable String studentId) {
+        return ResponseEntity.ok().body(
+                studentService.getStudentDashboard(studentId)
+        );
+    }
 }

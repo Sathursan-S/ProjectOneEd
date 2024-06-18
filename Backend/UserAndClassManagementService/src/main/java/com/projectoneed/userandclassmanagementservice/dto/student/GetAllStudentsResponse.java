@@ -14,5 +14,5 @@ public class GetAllStudentsResponse {
     private String lastName;
     private String email;
     private int age;
-    private int phoneNumber;
+    private String phoneNumber;
 }

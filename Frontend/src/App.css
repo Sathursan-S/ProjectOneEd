@@ -40,6 +40,7 @@
 
 
 .Button{
+  border-radius: 1rem;
   border: none; 
   color: #FFF;
   background: linear-gradient(90deg ,#7C27CB 0%, #290D44 100%);

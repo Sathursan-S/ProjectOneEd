@@ -51,4 +51,9 @@ public class ClassSpaceController {
 
         classSpaceService.deleteClassSpaceById(id);
     }
+
+    @GetMapping("/top3")
+    public List<ClassSpace> getTop3ClassSpaces() {
+        return classSpaceService.getTop3ClassSpaces();
+    }
 }
