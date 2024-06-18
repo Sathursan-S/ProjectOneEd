@@ -1,6 +1,7 @@
 package com.projectoneed.userandclassmanagementservice.models.classspace;
 
 import com.projectoneed.userandclassmanagementservice.models.user.student.Student;
+import jakarta.annotation.sql.DataSourceDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

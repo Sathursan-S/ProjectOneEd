@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ClassSpace {
     private String classSpaceName;
     private String classSpaceDescription;
     private String instructorId;
-    private List<String> classes;
+    @DBRef
+    private List<Class> classes;
     private List<String> enrolledStudents;
 }

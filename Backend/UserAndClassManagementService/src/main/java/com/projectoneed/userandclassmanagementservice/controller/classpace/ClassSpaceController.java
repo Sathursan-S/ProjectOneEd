@@ -1,6 +1,7 @@
 package com.projectoneed.userandclassmanagementservice.controller.classpace;
 
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
+import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import com.projectoneed.userandclassmanagementservice.service.ClassSpaceService;
@@ -50,6 +51,16 @@ public class ClassSpaceController {
     public void deleteClassSpace(@PathVariable String id) {
 
         classSpaceService.deleteClassSpaceById(id);
+    }
+
+    @PutMapping("/join")
+    public ResponseEntity<?> joinClass(
+            @RequestBody JoinRequestDto request) {
+        try {
+            return ResponseEntity.ok(classSpaceService.joinClass(request));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to join class"+ e.getMessage());
+        }
     }
 
     @GetMapping("/top3")

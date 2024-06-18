@@ -20,7 +20,7 @@
         <module>APIGateway</module>
         <module>UserAndClassManagementService</module>
         <module>shared-lib</module>
-        <!--        <module>payment-service</module>-->
+        <module>PaymentService</module>
         <!--        <module>config-service</module>-->
         <!--        <module>notification-service</module>-->
     </modules>

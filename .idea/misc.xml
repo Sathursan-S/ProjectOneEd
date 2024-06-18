@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/Backend/SharedLibs/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/shared-lib/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/PaymentService/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

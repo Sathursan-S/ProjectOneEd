@@ -12,6 +12,7 @@
         <module name="DiscoveryServer" />
         <module name="APIGateway" />
         <module name="authservice" />
+        <module name="PaymentService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +26,7 @@
       <module name="APIGateway" options="" />
       <module name="ClassManagementService" options="-parameters" />
       <module name="DiscoveryServer" options="" />
+      <module name="PaymentService" options="" />
       <module name="SharedLibs" options="-parameters" />
       <module name="UserAndClassManagementService" options="" />
       <module name="UserManagementService" options="-parameters" />

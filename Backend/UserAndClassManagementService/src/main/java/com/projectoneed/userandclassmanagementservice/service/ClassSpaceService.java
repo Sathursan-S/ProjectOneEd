@@ -1,9 +1,14 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
+import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequest;
+import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
+import com.projectoneed.userandclassmanagementservice.models.classspace.JoinRequest;
+import com.projectoneed.userandclassmanagementservice.repository.ClassRepository;
 import com.projectoneed.userandclassmanagementservice.repository.ClassSpaceRepository;
+import com.projectoneed.userandclassmanagementservice.repository.JoinRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClassSpaceService {
     private final ClassSpaceRepository classSpaceRepository;
+    private final ClassRepository classRepository;
+    private final JoinRequestRepository joinRequestRepository;
+
     public List<ClassSpace> getAllClassSpaces() {
         try {
             return classSpaceRepository.findAll();
@@ -51,9 +59,17 @@ public class ClassSpaceService {
 
     public ClassSpace addClassToClassSpace(String classSpaceId, Class classDetails) {
         try {
+            if (classRepository.existsByClassNameAndClassSpaceId(classDetails.getClassName(), classDetails.getClassSpaceId())){
+                throw new RuntimeException("Class already exists");
+            }
+            Class newClass = classRepository.save(classDetails);
+
+//            todo create subscription plan
+
+
             ClassSpace classSpace = classSpaceRepository.findById(classSpaceId).orElse(null);
             if (classSpace != null) {
-                classSpace.getClasses().add(classDetails.getClassSpaceId());
+                classSpace.getClasses().add(newClass);
                 return classSpaceRepository.save(classSpace);
             } else {
                 throw new RuntimeException("Class space with id " + classSpaceId + " not found");
@@ -68,6 +84,35 @@ public class ClassSpaceService {
             return classSpaceRepository.findTop3ByOrderByEnrolledStudentsDesc(Pageable.unpaged());
         } catch (Exception e) {
             throw new RuntimeException("Error while fetching top 3 class spaces");
+        }
+    }
+
+    public JoinRequest joinClass(JoinRequestDto request) {
+        try {
+            Class classDetails = classRepository.findById(request.getClassId())
+                    .orElseThrow(
+                            () -> new RuntimeException("Class not found")
+                    );
+
+            JoinRequest joinRequest = JoinRequest.builder()
+                    .classId(request.getClassId())
+                    .studentId(request.getStudentId())
+                    .status(JoinRequest.Status.PENDING)
+                    .build();
+            joinRequestRepository.save(joinRequest);
+
+//            todo send request to instructor
+
+//            todo send notification to instructor
+
+//            todo process payment
+
+//            todo send notification to student
+
+            return joinRequest;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while joining class" + e.getMessage());
         }
     }
 }
