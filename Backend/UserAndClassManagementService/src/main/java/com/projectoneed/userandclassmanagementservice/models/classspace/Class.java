@@ -27,7 +27,7 @@ public class Class {
     private String classDescription;
     private String medium;
     private double classFee;
-    private List<Student> students;
+    private List<String> students;
     private List<Syllabus> syllabus;
     private Date commencementDate;
     private List<TimeSlot> timeSlots;

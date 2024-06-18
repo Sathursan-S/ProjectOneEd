@@ -4,13 +4,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: UserAndClassManagementService
+        - id: UserAndClassManagementServiceInstructor
           uri: lb://UserAndClassManagementService
           predicates:
-            - Path=/api/v1/user/**
+            - Path=/api/v1/instructor/**
+        - id: UserAndClassManagementServiceStudent
+          uri: lb://UserAndClassManagementService
+          predicates:
+            - Path=/api/v1/student/**
+        - id: UserAndClassManagementServiceClass
+          uri: lb://UserAndClassManagementService
+          predicates:
             - Path=/api/v1/class/**
-          filters:
-            - SetPath=/
 
         - id: AuthService
           uri: lb://AuthService

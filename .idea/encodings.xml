@@ -5,7 +5,11 @@
     <file url="file://$PROJECT_DIR$/Backend/AuthService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/ClassManagementService/ClassManagementService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/DiscoveryServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/SharedLibs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/SharedLibs/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/UserAndClassManagementService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Backend/UserManagementService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Backend/src/main/resources" charset="UTF-8" />
   </component>
 </project>

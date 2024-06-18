@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/Backend/ClassManagementService/ClassManagementService/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/UserAndClassManagementService/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/DiscoveryServer/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/SharedLibs/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

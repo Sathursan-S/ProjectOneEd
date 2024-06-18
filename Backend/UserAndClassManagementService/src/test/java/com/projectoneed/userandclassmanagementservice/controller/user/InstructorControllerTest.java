@@ -1,6 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
-import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
 import com.projectoneed.userandclassmanagementservice.service.InstructorService;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
