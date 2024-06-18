@@ -53,7 +53,7 @@ public class ClassSpaceService {
         try {
             ClassSpace classSpace = classSpaceRepository.findById(classSpaceId).orElse(null);
             if (classSpace != null) {
-                classSpace.getClasses().add(classDetails);
+                classSpace.getClasses().add(classDetails.getClassSpaceId());
                 return classSpaceRepository.save(classSpace);
             } else {
                 throw new RuntimeException("Class space with id " + classSpaceId + " not found");

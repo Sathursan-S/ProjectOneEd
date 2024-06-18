@@ -1,11 +1,11 @@
 package com.projectoneed.authservice.controller;
 
-import com.projectoneed.authservice.service.LogoutService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
-import com.projectoneed.authservice.dto.AuthenticationResponce;
+import com.projectoneed.authservice.dto.AuthenticationResponse;
 import com.projectoneed.authservice.service.AuthenticationService;
 import com.projectoneed.authservice.dto.RegisterRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@CrossOrigin
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
@@ -24,22 +23,25 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponce> register(
-            @RequestBody RegisterRequest registerRequest
-    ) {
-        return ResponseEntity.ok(authService.register(registerRequest));
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
+        try {
+            return ResponseEntity.ok(authService.register(registerRequest));
+        } catch (Exception e) {
+            log.error("Failed to register user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(AuthenticationResponse.builder().error(e.getMessage()).build());
+        }
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponce> authenticate(
+    public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest authenticationRequest
     ) {
         try {
-            AuthenticationResponce response = authService.authenticate(authenticationRequest);
+            AuthenticationResponse response = authService.authenticate(authenticationRequest);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Failed to authenticate user", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.badRequest().body(AuthenticationResponse.builder().error(e.getMessage()).build());
         }
     }
 

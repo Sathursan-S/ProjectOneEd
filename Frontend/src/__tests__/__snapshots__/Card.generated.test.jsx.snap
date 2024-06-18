@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Card> should render component 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="card-header"
+  >
+    <h1>
+      Explore classes on SpaceEd
+    </h1>
+  </div>
+  <div
+    className="class-card-container"
+  >
+    <div
+      className="class-card-content"
+    >
+      <img
+        alt="cardimage"
+        src="test-file-stub"
+      />
+      <div
+        className="card-details"
+      >
+        <div
+          className="card-details-1"
+        >
+          <span
+            className="card-subject"
+          >
+            Mathematics
+          </span>
+          <span
+            className="card-grade"
+          >
+            Grade 10
+          </span>
+          <span
+            className="card-teacher"
+          >
+            Mr. Smith
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-2"
+        >
+          <div
+            className="card-enroll"
+          >
+            <span>
+              Enrolled Students
+            </span>
+            <span>
+              50
+            </span>
+          </div>
+          <div
+            className="card-medium"
+          >
+            <span>
+              Medium
+            </span>
+            <span>
+              English
+            </span>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="card-details-3"
+        >
+          <span>
+            Monthly fee
+          </span>
+          <span>
+            $50/month
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-4"
+        >
+          <span>
+            An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.
+          </span>
+        </div>
+      </div>
+      <div
+        className="card-button"
+      >
+        <div
+          className="card-stars"
+        />
+      </div>
+    </div>
+    <div
+      className="class-card-content"
+    >
+      <img
+        alt="cardimage"
+        src="test-file-stub"
+      />
+      <div
+        className="card-details"
+      >
+        <div
+          className="card-details-1"
+        >
+          <span
+            className="card-subject"
+          >
+            Science
+          </span>
+          <span
+            className="card-grade"
+          >
+            Grade 8
+          </span>
+          <span
+            className="card-teacher"
+          >
+            Ms. Johnson
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-2"
+        >
+          <div
+            className="card-enroll"
+          >
+            <span>
+              Enrolled Students
+            </span>
+            <span>
+              40
+            </span>
+          </div>
+          <div
+            className="card-medium"
+          >
+            <span>
+              Medium
+            </span>
+            <span>
+              English
+            </span>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="card-details-3"
+        >
+          <span>
+            Monthly fee
+          </span>
+          <span>
+            $40/month
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-4"
+        >
+          <span>
+            An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.
+          </span>
+        </div>
+      </div>
+      <div
+        className="card-button"
+      >
+        <div
+          className="card-stars"
+        />
+      </div>
+    </div>
+    <div
+      className="class-card-content"
+    >
+      <img
+        alt="cardimage"
+        src="test-file-stub"
+      />
+      <div
+        className="card-details"
+      >
+        <div
+          className="card-details-1"
+        >
+          <span
+            className="card-subject"
+          >
+            Science
+          </span>
+          <span
+            className="card-grade"
+          >
+            Grade 8
+          </span>
+          <span
+            className="card-teacher"
+          >
+            Ms. Johnson
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-2"
+        >
+          <div
+            className="card-enroll"
+          >
+            <span>
+              Enrolled Students
+            </span>
+            <span>
+              40
+            </span>
+          </div>
+          <div
+            className="card-medium"
+          >
+            <span>
+              Medium
+            </span>
+            <span>
+              English
+            </span>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="card-details-3"
+        >
+          <span>
+            Monthly fee
+          </span>
+          <span>
+            $40/month
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-4"
+        >
+          <span>
+            An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.
+          </span>
+        </div>
+      </div>
+      <div
+        className="card-button"
+      >
+        <div
+          className="card-stars"
+        />
+      </div>
+    </div>
+    <div
+      className="class-card-content"
+    >
+      <img
+        alt="cardimage"
+        src="test-file-stub"
+      />
+      <div
+        className="card-details"
+      >
+        <div
+          className="card-details-1"
+        >
+          <span
+            className="card-subject"
+          >
+            Science
+          </span>
+          <span
+            className="card-grade"
+          >
+            Grade 8
+          </span>
+          <span
+            className="card-teacher"
+          >
+            Ms. Johnson
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-2"
+        >
+          <div
+            className="card-enroll"
+          >
+            <span>
+              Enrolled Students
+            </span>
+            <span>
+              40
+            </span>
+          </div>
+          <div
+            className="card-medium"
+          >
+            <span>
+              Medium
+            </span>
+            <span>
+              English
+            </span>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="card-details-3"
+        >
+          <span>
+            Monthly fee
+          </span>
+          <span>
+            $40/month
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-4"
+        >
+          <span>
+            An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.
+          </span>
+        </div>
+      </div>
+      <div
+        className="card-button"
+      >
+        <div
+          className="card-stars"
+        />
+      </div>
+    </div>
+    <div
+      className="class-card-content"
+    >
+      <img
+        alt="cardimage"
+        src="test-file-stub"
+      />
+      <div
+        className="card-details"
+      >
+        <div
+          className="card-details-1"
+        >
+          <span
+            className="card-subject"
+          >
+            Science
+          </span>
+          <span
+            className="card-grade"
+          >
+            Grade 8
+          </span>
+          <span
+            className="card-teacher"
+          >
+            Ms. Johnson
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-2"
+        >
+          <div
+            className="card-enroll"
+          >
+            <span>
+              Enrolled Students
+            </span>
+            <span>
+              40
+            </span>
+          </div>
+          <div
+            className="card-medium"
+          >
+            <span>
+              Medium
+            </span>
+            <span>
+              English
+            </span>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="card-details-3"
+        >
+          <span>
+            Monthly fee
+          </span>
+          <span>
+            $40/month
+          </span>
+        </div>
+        <hr />
+        <div
+          className="card-details-4"
+        >
+          <span>
+            An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.
+          </span>
+        </div>
+      </div>
+      <div
+        className="card-button"
+      >
+        <div
+          className="card-stars"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

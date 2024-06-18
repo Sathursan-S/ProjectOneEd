@@ -1,6 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
-import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.sharedlib.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateInstructorResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
@@ -18,6 +18,15 @@ import java.util.List;
 @Slf4j
 public class InstructorController {
     private final InstructorService instructorService;
+
+    @GetMapping("/instructor/{id}")
+    public ResponseEntity<CreateInstructorResponse> getInstructorById(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(instructorService.getInstructorById(id));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get instructor");
+        }
+    }
 
     @GetMapping("/instructors")
     public List<GetAllInstructorsResponse> getAllInstructors() {
@@ -39,6 +48,13 @@ public class InstructorController {
     public ResponseEntity<?> updateInstructor(@RequestBody CreateAndUpdateInstructorRequest request) {
         return ResponseEntity.ok().body(
                 instructorService.updateInstructor(request)
+        );
+    }
+
+    @GetMapping("dashboard/{instructorId}")
+    public ResponseEntity<?> getInstructorDashboard(@PathVariable String instructorId) {
+        return ResponseEntity.ok().body(
+                instructorService.getInstructorDashboard(instructorId)
         );
     }
 }

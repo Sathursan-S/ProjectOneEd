@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './InstructorHomePage.css';
+import { useSelector } from 'react-redux';
+
 import newToClassSpaceImage from '../../Images/new-to-class-space.png'
 import { FaSearch } from 'react-icons/fa';
 import EnrolledClassCard from '../../Components/EnrolledClassCard/EnrolledClassCard';
@@ -12,6 +14,7 @@ import StudentJoinClassCard from '../../Components/StudentJoinClassCard/StudentJ
 import InstructorUpcomingClassCard from '../../Components/InstructorUpcomingClassCard/InstructorUpcomingClassCard';
 import InstructorJoinClassCard from '../../Components/InstructorJoinClassCard/InstructorJoinClassCard';
 import MyClassSpaceCard from '../../Components/MyClassSpaceCard/MyClassSpaceCard';
+import CreateClassSpaceModal from '../../Components/CreateClassSpaceModel/CreateClassSpaceModal';
 
 
 const InstructorHomePage = () => {
@@ -24,6 +27,13 @@ const InstructorHomePage = () => {
     const [recentlyAccessedClasses, setRecentlyAccessedClasses] = useState([]); 
     const [instructorJoinClasses, setInstructorJoinClasses] = useState([]); 
     const [classSpaces, setClassSpaces] = useState([]); 
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const user = useSelector((state) => state.authReducer.authData.details);
+
+    const toggleModal = () => {
+        setModalOpen(!isModalOpen);
+    };
 
     useEffect(() => {
         // Simulate fetching data from the DB
@@ -121,8 +131,8 @@ const InstructorHomePage = () => {
                   {isUserGroups && <span >User Groups</span>}
                   {isWallet && <span >Wallet</span>}
                   <div className="search">
-                      <input type="text" placeholder='Search class spaces'  />
-                      <button   ><FaSearch /></button>
+                      <input className='search-input' type="text" placeholder='Search class spaces'  />
+                      <button className='search-button'  ><FaSearch /></button>
                   </div>
                   <div className="create">
                       <button className='Button'>+ Create</button>
@@ -142,7 +152,7 @@ const InstructorHomePage = () => {
           {isDashboard && <div className="my-claases">
               <div className="my-classes-left">
                   <div className="greeting">
-                  <Greeting name="Himosh Ravithas"/>
+                      <Greeting firstName={user.userFirstName} lastName={user.userLastName} />
                   </div>
                   <div className="recently-accesed-classes">
                       <span className='upcoming-classes-title'>Recently accesed classes</span>
@@ -202,12 +212,25 @@ const InstructorHomePage = () => {
               ))
               
               ) : (
-                      <div className="new-to-class-space">
-                              <img src={newToClassSpaceImage} alt="" />
-                              <span className='ready-to-go'>Woah! Ready to go...</span>
-                              <span className='create-your-first-class-space'>create your first class space in few more steps</span>
-                              <button className='create-button Button'>+ Create</button>
-                        </div>
+                     <div>
+            {/* Existing content... */}
+
+            <div className="new-to-class-space">
+                <img src={newToClassSpaceImage} alt="" />
+                <span className='ready-to-go'>Woah! Ready to go...</span>
+                <span className='create-your-first-class-space'>create your first class space in a few more steps</span>
+                <button className='create-button Button' onClick={toggleModal}>+ Create</button>
+            </div>
+
+            
+            {isModalOpen && (
+                <CreateClassSpaceModal onClose={toggleModal}>
+                    
+                    <h4>Create class space</h4>
+                   
+                </CreateClassSpaceModal>
+            )} 
+        </div>
                   
               )}
               

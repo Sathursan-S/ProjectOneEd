@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateClassSpaceModal> should render component 1`] = `
+<div
+  className="modal-backdrop"
+>
+  <div
+    className="modal-content"
+  >
+    <button
+      className="modal-close-button"
+    >
+      X
+    </button>
+    <form
+      onSubmit={[Function]}
+    >
+      <h4>
+        Create class space
+      </h4>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="upload-image"
+        >
+          Upload cover image (Optional)
+        </label>
+        <input
+          id="upload-image"
+          onChange={[Function]}
+          type="file"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <input
+          id="name"
+          onChange={[Function]}
+          required={true}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="description"
+        >
+          Description
+        </label>
+        <textarea
+          id="description"
+          onChange={[Function]}
+          required={true}
+          value=""
+        />
+      </div>
+      <button
+        className="submit-button Button"
+        type="submit"
+      >
+        Create Class Space
+      </button>
+    </form>
+  </div>
+</div>
+`;

@@ -1,8 +1,9 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
-import com.projectoneed.userandclassmanagementservice.dto.CreateUserRequest;
+import com.projectoneed.sharedlib.dto.CreateUserRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateAndUpdateStudentRequest;
 import com.projectoneed.userandclassmanagementservice.dto.student.CreateStudentResponse;
+import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.student.GetAllStudentsResponse;
 import com.projectoneed.userandclassmanagementservice.models.user.student.Student;
 import com.projectoneed.userandclassmanagementservice.repository.StudentRepository;
@@ -86,5 +87,23 @@ public class StudentService {
         student.setPhoneNumber(request.getPhone());
 
         return studentRepository.save(student);
+    }
+
+    public DashboardResponse getStudentDashboard(String studentId) {
+        try {
+            Student student = studentRepository.findByUserId(studentId)
+                    .orElseThrow(
+                            () -> new RuntimeException("Student not found")
+                    );
+
+            return DashboardResponse.builder()
+                    .userId(student.getUserId())
+                    .userFirstName(student.getFirstName())
+                    .userLastName(student.getLastName())
+                    .userEmail(student.getEmail())
+                    .build();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get student dashboard");
+        }
     }
 }

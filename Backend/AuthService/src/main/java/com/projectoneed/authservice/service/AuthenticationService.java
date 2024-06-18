@@ -2,7 +2,7 @@ package com.projectoneed.authservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projectoneed.authservice.dto.AuthenticationRequest;
-import com.projectoneed.authservice.dto.AuthenticationResponce;
+import com.projectoneed.authservice.dto.AuthenticationResponse;
 import com.projectoneed.authservice.dto.CreateUserRequest;
 import com.projectoneed.authservice.dto.RegisterRequest;
 import com.projectoneed.authservice.model.token.Token;
@@ -35,7 +35,11 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final RestTemplate restTemplate;
 
-    public AuthenticationResponce register(RegisterRequest registerRequest) {
+    public AuthenticationResponse register(RegisterRequest registerRequest) {
+        if (userRepository.existsByEmail(registerRequest.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
         var user = User.builder()
                 .username(registerRequest.getUsername())
                 .email(registerRequest.getEmail())
@@ -43,31 +47,31 @@ public class AuthenticationService {
                 .role(registerRequest.getRole())
                 .build();
         var savedUser = userRepository.save(user);
-        if(registerRequest.getRole().equals(Role.STUDENT)){
-            try{
-                createStudent(savedUser, registerRequest);
-            }catch (Exception e){
-                userRepository.delete(savedUser);
-                throw new RuntimeException("Failed to create student");
+
+        try {
+            switch (registerRequest.getRole()) {
+                case STUDENT:
+                    createStudent(savedUser, registerRequest);
+                    break;
+                case INSTRUCTOR:
+                    createInstructor(savedUser, registerRequest);
+                    break;
             }
-        }else if(registerRequest.getRole().equals(Role.INSTRUCTOR)){
-            try {
-                createInstructor(savedUser, registerRequest);
-            }catch (Exception e){
-                userRepository.delete(savedUser);
-                throw new RuntimeException("Failed to create instructor");
-            }
+        } catch (Exception e) {
+            userRepository.delete(savedUser);
+            throw new RuntimeException("Failed to create user profile: " + e.getMessage(), e);
         }
+
         var jwtToken = jwtService.generateToken(savedUser);
         var refreshToken = jwtService.generateRefreshToken(savedUser);
-        saveUserToken(savedUser,jwtToken);
-        return AuthenticationResponce.builder()
+        saveUserToken(savedUser, jwtToken);
+        return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
-    public void createStudent(User user, RegisterRequest registerRequest){
+    public void createStudent(User user, RegisterRequest registerRequest) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
@@ -83,7 +87,7 @@ public class AuthenticationService {
         );
     }
 
-    public void createInstructor(User user, RegisterRequest registerRequest){
+    public void createInstructor(User user, RegisterRequest registerRequest) {
         CreateUserRequest createUserRequest = CreateUserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
@@ -99,7 +103,7 @@ public class AuthenticationService {
         );
     }
 
-    public AuthenticationResponce authenticate(AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
@@ -113,7 +117,7 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return AuthenticationResponce.builder()
+        return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -126,7 +130,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String username;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
@@ -138,7 +142,7 @@ public class AuthenticationService {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
-                var authResponse = AuthenticationResponce.builder()
+                var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
@@ -171,7 +175,7 @@ public class AuthenticationService {
 
     public Object getUserById(String id) {
         User user = userRepository.findByUserId(id);
-        if(user == null){
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
         return user;

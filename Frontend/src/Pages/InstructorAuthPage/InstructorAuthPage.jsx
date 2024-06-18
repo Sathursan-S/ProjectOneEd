@@ -2,53 +2,64 @@ import React, { useState } from "react";
 import './InstructorAuthPage.css'
 import img from '../../Images/Auth-page-img.png'
 import { FaArrowLeft } from 'react-icons/fa'
+import { useDispatch, useSelector } from "react-redux";
 
+import { Link, useNavigate } from "react-router-dom";
+import { logIn, signUp } from "../../Actions/AuthAction.js";
 
 
 
 const InstructorAuthPage = () => {
-    const [isStudentSignUp, setIsStudentSignUp] = useState(true);
-    const [isStudentSignUpPage_02, setIsStudentSignUpPage_02] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
-    const [users, setUsers] = useState([]);
-
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
+    const initialState = {
+        username:"",
+        email: "",
+        firstName: "",
+        lastName: "",
+        phone: "" ,
+        password: "",
+        role: "INSTRUCTOR",
         institutionName: '',
         capacity: '',
         instructorPosition: '',
         location: '',
         optionalPhone: ''
-    });
-    
-    const resetForm = () => {
-        setFormData({
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            phone: '',
-            institutionName: '',
-            capacity: '',
-            instructorPosition: '',
-            location: '',
-            optionalPhone: ''
-        })
-        
     };
 
+    const loading = useSelector((state) => state.authReducer.loading);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
+
+    const [isStudentSignUp, setIsStudentSignUp] = useState(true);
+    const [isStudentSignUpPage_02, setIsStudentSignUpPage_02] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+    const [data, setData] = useState(initialState);
+
+    
+    const resetForm = () => {
+    setData(initialState);
+    
+  };
+
+
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "username") {
+        // Update both username and email when username input changes
+        setData(prevData => ({
+            ...prevData,
+            username: value,
+            email: value  // Sync the username with email
+        }));
+    } else {
+        // Handle changes for other inputs normally
+        setData(prevData => ({
             ...prevData,
             [name]: value
         }));
-    };
+    }
+};
 
     const handleSubmitNext = async (e) => {
         e.preventDefault();
@@ -56,25 +67,19 @@ const InstructorAuthPage = () => {
         setIsStudentSignUpPage_02(true);
     };
 
-    const handleSignUp = async (e) => {
+    const handleSubmit = async (e) => {
+    console.log(data);
         e.preventDefault();
-        const newUser = { ...formData };
-        setUsers([...users, newUser]);
-        console.log("New user signed up:", newUser);
-        // Additional logic (e.g., redirect)
-    };
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const foundUser = users.find(user => user.email === formData.email && user.password === formData.password);
-        if (foundUser) {
-            console.log("User logged in:", foundUser);
-            // Additional logic (e.g., redirect)
+        if (isStudentSignUpPage_02) {
+            dispatch(signUp(data, navigate))
+            
         } else {
-            console.log("Invalid credentials");
-            // Show error message or handle invalid login
+            // Simulated login logic
+            dispatch(logIn(data, navigate));
+            console.log(data);
         }
-    };
+        
+    }
   return (
       <div className='AuthPage'>
           <div className="auth-page-details">
@@ -97,13 +102,15 @@ const InstructorAuthPage = () => {
               </div>
           </div>
           <div className='login-card'>
+            <div className="login-card-content">
             <div className="login-card-header">
                   <span>SpaceEd</span>
                   {isStudentSignUp  && (
                       <span onClick={() => {
-                      setIsStudentSignUp((prev) => !prev);
-                          setIsLogin((prev) => !prev);
-                          setIsStudentSignUpPage_02(false);
+                      setIsStudentSignUp(false);
+                          setIsLogin(true);
+                              setIsStudentSignUpPage_02(false);
+                              resetForm();
                       
                       }}>
                           Already have an account ? Sign in</span>
@@ -111,9 +118,10 @@ const InstructorAuthPage = () => {
                   {isLogin && (
                       <span onClick={() => {
                       
-                          setIsLogin((prev) => !prev);
+                          setIsLogin(false);
                           setIsStudentSignUpPage_02(false);
-                          setIsStudentSignUp(true);
+                              setIsStudentSignUp(true);
+                                resetForm();
                       
                       }}>
                           Don’t have an account ? Sign up</span>
@@ -128,19 +136,36 @@ const InstructorAuthPage = () => {
             </div>
               <div className="login-card-input">
                     {isLogin && (
-                        <form onSubmit={handleLogin}>
+                        <form >
                             {/* Login form */}
                             <div className="login-card-email">
                                 <span>Email address</span>
-                                <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
+                                <input
+                                    required
+                                    type="email"
+                                    name="username"
+                                    value={data.username}
+                                    
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className="login-card-password">
                                 <span>Password</span>
-                                <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-                                <span>{isStudentSignUp ? "" : "Forget your password?"}</span>
+                                <input
+                                    required
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    onChange={handleChange}
+                                  />
+                                  <span>{isStudentSignUp ? "" : "Forget your password?"}</span>
                             </div>
                             <div className="login-card-button">
-                                <button className='Button' type="submit">Continue</button>
+                              <button className='Button'
+                                  onClick={handleSubmit}
+                                  disabled={loading}
+                              >
+                                  Continue</button>
                             </div>
                         </form>
                     )}
@@ -149,43 +174,83 @@ const InstructorAuthPage = () => {
                             {/* Student sign up form */}
                             <div className="login-card-email">
                                 <span>Email address</span>
-                                <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
-                            </div>
+                            <input
+                                required
+                                type="email"
+                                name="username"
+                                value={data.username}
+                                
+                                onChange={handleChange}
+                            />                            </div>
                             <div className="login-card-password">
                                 <span>Password</span>
-                                <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-                                <span>Forget your password?</span>
+                                <input
+                                    required
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    onChange={handleChange}
+                                  />
+                                  <span>Forget your password?</span>
                             </div>
                             <div className="login-card-name">
                                 <div className="login-card-firstname">
                                     <span>First name</span>
-                                    <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} />
-                                </div>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="firstName"
+                                        value={data.firstName}
+                                        onChange={handleChange}
+                                    />                                </div>
                                 <div className="login-card-lastname">
                                     <span>Last name</span>
-                                    <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} />
-                                </div>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="lastName"
+                                        value={data.lastName}
+                                        onChange={handleChange}
+                                    />                                </div>
                             </div>
                             <div className="login-card-phone">
                                 <span>Phone</span>
-                                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} />
-                            </div>
+                                <input
+                                    required
+                                    type="text"
+                                    name="phone"
+                                    value={data.phone}
+                                    onChange={handleChange}
+                                />                            </div>
                             <div className="login-card-button">
-                                <button className={isStudentSignUpPage_02 ? "buttonHidden" :"Button"} type="submit">Next</button>
+                              <button
+                                  className={isStudentSignUpPage_02 ? "buttonHidden" : "Button"}
+                                  type="submit">Next</button>
                             </div>
                         </form>
                     )}
                     {isStudentSignUpPage_02 && (
-                        <form onSubmit={handleSignUp}>
+                        <form >
                             {/* Student sign up page 2 form */}
                             <div className="signup-institution-name-capacity">
                                 <div className="signup-institution-name">
                                     <span>Institution name</span>
-                                    <input type="text" name="institutionName" value={formData.institutionName} onChange={handleInputChange} />
+                                  <input
+                                        required
+                                      type="text"
+                                      name="institutionName"
+                                      value={data.institutionName}
+                                      onChange={handleChange}
+                                  />
                                 </div>
                                 <div className="signup-capacity">
                                     <span>Capacity</span>
-                                    <select style={{ color: "gray" }} value={formData.capacity} onChange={handleInputChange} name="capacity">
+                                  <select
+                                      style={{ color: "gray" }}
+                                      value={data.capacity}
+                                      onChange={handleChange}
+                                      name="capacity"
+                                  >
                                         <option value="" disabled hidden>Capacity</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
@@ -197,7 +262,12 @@ const InstructorAuthPage = () => {
                             </div>
                             <div className="signup-instructor-position">
                                 <span>What best describes you?</span>
-                                <select style={{ color: "gray" }} value={formData.instructorPosition} onChange={handleInputChange} name="instructorPosition">
+                              <select
+                                  style={{ color: "gray" }}
+                                  value={data.instructorPosition}
+                                  onChange={handleChange}
+                                  name="instructorPosition"
+                              >
                                     <option value="" disabled hidden>Lecturer/Teacher/Undergraduate/Other</option>
                                     <option value="lecture">Lecturer</option>
                                     <option value="teacher">Teacher</option>
@@ -208,7 +278,12 @@ const InstructorAuthPage = () => {
                             <div>
                                 <div className="signup-location">
                                     <span>Location</span>
-                                    <select style={{ color: "gray" }} value={formData.location} onChange={handleInputChange} name="location">
+                                  <select
+                                      style={{ color: "gray" }}
+                                      value={data.location}
+                                      onChange={handleChange}
+                                      name="location"
+                                  >
                                         <option value="" disabled hidden>District</option>
                                         <option value="galle">Galle</option>
                                         <option value="colombo">Colombo</option>
@@ -220,22 +295,32 @@ const InstructorAuthPage = () => {
                                 </div>
                                 <div className="login-card-password">
                                     <span>Phone(Optional)</span>
-                                    <input type="text" name="optionalPhone" value={formData.optionalPhone} onChange={handleInputChange} placeholder="+94 XXXXXXXX.." />
+                                  <input
+                                      type="text"
+                                      name="optionalPhone"
+                                      value={data.optionalPhone}
+                                      onChange={handleChange}
+                                      placeholder="+94 XXXXXXXX.."
+                                  />
                                 </div>
                             </div>
                             <div className="login-card-button">
-                                <button className='Button' type="submit">Get started</button>
+                              <button
+                                    className='Button'
+                                    onClick={handleSubmit}
+                                    disabled={loading}
+                              >Get started</button>
                             </div>
                         </form>
                     )}
                 </div>
             
               
-          
           </div>
-                <div className="auth-page-home-button">
+        </div>
+                {/* <div className="auth-page-home-button">
                   <button><FaArrowLeft/> Go home</button>
-              </div>
+              </div> */}
 
     </div>
   )

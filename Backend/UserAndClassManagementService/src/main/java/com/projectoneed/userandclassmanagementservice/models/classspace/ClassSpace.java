@@ -23,6 +23,6 @@ public class ClassSpace {
     private String classSpaceName;
     private String classSpaceDescription;
     private String instructorId;
-    private List<Class> classes;
+    private List<String> classes;
     private List<String> enrolledStudents;
 }
