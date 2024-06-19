@@ -1,7 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
-import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
