@@ -10,8 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface ClassSpaceRepository extends MongoRepository<ClassSpace, String>{
-    Optional<ClassSpace> findByClassSpaceId(String classSpaceId);
+    ClassSpace findByClassSpaceId(String classSpaceId);
     Optional<ClassSpace> findByClassSpaceName(String classSpaceName);
     List<ClassSpace> findAll();
-    List<ClassSpace> findTop3ByOrderByEnrolledStudentsDesc(Pageable pageable);
+
+    List<ClassSpace> findClassSpacesByInstructorId(String instructionId);
 }

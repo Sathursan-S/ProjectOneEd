@@ -1,6 +1,7 @@
 package com.projectoneed.userandclassmanagementservice.controller.user;
 
 import com.projectoneed.sharedlib.dto.CreateUserRequest;
+import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateInstructorResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
@@ -19,7 +20,7 @@ import java.util.List;
 public class InstructorController {
     private final InstructorService instructorService;
 
-    @GetMapping("/instructor/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CreateInstructorResponse> getInstructorById(@PathVariable String id) {
         try {
             return ResponseEntity.ok(instructorService.getInstructorById(id));
@@ -52,7 +53,7 @@ public class InstructorController {
     }
 
     @GetMapping("dashboard/{instructorId}")
-    public ResponseEntity<?> getInstructorDashboard(@PathVariable String instructorId) {
+    public ResponseEntity<DashboardResponse> getInstructorDashboard(@PathVariable String instructorId) {
         return ResponseEntity.ok().body(
                 instructorService.getInstructorDashboard(instructorId)
         );

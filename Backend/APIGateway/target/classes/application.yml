@@ -16,6 +16,10 @@ spring:
           uri: lb://UserAndClassManagementService
           predicates:
             - Path=/api/v1/class/**
+        - id: UserAndClassManagementServiceClassSwagger
+          uri: lb://UserAndClassManagementService
+          predicates:
+            - Path=/swagger-ui/**
 
         - id: PaymentService
           uri: lb://PaymentService

@@ -28,7 +28,7 @@
       <module name="DiscoveryServer" options="" />
       <module name="PaymentService" options="" />
       <module name="SharedLibs" options="-parameters" />
-      <module name="UserAndClassManagementService" options="" />
+      <module name="UserAndClassManagementService" options="-parameters" />
       <module name="UserManagementService" options="-parameters" />
       <module name="authservice" options="" />
     </option>

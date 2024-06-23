@@ -1,12 +1,12 @@
 package com.projectoneed.userandclassmanagementservice.dto.classpace;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateClassSpaceRequest {
     private String classSpaceName;
     private String classSpaceDescription;

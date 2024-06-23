@@ -8,8 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Syllabus {
-    private String syllabusId;
     private String syllabusName;
     private String syllabusDescription;
-    private String syllabusLink;
 }
