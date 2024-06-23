@@ -15,8 +15,8 @@ import InstructorUpcomingClassCard from '../../Components/InstructorUpcomingClas
 import InstructorJoinClassCard from '../../Components/InstructorJoinClassCard/InstructorJoinClassCard';
 import MyClassSpaceCard from '../../Components/MyClassSpaceCard/MyClassSpaceCard';
 import CreateClassSpaceModal from '../../Components/CreateClassSpaceModel/CreateClassSpaceModal';
-
-
+import { getClassSpaces } from '../../Actions/CreateClassSpaceAction';
+import { useDispatch } from 'react-redux';
 const InstructorHomePage = () => {
     const [isDashboard, setDashboard] = useState(true);
     const [isJoinClasses, setJoinClasses] = useState(false);
@@ -26,32 +26,25 @@ const InstructorHomePage = () => {
     const [upcomingClasses, setUpcomingClasses] = useState([]); 
     const [recentlyAccessedClasses, setRecentlyAccessedClasses] = useState([]); 
     const [instructorJoinClasses, setInstructorJoinClasses] = useState([]); 
-    const [classSpaces, setClassSpaces] = useState([]); 
     const [isModalOpen, setModalOpen] = useState(false);
-
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.authReducer.authData.details);
-
+    const classSpaces = useSelector((state) => state.classSpaceReducer.classSpaces);
+    
+    
     const toggleModal = () => {
         setModalOpen(!isModalOpen);
     };
 
     useEffect(() => {
         // Simulate fetching data from the DB
-        fetchUpcomingClasses();
+        dispatch(getClassSpaces());
         fetchRecentlyAccessedClasses();
         fetchInstructorJoinClasses();
-        fetchClassSpaces();
-    }, []);
+        fetchUpcomingClasses();
+    },[dispatch]);
 
-    const fetchClassSpaces = async () => {
-
-        setClassSpaces([ // Uncomment to test data scenario
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
-            // { classesCount:'4',batch:"Physical Science-24", classSpceDetails:'Theory classes for 24th morning batch' },
- 
-        ]);
-    };
+  
     const fetchInstructorJoinClasses = async () => {
 
         setInstructorJoinClasses([ // Uncomment to test data scenario
@@ -135,7 +128,7 @@ const InstructorHomePage = () => {
                       <button className='search-button'  ><FaSearch /></button>
                   </div>
                   <div className="create">
-                      <button className='Button'>+ Create</button>
+                      <button className='Button' onClick={toggleModal}>+ Create</button>
                   </div>
               </div>
             
@@ -223,13 +216,7 @@ const InstructorHomePage = () => {
             </div>
 
             
-            {isModalOpen && (
-                <CreateClassSpaceModal onClose={toggleModal}>
-                    
-                    <h4>Create class space</h4>
-                   
-                </CreateClassSpaceModal>
-            )} 
+            
         </div>
                   
               )}
@@ -271,7 +258,13 @@ const InstructorHomePage = () => {
                   USER GROUPS
             </div>
           )}
-          
+          {isModalOpen && (
+                <CreateClassSpaceModal onClose={toggleModal}>
+                    
+                    <h4>Create class space</h4>
+                   
+                </CreateClassSpaceModal>
+            )} 
 
           
     </div>

@@ -51,17 +51,21 @@ input[type="text"] {
     border-radius: 10px;
 }
 
-.submit-button {
+.class-space-submit-button {
    margin-top: 20px;
     border-radius: 10px;
     width: 100%;
     cursor: pointer;
 }
 
-.submit-button:hover {
-    background-color: #5a4dad;
-}
+
 
 .description-textarea {
-    
+    display: flex;
+  width: 95%; /* Set a fixed width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 100px;
+  resize: none;
 }

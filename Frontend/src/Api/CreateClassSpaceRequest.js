@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://192.168.8.197:8081",
+  baseURL:
+    "https://34d4-2402-d000-a400-7da1-dc5e-ba72-fd96-feaa.ngrok-free.app",
 });
 
 export const createClassSpace = (classSpaceData) =>
-  API.post("/api/classSpace/create", classSpaceData);
+  API.post("/api/v1/class/createClassSpace", classSpaceData);
 
-// Path: Frontend/src/Actions/CreateClassSpaceAction.js
+export const getClassSpaces = () => API.get("/api/v1/class/classspaces");

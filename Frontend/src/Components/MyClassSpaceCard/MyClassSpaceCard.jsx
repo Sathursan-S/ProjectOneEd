@@ -3,16 +3,25 @@ import './MyClassSpaceCard.css'
 import image from '../../Images/Card.png'
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import EditClassSpaceModal from '../EditClassSpaceModal/EditClassSpaceModal';
+import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const MyClassSpaceCard = ({ classesCount, batch, classSpceDetails }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleEditModal = () => {
     setEditModalOpen(!isEditModalOpen);
   };
+  const classSpacePage = () => { 
+    navigate('/my-class-space-page');    
+  };
 
   return (
-    <div className='EnrolledClassCard'>
+    
+    <div className='EnrolledClassCard' onClick={classSpacePage}>
          
           <div className="card-image" style={{ backgroundImage: `url(${image})` }}>
                 <button className='card-edit-button' onClick={toggleEditModal}><FaEdit /></button>
@@ -38,7 +47,8 @@ const MyClassSpaceCard = ({ classesCount, batch, classSpceDetails }) => {
       />
       )}
      
-    </div>
+      </div>
+      
   )
 }
 

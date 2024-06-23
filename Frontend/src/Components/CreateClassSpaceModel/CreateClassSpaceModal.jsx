@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
-import './CreateClassSpaceModal.css'
+import React, { useState, useRef } from 'react';
+import './CreateClassSpaceModal.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { createClassSpace } from '../../Actions/CreateClassSpaceAction';
 
 const CreateClassSpaceModal = ({ onClose }) => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const loading = useSelector((state) => state.classSpaceReducer.uploading);
+     const user  = useSelector((state) => state.authReducer.authData);
     const [image, setImage] = useState(null);
+    const initialState = {
+        classSpaceName: "",
+        classSpaceDiscription: "",
+        userId: user.userId,
 
-    const handleImageChange = (event) => {
-        setImage(event.target.files[0]);
+    }
+   
+    
+    const dispatch = useDispatch();
+    const [data, setData] = useState(initialState);
+    const reset = () => {
+        
+        setData(initialState);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle the form submission logic here
-        // You might want to send the data to a server or manage it locally
-        console.log({ name, description, image });
+       
+        try {
+            dispatch(createClassSpace(data));
+            reset();
+        } catch (error) {
+            console.error("Error creating class space:", error);
+        }
         onClose(); // Close modal after submission
     };
 
@@ -26,29 +42,33 @@ const CreateClassSpaceModal = ({ onClose }) => {
                     <h4>Create class space</h4>
                     <div className="form-group">
                         <label htmlFor="upload-image">Upload cover image (Optional)</label>
-                        <input type="file" id="upload-image" onChange={handleImageChange} />
+                        <input
+                            type="file"
+                            id="upload-image"
+                            onChange={(e) => setImage(e.target.files[0])}
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            value={name} 
-                            onChange={(e) => setName(e.target.value)} 
-                            required 
+                        <input
+                            type="text"
+                            value={data.classSpaceName}
+                            required
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="description">Description</label>
-                        <input className='description-textarea'
-                            type="text"
-                            id="description" 
-                            value={description} 
-                            onChange={(e) => setDescription(e.target.value)} 
-                            required 
+                        <textarea
+                            className='description-textarea'
+                            value={data.classSpaceDiscription}
+                            required
                         />
                     </div>
-                    <button type="submit" className="submit-button Button">Create Class Space</button>
+                    <button
+                        type="submit"
+                        className="class-space-submit-button Button"
+                        disabled={loading}
+                    >{loading ? "loading" : "Create Class Space"}</button>
                 </form>
             </div>
         </div>

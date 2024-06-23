@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://192.168.8.197:8081",
+  baseURL:
+    "https://34d4-2402-d000-a400-7da1-dc5e-ba72-fd96-feaa.ngrok-free.app",
 });
 const DETAILSAPI = axios.create({
-  baseURL: "http://192.168.8.197:8082",
+  baseURL:
+    "https://34d4-2402-d000-a400-7da1-dc5e-ba72-fd96-feaa.ngrok-free.app",
 });
 
 export const logIn = (formData) =>

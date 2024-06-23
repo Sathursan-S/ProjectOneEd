@@ -21,7 +21,8 @@ import StudentHomePage from "./Pages/StudentHomePage/StudentHomePage";
 import AuthPage from "./Pages/StudentAuthPage/StudentAuthPage";
 import InstructorHomePage from "./Pages/InstructorHomePage/InstructorHomePage";
 import { jwtDecode } from "jwt-decode";
-
+import MyClassSpacePage from "./Pages/MyClassSpacePage/MyClassSpacePage";
+import MyClassViewPage from "./Pages/MyClassViewPage/MyClassViewPage";
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
 
@@ -70,7 +71,8 @@ function App() {
             )
           }
         />
-        <Route path="/class-view" element={<ClassViewPage />} />
+        <Route path="/class-view-page" element={<ClassViewPage />} />
+        <Route path="/my-class-page" element={<MyClassViewPage />} />
         <Route path="/explore-classes" element={<ExploreClassesPage />} />
         <Route path="/teachon-spaceed" element={<InstructorAuthPage />} />
         <Route path="/instructor-signup" element={<InstructorAuthPage />} />
@@ -84,8 +86,9 @@ function App() {
           path="/instructor-home"
           element={user ? <InstructorHomePage /> : <Navigate to="/home" />}
         />
+        <Route path="/my-class-space-page" element={<MyClassSpacePage />} />
       </Routes>
-
+      {/* <MyClassSpacePage /> */}
       {/* <StudentHomePage/> */}
       {/* <InstructorHomePage/> */}
       {/* <InstructorAuthPage/> */}

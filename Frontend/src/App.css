@@ -46,3 +46,9 @@
   background: linear-gradient(90deg ,#7C27CB 0%, #290D44 100%);
 }
 
+.Button:hover{
+  background: #FFF;
+  color: #7C27CB;
+  border: 1px solid #7C27CB;
+}
+

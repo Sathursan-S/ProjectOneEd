@@ -1,11 +1,24 @@
-import * as ClassSpaceCreateApi from "../Api/CreateClassSpaceRequest";
+import * as api from "../Api/CreateClassSpaceRequest";
 
-export const createClassSpace = async (classSpaceData) => {
+export const createClassSpace = (classSpaceData) => async (dispatch) => {
   try {
-    const { data } = await ClassSpaceCreateApi.createClassSpace(classSpaceData);
-    console.log("Class space created successfully:", data);
+    dispatch({ type: "UPLOAD_START" });
+    const { data } = await api.createClassSpace(classSpaceData);
+    dispatch({ type: "UPLOAD_SUCCESS", data });
+    console.log(data);
   } catch (error) {
-    console.error("Error creating class:", error);
-    throw error;
+    console.log(error);
+    dispatch({ type: "UPLOAD_FAIL", error });
+  }
+};
+
+export const getClassSpaces = () => async (dispatch) => {
+  try {
+    dispatch({ type: "FETCH_START" });
+    const { data } = await api.getClassSpaces();
+    dispatch({ type: "FETCH_SUCCESS", data });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "FETCH_FAIL", error });
   }
 };

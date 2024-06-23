@@ -1,3 +1,8 @@
+.EnrolledClassCard:hover{
+    border: #3f0872 2px solid;
+    cursor: pointer;
+}
+
 .EnrolledClassCard{
     width: 45vh;
     margin: 1rem;
@@ -6,7 +11,7 @@
 }
 
 .card-image{
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
     display: flex;
     justify-content: flex-end;
     height: 20vh;
