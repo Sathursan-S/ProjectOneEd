@@ -5,50 +5,29 @@ import newToClassSpaceImage from '../../Images/new-to-class-space.png'
 import EnrolledClassCard from '../../Components/EnrolledClassCard/EnrolledClassCard';
 import image from '../../Images/Card.png'
 import CreateClassModal from '../../Components/CreateClassModal/CreateClassModal';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClasses } from '../../Actions/CreateClassAction';
 
 const MyClassSpacePage = () => {
+  const { classSpaceId } = useParams();
+  
   const classSpaceName = "Physics Science - 2024";
   const [activeSection, setActiveSection] = useState('My classes');
-  const [classes, setClasses] = useState([]); 
+  
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const classes = useSelector((state) => state.classReducer.classes);
+  
+  const dispatch = useDispatch();
    const toggleModal = () => {
         setModalOpen(!isModalOpen);
     };
     useEffect(() => {
-        fetchClasses();
+      dispatch(getClasses(classSpaceId));
     }, []);
 
-    const fetchClasses = async () => {
-
-        setClasses([ // Uncomment to test data scenario
-          //   { image:image,
-          //     subject:"A/L ICT - Paper class",
-          //     grade:'2024 Batch - Advanced Level',
-          //   teacher: 'Himosh  ',
-          //   studentCount: 10,
-          //   requestCount: 5
-          // },
-          
-          //   { image:image,
-          //     subject:"A/L ICT - Paper class",
-          //     grade:'2024 Batch - Advanced Level',
-          //   teacher: 'Himosh  ',
-          //   studentCount: 10,
-          //   requestCount: 5
-          // },
-          
-          //   { image:image,
-          //     subject:"A/L ICT - Paper class",
-          //     grade:'2024 Batch - Advanced Level',
-          //     teacher: 'Himosh  ',
-          //     studentCount: 10,
-          //   requestCount: 5},
-            
- 
-        ]);
-    };
-
+    
+    
   return (
     <div className='MyClassSpacePage'>
       <header className="header">
@@ -89,13 +68,13 @@ const MyClassSpacePage = () => {
       <div className="section">
         {activeSection === 'My classes' && <div className="enrolled-classes">
               {classes.length > 0 ? (
-                  classSpaces.map((classInfo) => (
+                  classes.map((classInfo) => (
                   <EnrolledClassCard
                     
-                    image={classInfo.image}
-                    subject={classInfo.subject}
-                    grade={classInfo.grade}
-                      teacher={classInfo.teacher}
+                    
+                    subject={classInfo.className}
+                    grade={classInfo.gradeCategory}
+                      teacher={classInfo.instructorName}
                       studentCount={classInfo.studentCount}
                       requestCount={classInfo.requestCount}
               
@@ -142,7 +121,7 @@ const MyClassSpacePage = () => {
         )}
       </div>
        {isModalOpen && (
-                <CreateClassModal onClose={toggleModal}>
+                <CreateClassModal classSpaceId={classSpaceId} onClose={toggleModal}>
                     <div>
                         <label>Subject</label>
                         <input type="text" placeholder="Enter subject" />

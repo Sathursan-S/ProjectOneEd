@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "http://192.168.8.197:8080/" });
 
 export const createClass = (classData) =>
-  API.post("/api/v1/class/{classSpaceId}/createClass", classData);
+  API.post("/api/v1/class/createClass", classData);
 
-export const getClasses = () => API.get(`/api/v1/class/${id}`);
+export const getClasses = (id) => API.get(`/api/v1/class/classes/${id}`);

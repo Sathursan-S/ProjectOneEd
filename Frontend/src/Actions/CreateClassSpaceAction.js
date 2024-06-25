@@ -12,13 +12,24 @@ export const createClassSpace = (classSpaceData) => async (dispatch) => {
   }
 };
 
-export const getClassSpaces = () => async (dispatch) => {
+export const getClassSpaces = (id) => async (dispatch) => {
   try {
     dispatch({ type: "FETCH_START" });
-    const { data } = await api.getClassSpaces();
+    const { data } = await api.getClassSpaces(id);
     dispatch({ type: "FETCH_SUCCESS", data });
   } catch (error) {
     console.log(error);
     dispatch({ type: "FETCH_FAIL", error });
+  }
+};
+
+export const getAllClasses = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "FETCH_ALL_CLASSES_START" });
+    const { data } = await api.getAllClasses(id);
+    dispatch({ type: "FETCH_ALL_CLASSES_SUCCESS", data });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "FETCH_ALL_CLASSES_FAIL", error });
   }
 };

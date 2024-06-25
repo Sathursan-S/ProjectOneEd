@@ -86,7 +86,10 @@ function App() {
           path="/instructor-home"
           element={user ? <InstructorHomePage /> : <Navigate to="/home" />}
         />
-        <Route path="/my-class-space-page" element={<MyClassSpacePage />} />
+        <Route
+          path="/my-class-space-page/:classSpaceId"
+          element={user ? <MyClassSpacePage /> : <Navigate to="/home" />}
+        />
       </Routes>
       {/* <MyClassSpacePage /> */}
       {/* <StudentHomePage/> */}

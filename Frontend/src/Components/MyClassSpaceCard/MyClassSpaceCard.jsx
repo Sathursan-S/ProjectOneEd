@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const MyClassSpaceCard = ({ classesCount, batch, classSpceDetails }) => {
+const MyClassSpaceCard = ({ classesCount, batch, classSpceDetails, classSpaceId }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleEditModal = () => {
     setEditModalOpen(!isEditModalOpen);
   };
+  
   const classSpacePage = () => { 
-    navigate('/my-class-space-page');    
+    navigate(`/my-class-space-page/${classSpaceId}`);    
   };
 
   return (

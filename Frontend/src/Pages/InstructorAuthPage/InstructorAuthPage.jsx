@@ -136,7 +136,7 @@ const InstructorAuthPage = () => {
             </div>
               <div className="login-card-input">
                     {isLogin && (
-                        <form >
+                        <form  onSubmit={handleSubmit}>
                             {/* Login form */}
                             <div className="login-card-email">
                                 <span>Email address</span>
@@ -162,8 +162,8 @@ const InstructorAuthPage = () => {
                             </div>
                             <div className="login-card-button">
                               <button className='Button'
-                                  onClick={handleSubmit}
-                                  disabled={loading}
+                                  type="submit"
+                                  
                               >
                                   Continue</button>
                             </div>

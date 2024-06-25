@@ -1,5 +1,5 @@
 const classSpaceReducer = (
-  state = { uploading: false, classSpaces: [] },
+  state = { uploading: false, classSpaces: [], allClasses: [] },
   action
 ) => {
   switch (action.type) {
@@ -20,6 +20,14 @@ const classSpaceReducer = (
       return { ...state, loading: false, classSpaces: action.data };
     case "FETCH_FAIL":
       return { ...state, loading: false };
+
+    case "FETCH_ALL_CLASSES_START":
+      return { ...state, loading: true };
+    case "FETCH_ALL_CLASSES_SUCCESS":
+      return { ...state, loading: false, allClasses: action.data };
+    case "FETCH_ALL_CLASSES_FAIL":
+      return { ...state, loading: false };
+
     default:
       return state;
   }

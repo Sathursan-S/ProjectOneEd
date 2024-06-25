@@ -3,6 +3,7 @@ import './EnrolledClassCard.css'
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import img from '../../Images/Card.png'
 
 const EnrolledClassCard = ({ requestCount,image, subject, grade, teacher, studentCount }) => {
   const user = useSelector((state) => state.authReducer.authData);
@@ -17,7 +18,7 @@ const EnrolledClassCard = ({ requestCount,image, subject, grade, teacher, studen
   return (
     <div className='EnrolledClassCard' onClick={user.role === 'INSTRUCTOR'? myClassPage: classViewPage}>
          
-      <div className="card-image" style={{ backgroundImage: `url(${image})` }}>
+      <div className="card-image" style={{ backgroundImage: `url(${img})` }}>
         {user.role === 'INSTRUCTOR' &&
           <>
           <button className='card-edit-button' ><FaEdit /></button>

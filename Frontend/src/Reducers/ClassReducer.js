@@ -2,21 +2,21 @@ const initialState = { uploading: false, classes: [], loading: false };
 
 const classReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "UPLOAD_START":
+    case "CLASS_UPLOAD_START":
       return { ...state, uploading: true };
-    case "UPLOAD_SUCCESS":
+    case "CLASS_UPLOAD_SUCCESS":
       return {
         ...state,
         uploading: false,
         classes: [...state.classes, action.data],
       };
-    case "UPLOAD_FAIL":
+    case "CLASS_UPLOAD_FAIL":
       return { ...state, uploading: false };
-    case "FETCH_START":
+    case "CLASS_FETCH_START":
       return { ...state, loading: true };
-    case "FETCH_SUCCESS":
+    case "CLASS_FETCH_SUCCESS":
       return { ...state, loading: false, classes: action.data };
-    case "FETCH_FAIL":
+    case "CLASS_FETCH_FAIL":
       return { ...state, loading: false };
     default:
       return state;

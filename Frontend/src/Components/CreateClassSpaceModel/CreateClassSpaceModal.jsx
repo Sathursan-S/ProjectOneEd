@@ -1,30 +1,32 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './CreateClassSpaceModal.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { createClassSpace } from '../../Actions/CreateClassSpaceAction';
 
 const CreateClassSpaceModal = ({ onClose }) => {
     const loading = useSelector((state) => state.classSpaceReducer.uploading);
-     const user  = useSelector((state) => state.authReducer.authData);
+    const user = useSelector((state) => state.authReducer.authData);
     const [image, setImage] = useState(null);
     const initialState = {
         classSpaceName: "",
-        classSpaceDiscription: "",
-        userId: user.userId,
-
-    }
-   
-    
-    const dispatch = useDispatch();
+        classSpaceDescription: "",
+        instructorId: user.userId,
+    };
+    console.log(user.userId);
     const [data, setData] = useState(initialState);
+    const dispatch = useDispatch();
+
     const reset = () => {
-        
         setData(initialState);
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setData({ ...data, [name]: value });
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-       
         try {
             dispatch(createClassSpace(data));
             reset();
@@ -49,18 +51,22 @@ const CreateClassSpaceModal = ({ onClose }) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="classSpaceName">Name</label>
                         <input
-                            type="text"
+                            type='text'
+                            name="classSpaceName"
                             value={data.classSpaceName}
+                            onChange={handleChange}
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="classSpaceDescription">Description</label>
                         <textarea
                             className='description-textarea'
-                            value={data.classSpaceDiscription}
+                            name="classSpaceDescription"
+                            value={data.classSpaceDescription}
+                            onChange={handleChange}
                             required
                         />
                     </div>

@@ -3,30 +3,28 @@ import './CreateClassModal.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { createClass } from '../../Actions/CreateClassAction';
 
-const CreateClassModal = ({ onClose }) => {
+const CreateClassModal = ({ onClose, classSpaceId }) => {
     // const loading = useSelector((state) => state.classReducer.uploading);
     const loading = false;
     const user = useSelector((state) => state.authReducer.authData);
-
     const initialState = {
-        name: "",
-        description: "",
-        category: "",
+        className: "",
+        classSpaceId: classSpaceId,
+        instructorId: user.userId,
+        gradeCategory: "",
         instructorName: "",
-        occupation: "",
+        classDescription: "",
         medium: "",
-        monthlyFee: "",
-        syllabusTitle: "",
+        classFee: "",
+        syllabusName: "",
         syllabusDescription: "",
-        commenceDate: "",
-        commenceTime: "",
-        repeatDay: "",
+        date: "",
         startTime: "",
         endTime: "",
-        userId: user.userId,
-        schedules: [],
-        syllabusItems: []
+        syllabus: [],
+        classSchedule: [],
     };
+    console.log(user.userId)
 
     const [data, setData] = useState(initialState);
     const [step, setStep] = useState(1);
@@ -39,19 +37,20 @@ const CreateClassModal = ({ onClose }) => {
     };
 
     const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
     };
 
     const handleAddNextSchedule = () => {
         const newSchedule = {
-            repeatDay: data.repeatDay,
-            startTime: data.startTime,
-            endTime: data.endTime
+            date: data.date,
+            startTime: new Date(data.date + 'T' + data.startTime).toISOString(),
+            endTime: new Date(data.date + 'T' + data.endTime).toISOString()
         };
         setData({
             ...data,
-            schedules: [...data.schedules, newSchedule],
-            repeatDay: "",
+            classSchedule: [...data.classSchedule, newSchedule],
+            date: "",
             startTime: "",
             endTime: ""
         });
@@ -59,13 +58,13 @@ const CreateClassModal = ({ onClose }) => {
 
     const handleAddMoreSyllabus = () => {
         const newSyllabusItem = {
-            title: data.syllabusTitle,
-            description: data.syllabusDescription
+            syllabusName: data.syllabusName,
+            syllabusDescription: data.syllabusDescription
         };
         setData({
             ...data,
-            syllabusItems: [...data.syllabusItems, newSyllabusItem],
-            syllabusTitle: "",
+            syllabus: [...data.syllabus, newSyllabusItem],
+            syllabusName: "",
             syllabusDescription: ""
         });
     };
@@ -86,10 +85,11 @@ const CreateClassModal = ({ onClose }) => {
             try {
                 dispatch(createClass(newClass));
                 reset();
+                console.log(newClass); // Log the newClass data to check the format
             } catch (error) {
                 console.error("Error creating class:", error);
             }
-            onClose();
+            onClose(); // Close modal after submission
         }
     };
 
@@ -116,31 +116,31 @@ const CreateClassModal = ({ onClose }) => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="name">Class Name</label>
+                                <label htmlFor="className">Class Name</label>
                                 <input
                                     type="text"
-                                    name="name"
-                                    value={data.name}
+                                    name="className"
+                                    value={data.className}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="category">Category</label>
+                                <label htmlFor="gradeCategory">Category</label>
                                 <input
                                     type="text"
-                                    name="category"
-                                    value={data.category}
+                                    name="gradeCategory"
+                                    value={data.gradeCategory}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="description">Description</label>
+                                <label htmlFor="classDescription">Description</label>
                                 <textarea
                                     className="text-area"
-                                    name="description"
-                                    value={data.description}
+                                    name="classDescription"
+                                    value={data.classDescription}
                                     onChange={handleChange}
                                     required
                                 />
@@ -169,16 +169,6 @@ const CreateClassModal = ({ onClose }) => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="occupation">Occupation</label>
-                                <input
-                                    type="text"
-                                    name="occupation"
-                                    value={data.occupation}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
                                 <label htmlFor="medium">Medium</label>
                                 <input
                                     type="text"
@@ -189,11 +179,11 @@ const CreateClassModal = ({ onClose }) => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="monthlyFee">Monthly Fee</label>
+                                <label htmlFor="classFee">Monthly Fee</label>
                                 <input
-                                    type="text"
-                                    name="monthlyFee"
-                                    value={data.monthlyFee}
+                                    type="decimal"
+                                    name="classFee"
+                                    value={data.classFee}
                                     onChange={handleChange}
                                     required
                                 />
@@ -219,18 +209,18 @@ const CreateClassModal = ({ onClose }) => {
                     )}
                     {step === 3 && (
                         <>
-                            {data.syllabusItems.map((item, index) => (
+                            {data.syllabus.map((item, index) => (
                                 <div key={index} className="syllabus-item">
-                                    <span>{item.title}</span>
-                                    <p>{item.description}</p>
+                                    <span>{item.syllabusName}</span>
+                                    <p>{item.syllabusDescription}</p>
                                 </div>
                             ))}
                             <div className="form-group">
-                                <label htmlFor="syllabusTitle">Title</label>
+                                <label htmlFor="syllabusName">Title</label>
                                 <input
                                     type="text"
-                                    name="syllabusTitle"
-                                    value={data.syllabusTitle}
+                                    name="syllabusName"
+                                    value={data.syllabusName}
                                     onChange={handleChange}
                                     required
                                 />
@@ -274,49 +264,22 @@ const CreateClassModal = ({ onClose }) => {
                     {step === 4 && (
                         <>
                             <div className="form-group">
-                                <label htmlFor="commenceDate">Commence on</label>
-                                <div className="schedule-group">
-                                    <input
-                                        type="date"
-                                        name="commenceDate"
-                                        value={data.commenceDate}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <input
-                                        type="time"
-                                        name="commenceTime"
-                                        value={data.commenceTime}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="repeatDay">Class Timetable</label>
-                                {data.schedules.map((schedule, index) => (
+                                <label htmlFor="classSchedule">Class Timetable</label>
+                                {data.classSchedule.map((schedule, index) => (
                                     <div key={index} className="schedule-item">
-                                        <span>Every {schedule.repeatDay}</span>
+                                        <span>{schedule.date}</span>
                                         <span>From {schedule.startTime}</span>
                                         <span>To {schedule.endTime}</span>
                                     </div>
                                 ))}
                                 <div className="schedule-group">
-                                    <select
-                                        name="repeatDay"
-                                        value={data.repeatDay}
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        value={data.date}
                                         onChange={handleChange}
                                         required
-                                    >
-                                        <option value="">Repeat</option>
-                                        <option value="monday">Monday</option>
-                                        <option value="tuesday">Tuesday</option>
-                                        <option value="wednesday">Wednesday</option>
-                                        <option value="thursday">Thursday</option>
-                                        <option value="friday">Friday</option>
-                                        <option value="saturday">Saturday</option>
-                                        <option value="sunday">Sunday</option>
-                                    </select>
+                                    />
                                     <input
                                         type="time"
                                         name="startTime"
