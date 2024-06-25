@@ -1,116 +1,79 @@
-import React from 'react';
+// src/Components/Card/Card.js
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
 import './Card.css';
 import { Link } from 'react-router-dom';
-import classImg from '../../Images/Card.png';
+import { fetchClasses } from '../../Actions/ClassActions';
 
 const Card = () => {
-  const cardData = [
-    {
-      image: classImg,
-      subject: "Mathematics",
-      grade: "Grade 10",
-      teacher: "Mr. Smith",
-      medium: "English",
-      enrolls: 50,
-      fee: "$50/month"
-    },
-    {
-      image: classImg,
-      subject: "Science",
-      grade: "Grade 8",
-      teacher: "Ms. Johnson",
-      medium: "English",
-      enrolls: 40,
-      fee: "$40/month"
-    },
-    {
-      image: classImg,
-      subject: "Science",
-      grade: "Grade 8",
-      teacher: "Ms. Johnson",
-      medium: "English",
-      enrolls: 40,
-      fee: "$40/month"
-    },
-    {
-      image: classImg,
-      subject: "Science",
-      grade: "Grade 8",
-      teacher: "Ms. Johnson",
-      medium: "English",
-      enrolls: 40,
-      fee: "$40/month"
-    },
-    {
-      image: classImg,
-      subject: "Science",
-      grade: "Grade 8",
-      teacher: "Ms. Johnson",
-      medium: "English",
-      enrolls: 40,
-      fee: "$40/month"
-    },
-    // Add more objects as needed
-  ];
+    const dispatch = useDispatch();
+    const classState = useSelector((state) => state.classData);
 
-  return (
-    <div className="card-container">
-      <div className="card-header">
-        <h1>Explore classes on SpaceEd</h1>
-      </div>
-      <div className="class-card-container">
+    useEffect(() => {
+        dispatch(fetchClasses());
+    }, [dispatch]);
 
-      {cardData.map((data, index) => {
-        const { image, subject, grade, teacher, enrolls, medium, fee } = data;
-        return (
-          <div className="class-card-content" key={index}>
-            {/* <div className='class-card-image'> */}
-              <img src={image} alt='cardimage' />
-            {/* </div> */}
-            <div className='card-details'>
-              <div className='card-details-1'>
-                <span className='card-subject'>{subject}</span>
-                <span className='card-grade'>{grade}</span>
-                <span className='card-teacher'>{teacher}</span>
-              </div>
-              <hr />
-              <div className='card-details-2'>
-                <div className='card-enroll'>
-                  <span>Enrolled Students</span>
-                  <span>{enrolls}</span>
-                </div>
-                <div className='card-medium'>
-                  <span>Medium</span>
-                  <span>{medium}</span>
-                </div>
-              </div>
-              <hr />
-              <div className='card-details-3'>
-                <span>Monthly fee</span>
-                <span>{fee}</span>
-              </div>
-              <hr />
-              <div className='card-details-4'>
-                <span>An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.</span>
-              </div>
+    if (classState.loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (classState.error) {
+        console.error('Fetch classes error:', classState.error);
+        return <div>Error: {classState.error}</div>;
+    }
+
+    return (
+        <div className="card-container">
+            <div className="card-header">
+                <h1>Explore classes on SpaceEd</h1>
             </div>
-            <div className='card-button'>
-              <Link to='/class-view'>
-                <button className='Button card-butt'>Show details</button>
-              </Link>
-              <div className='card-stars'>
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
+            <div className="class-card-container">
+                {classState.classes.map((classItem) => (
+                    <div className="class-card-content" key={classItem.classId}>
+                        <img src={classItem.image} alt="class thumbnail" />
+                        <div className="card-details">
+                            <div className="card-details-1">
+                                <span className="card-subject">{classItem.className}</span>
+                                <span className="card-grade">{classItem.gradeCategory}</span>
+                                <span className="card-teacher">{classItem.instructorName}</span>
+                            </div>
+                            <hr />
+                            <div className="card-details-2">
+                                <div className="card-enroll">
+                                    <span>Enrolled Students</span>
+                                    <span>{classItem.enrolledStudents ? classItem.enrolledStudents.length : 0}</span>
+                                </div>
+                                <div className="card-medium">
+                                    <span>Medium</span>
+                                    <span>{classItem.medium}</span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="card-details-3">
+                                <span>Monthly fee</span>
+                                <span>LKR {classItem.classFee.value}</span>
+                            </div>
+                            <hr />
+                            <div className="card-details-4">
+                                <span>{classItem.classDescription}</span>
+                            </div>
+                        </div>
+                        <div className="card-button">
+                            <Link to={`/class-view-page/${classItem.classId}`}>
+                                <button className="Button card-butt">Show details</button>
+                            </Link>
+                            <div className="card-stars">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
-        )
-      })}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Card;

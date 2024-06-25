@@ -62,7 +62,6 @@
 .auth-page-details img {
     width: 50%;
     height: 80%;
-    object-fit: cover;
     margin-left: 80px;
     margin-top: 50px;
 }
@@ -181,6 +180,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .login-card-button button{

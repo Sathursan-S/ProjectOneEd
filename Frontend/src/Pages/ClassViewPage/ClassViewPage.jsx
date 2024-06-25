@@ -1,63 +1,74 @@
-import React from 'react'
-import ClassCard from '../../Components/ClassCard/ClassCard'
-import image from '../../Images/Card.png'
-import './ClassViewPage.css'
-import ClassSchedule from '../../Components/ClassSchedule/ClassSchedule'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchClassById } from '../../Actions/ClassActions';
+import ClassCard from '../../Components/ClassCard/ClassCard';
+import ClassSchedule from '../../Components/ClassSchedule/ClassSchedule';
+import './ClassViewPage.css';
 
 const ClassViewPage = () => {
+    const dispatch = useDispatch();
+    const { classId } = useParams();
+    console.log("Class ID:", classId); // Add this line
+
+    const classState = useSelector((state) => state.classData);
+    const { loading, currentClass, error } = classState;
+
+    useEffect(() => {
+        dispatch(fetchClassById(classId));
+    }, [dispatch, classId]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    if (!currentClass) {
+        return <div>Class not found</div>;
+    }
     return (
         <div className='ClassViewPage'>
-            
             <div className="class-card">
                 <ClassCard
-                    image={image}
-                    subject="Combined Maths"
-                    grade='2024 Batch - Advanced Level'
-                    teacher='By Mr. R.Himosh (Bsc Engineering(Reading)) '
-                    enrolls='100'
-                    medium='Tamil'
-                    fee='LKR 1500'
+                    image={currentClass.image}
+                    subject={currentClass.subject}
+                    grade={currentClass.grade}
+                    teacher={currentClass.teacher}
+                    enrolls={currentClass.enrolls}
+                    medium={currentClass.medium}
+                    fee={currentClass.classFee}
                 />
             </div>
             <div className="class-details">
                 <div className="class-description">
                     <span>Description</span>
                     <hr />
-                    <span className='description'>Welcome to our comprehensive online
-                        course on Digital Marketing Fundamentals!
-                        In this dynamic and interactive program,
-                        you will embark on a journey to acquire
-                        essential skills and knowledge to thrive
-                        in the ever-evolving world of digital marketing.
+                    <span className='description'>
+                        Welcome to our comprehensive online course on {currentClass.subject}!
                     </span>
                 </div>
                 <div className="class-syllabus">
                     <span>Syllabus</span>
                     <hr />
-                    <div className="syllabus-lessions">
+                    <div className="syllabus-lessons">
                         <span className="class-small-circle"></span>
-                        <span className='syllabuses'>Foundational Concepts: Gain a solid
-                            understanding of the core principles of
-                            digital marketing, including SEO, social
-                            media marketing, email marketing, and
-                            content strategy.
+                        <span className='syllabuses'>
+                            Foundational Concepts: Gain a solid understanding of the core principles of {currentClass.subject}.
                         </span>
                     </div>
-                    <div className="syllabus-lessions">
+                    <div className="syllabus-lessons">
                         <span className="class-small-circle"></span>
-                        <span className='syllabuses'>Practical Skills Development: Through
-                            hands-on exercises and real-world case
-                            studies, you'll develop practical skills
-                            that can be immediately applied to enhance
-                            your digital marketing efforts.
+                        <span className='syllabuses'>
+                            Practical Skills Development: Develop practical skills through hands-on exercises and real-world case studies.
                         </span>
                     </div>
-                    <div className="syllabus-lessions">
+                    <div className="syllabus-lessons">
                         <span className="class-small-circle"></span>
-                        <span className='syllabuses'>Industry Insights: Stay up-to-date with the
-                            latest industry trends, best practices,
-                            and emerging technologies in the digital
-                            marketing landscape.
+                        <span className='syllabuses'>
+                            Industry Insights: Stay updated with the latest trends and best practices in {currentClass.subject}.
                         </span>
                     </div>
                 </div>
@@ -65,37 +76,24 @@ const ClassViewPage = () => {
                     <span>Schedule</span>
                     <hr />
                     <div className="schedules">
-                        <ClassSchedule
-                            day="Monday"
-                            start="8.00 pm"
-                            end="10.pm"
-                        />
-                         <ClassSchedule
-                            day="Monday"
-                            start="8.00 pm"
-                            end="10.pm"
-                        />
-                        <ClassSchedule
-                            day="Monday"
-                            start="8.00 pm"
-                            end="10.pm"
-                        />
+                        <ClassSchedule day="Monday" start="8.00 pm" end="10.00 pm" />
+                        <ClassSchedule day="Wednesday" start="8.00 pm" end="10.00 pm" />
+                        <ClassSchedule day="Friday" start="8.00 pm" end="10.00 pm" />
                     </div>
                 </div>
                 <div className="class-review">
                     <span>Review</span>
                     <hr />
                     <div className="reviews">
-
+                        {/* Add review components here */}
                     </div>
                 </div>
                 <div className="class-report-issue">
                     <button className='Button report-button'>Report issue</button>
                 </div>
             </div>
-            
         </div>
-  )
-}
+    );
+};
 
-export default ClassViewPage
+export default ClassViewPage;

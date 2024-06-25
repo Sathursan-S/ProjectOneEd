@@ -71,8 +71,9 @@ function App() {
             )
           }
         />
-        <Route path="/class-view-page" element={<ClassViewPage />} />
-        <Route path="/my-class-page" element={<MyClassViewPage />} />
+          <Route path="/class-view-page/:classId" element={<ClassViewPage />} />
+
+          {/*<Route path="/my-class-page" element={<MyClassViewPage />} />*/}
         <Route path="/explore-classes" element={<ExploreClassesPage />} />
         <Route path="/teachon-spaceed" element={<InstructorAuthPage />} />
         <Route path="/instructor-signup" element={<InstructorAuthPage />} />
