@@ -6,6 +6,8 @@ import classReducer from "./ClassReducer";
 
 export const reducers = combineReducers({
   authReducer,
+
   classSpaceReducer,
+  classData: classReducer,
   classReducer,
 });

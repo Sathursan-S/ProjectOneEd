@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CreateClassModal.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { createClass } from '../../Actions/CreateClassAction';
+import { createClass } from '../../Actions/ClassActions';
 
 const CreateClassModal = ({ onClose, classSpaceId }) => {
     // const loading = useSelector((state) => state.classReducer.uploading);
