@@ -2,7 +2,9 @@ import React, {useState } from 'react'
 import './MyClassViewPage.css'
 import cardimg from '../../Images/Card.png'
 import RequestCard from '../../Components/RequestCard/RequestCard';
+
 const MyClassViewPage = () => {
+
       const [activeSection, setActiveSection] = useState('My classes');
 
   return (
@@ -44,18 +46,16 @@ const MyClassViewPage = () => {
         <div className="section">
               {activeSection === 'Class details' &&
                   <>
-                  <div className="my-class-card">
-                      <div className="img" style={{ backgroundImage: `url(${cardimg})` }}>
-                            <h1></h1>
-                      </div>
+                    <div className="my-class-card">
+                      <img src={cardimg} alt="card" className="img" />    
                       <div className="my-card-details">
-                          <span className='published'>published</span>
-                          <span className="my-class-name">Chemistry - Theory</span>
-                          <span className="batch">2024 Batch - A/L</span>
-                          <span className="medium">Created by Vithusan</span>
-                          <span className="medium">Medium Tamil</span>
-                          <span className="medium">Enrolled students 100</span>
-                          <span className="monthly-fee">Monthly fee LKR 1500</span>
+                          <div className='published'>published</div>
+                          <div className="my-class-name">Chemistry - Theory</div>
+                          <div className="batch">2024 Batch - A/L</div>
+                          <div className="medium">Created by Vithusan</div>
+                          <div className="medium">Medium Tamil</div>
+                          <div className="medium">Enrolled students 100</div>
+                          <div className="monthly-fee">Monthly fee LKR 1500</div>
                       </div>
                     </div>
                     <div className="my-class-discription">
