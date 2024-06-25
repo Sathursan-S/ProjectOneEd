@@ -1,6 +1,7 @@
 import React, {useState } from 'react'
 import './MyClassViewPage.css'
 import cardimg from '../../Images/Card.png'
+import RequestCard from '../../Components/RequestCard/RequestCard';
 const MyClassViewPage = () => {
       const [activeSection, setActiveSection] = useState('My classes');
 
@@ -98,7 +99,14 @@ const MyClassViewPage = () => {
                                 <span className='schedules'>Friday 6.00 PM - 7.00 PM</span>
                             </div>
                   </div>
-              </>}
+                  </>}
+              {activeSection === 'Join requests' && 
+                   (
+                    <div>
+                        <RequestCard studentName="Vithusan"/>
+                    </div>
+                    )}
+              
         </div>
     </div>
   )

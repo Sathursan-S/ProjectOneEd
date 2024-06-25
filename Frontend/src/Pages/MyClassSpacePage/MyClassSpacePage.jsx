@@ -8,6 +8,7 @@ import CreateClassModal from '../../Components/CreateClassModal/CreateClassModal
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClasses } from '../../Actions/CreateClassAction';
+import RequestCard from '../../Components/RequestCard/RequestCard';
 
 const MyClassSpacePage = () => {
   const { classSpaceId } = useParams();
@@ -57,12 +58,7 @@ const MyClassSpacePage = () => {
         >
           Manage Status
         </button>
-        <button
-          className={activeSection === 'Join Requests' ? 'active' : ''}
-          onClick={() => setActiveSection('Join Requests')}
-        >
-          Join Requests
-        </button>
+      
       </div>
       <hr style={{width:"100%"}}></hr>
       <div className="section">
@@ -113,12 +109,7 @@ const MyClassSpacePage = () => {
             <p>Display list of assignments</p>
           </div>
         )}
-        {activeSection === 'Join Requests' && (
-          <div>
-            <h2>Join Requests</h2>
-            <p>Display list of resources</p>
-          </div>
-        )}
+        
       </div>
        {isModalOpen && (
                 <CreateClassModal classSpaceId={classSpaceId} onClose={toggleModal}>
