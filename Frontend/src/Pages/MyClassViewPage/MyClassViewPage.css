@@ -20,8 +20,8 @@
 
 
 .my-class-card {
-    
     display: flex;
+    flex-direction: row;
     border-radius: 10px;
     flex-direction: row;
     background-color: #fff;
@@ -30,36 +30,28 @@
     margin-bottom: 50px;
     font-family: 'Arial', sans-serif;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    justify-content: left;
+    align-items: left;
+    /* overflow: hidden; */
     margin-left: auto;
     margin-right: auto;
 }
 
-.img {
-    flex: 1;
+.my-class-card img{
     display: flex;
     height: 100%;
     width: 30%;
-    background-size: cover; 
-    background-position: center; 
     background-repeat: no-repeat; 
-    
-}
-.img>h1{
-    font-size: 9.2rem;
 }
 
 .my-card-details {
-    flex: 2;
-    padding: 20px;
-    height: 20%;
     display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 70%;
+    height: 100%;
     background-color: #5e2ca5;
     color: #fff;
-    position: relative;
-    background-size: cover; 
 }
 .my-card-details .published {
     background-color: #4caf50;
@@ -72,10 +64,12 @@
     right: 20px;
 }
 
+
 .my-class-name {
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 10px;
+    
 }
 
  .batch,
@@ -110,9 +104,13 @@
     width: 100%;
 }
 
+.syllabus-lessions{
+
+}
+
 .schedule-lessions {
     display: flex;
-    align-items: center;
+    align-items: left;
     background-color: #fff;
     padding: 10px;
     width: 100%;
@@ -126,12 +124,13 @@
 }
 
 .class-small-circle {
-    width: 10px;
-    height: 10px;
+    width: 1px;
+    height: 1px;
     background-color: #5e2ca5;
     border-radius: 50%;
     margin-right: 10px;
-    
+    padding: 5px;
+    align-items: center;
     
 }
 
@@ -141,4 +140,77 @@
     color: #333;
     
     
+}
+
+
+/* Base styles are for desktop */
+
+/* Tablet screen (devices with width up to 768px) */
+@media (max-width: 768px) {
+    .MyClassViewPage-inside {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .my-class-card {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .my-class-card img {
+        width: 100%; /* Full width on tablets */
+    }
+
+    .my-card-details {
+        flex-direction: column;
+        width: 100%;
+        padding: 15px;
+        height: auto; /* Adjust height for better readability */
+    }
+
+    .my-class-schedule {
+        padding: 15px;
+    }
+
+    .schedule-lessions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Mobile screen (devices with width up to 480px) */
+@media (max-width: 480px) {
+    .MyClassViewPage {
+        margin-top: 3rem;
+    }
+
+    .MyClassViewPage-inside {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .my-class-card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .img > h1 {
+        font-size: 4.5rem; /* Smaller font size for mobile */
+    }
+
+    .my-card-details .published {
+        top: 10px;
+        right: 10px;
+        padding: 3px 7px; /* Smaller padding */
+    }
+
+    .my-class-name {
+        font-size: 1.2em; /* Adjust font size */
+    }
+
+    .batch,
+    .medium,
+    .monthly-fee {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+    }
 }
