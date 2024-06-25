@@ -1,5 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
+import com.projectoneed.userandclassmanagementservice.dto.ManageJoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
@@ -189,4 +190,31 @@ public class ClassSpaceService {
         }
     }
 
+    public Object manageJoinRequest(ManageJoinRequestDto request) {
+        try {
+            JoinRequest joinRequest = joinRequestRepository.findById(request.getJoinRequestId())
+                    .orElseThrow(
+                            () -> new RuntimeException("Join request not found")
+                    );
+
+            joinRequest.setStatus(request.isAccepted() ? JoinRequest.Status.ACCEPTED : JoinRequest.Status.REJECTED);
+
+            joinRequestRepository.save(joinRequest);
+
+            Class classDetails = classRepository.findById(joinRequest.getClassId())
+                    .orElseThrow(
+                            () -> new RuntimeException("Class not found")
+                    );
+
+            if (request.isAccepted()) {
+                classDetails.getEnrolledStudents().add(joinRequest.getStudentId());
+                classDetails.getJoinRequests().remove(joinRequest);
+                classRepository.save(classDetails);
+            }
+
+            return joinRequest;
+        } catch (Exception e) {
+            throw new RuntimeException("Error while managing join request " + e.getMessage());
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package com.projectoneed.paymentservice.service;
 
-
 import com.projectoneed.sharedlib.dto.payment.*;
 
 public interface PaymentService {

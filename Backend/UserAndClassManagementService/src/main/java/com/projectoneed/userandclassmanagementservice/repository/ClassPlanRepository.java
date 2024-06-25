@@ -1,6 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.repository;
 
-import com.projectoneed.sharedlib.dto.payment.ClassPlan;
+import com.projectoneed.userandclassmanagementservice.models.classspace.ClassPlan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.repository;
 
-import com.projectoneed.sharedlib.dto.payment.SubscriptionDetails;
+import com.projectoneed.userandclassmanagementservice.models.classspace.SubscriptionDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

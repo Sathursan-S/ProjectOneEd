@@ -1,5 +1,6 @@
 package com.projectoneed.userandclassmanagementservice.controller.classpace;
 
+import com.projectoneed.userandclassmanagementservice.dto.ManageJoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
@@ -95,6 +96,16 @@ public class ClassSpaceController {
             return ResponseEntity.ok(classSpaceService.joinClass(request));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Failed to join class"+ e.getMessage());
+        }
+    }
+
+    @PutMapping("/manage-join-request")
+    public ResponseEntity<?> manageJoinRequest(
+            @RequestBody ManageJoinRequestDto request) {
+        try {
+            return ResponseEntity.ok(classSpaceService.manageJoinRequest(request));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to manage join request"+ e.getMessage());
         }
     }
 
