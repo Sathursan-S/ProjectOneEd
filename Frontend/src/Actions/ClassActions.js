@@ -78,7 +78,7 @@ export const fetchClassById = (classId) => {
   return async (dispatch) => {
     dispatch(fetchClassByIdRequest());
     try {
-      const response = await axios.get(`http://192.168.8.197:8080/api/v1/class/${classId}`);
+      const response = await axios.get(`http://192.168.8.197:8080/api/v1/class/class/${classId}`);
       dispatch(fetchClassByIdSuccess(response.data));
     } catch (error) {
       dispatch(fetchClassByIdFailure(error.message));
