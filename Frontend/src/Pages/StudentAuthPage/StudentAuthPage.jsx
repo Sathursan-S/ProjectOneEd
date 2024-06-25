@@ -57,6 +57,7 @@ const AuthPage = () => {
         } else {
             // Simulated login logic
             dispatch(logIn(data, navigate));
+            console.log(data);
         }
         
     }

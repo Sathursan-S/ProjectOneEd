@@ -63,18 +63,13 @@ const MyClassSpacePage = () => {
       <hr style={{width:"100%"}}></hr>
       <div className="section">
         {activeSection === 'My classes' && <div className="enrolled-classes">
-              {classes.length > 0 ? (
-                  classes.map((classInfo) => (
-                  <EnrolledClassCard
-                    
-                    
-                    subject={classInfo.className}
-                    grade={classInfo.gradeCategory}
-                      teacher={classInfo.instructorName}
-                      studentCount={classInfo.studentCount}
-                      requestCount={classInfo.requestCount}
               
-                    />
+                  {classes.length > 0 ? (
+                        classes.map((classInfo) => (
+                            <EnrolledClassCard
+                                
+                                classInfo={classInfo}
+                            />
               ))
               
               ) : (

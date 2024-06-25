@@ -1,4 +1,4 @@
-import * as api from "../Api/CreateClassRequest";
+import * as api from "../Api/ClassRequest";
 
 export const createClass = (classData) => async (dispatch) => {
   try {

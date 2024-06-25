@@ -9,4 +9,4 @@ export const createClassSpace = (classSpaceData) =>
 
 export const getClassSpaces = (id) => API.get(`/api/v1/class/classSpace/${id}`);
 export const getAllClasses = (id) =>
-  API.get(`/api/v1/class-by-instr/classes/${id}`);
+  API.get(`/api/v1/class/classes-by-instr/${id}`);

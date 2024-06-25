@@ -5,9 +5,6 @@ import {
   FETCH_CLASS_BY_ID_REQUEST,
   FETCH_CLASS_BY_ID_SUCCESS,
   FETCH_CLASS_BY_ID_FAILURE,
-  CLASS_UPLOAD_START,
-  CLASS_UPLOAD_SUCCESS,
-  CLASS_UPLOAD_FAIL,
 } from "../Actions/ClassActions";
 
 const initialState = {
@@ -59,15 +56,15 @@ const classReducer = (state = initialState, action) => {
         currentClass: null,
         error: action.payload,
       };
-    case CLASS_UPLOAD_START:
+    case "CLASS_UPLOAD_START":
       return { ...state, uploading: true };
-    case CLASS_UPLOAD_SUCCESS:
+    case "CLASS_UPLOAD_SUCCESS":
       return {
         ...state,
         uploading: false,
         classes: [...state.classes, action.data],
       };
-    case CLASS_UPLOAD_FAIL:
+    case "CLASS_UPLOAD_FAIL":
       return { ...state, uploading: false, error: action.payload };
     default:
       return state;
