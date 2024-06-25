@@ -7,7 +7,7 @@ const MyClassViewPage = () => {
 
   return (
     <div className='MyClassViewPage'>
-        
+       <div className="MyClassViewPage-inside"> 
       <header className="header">
             <h1>Chemistry - 2024</h1>
             <div className="delete">
@@ -73,7 +73,7 @@ const MyClassViewPage = () => {
                     <div className="my-class-syllabus">
                       <span>Syllabus</span>
                       <hr />
-                        <div className="syllabus-lessions">
+                        <div className="syllabus-lessions ">
                             <span className="class-small-circle"></span>
                             <span className='syllabuses'>Foundational Concepts: Gain a solid
                                 understanding of the core principles of
@@ -88,15 +88,18 @@ const MyClassViewPage = () => {
                         <hr />
                             <div className="schedule-lessions">
                                 <span className="class-small-circle"></span>
-                                <span className='schedules'>Monday 6.00 PM - 7.00 PM</span>
+                                <span className='schedules'>Monday </span>
+                                <span className='schedules'>6.00 PM - 7.00 PM </span>
                             </div>
                             <div className="schedule-lessions">
                                 <span className="class-small-circle"></span>
-                                <span className='schedules'>Wednesday 6.00 PM - 7.00 PM</span>
+                                <span className='schedules'>Wednesday </span>
+                                <span className='schedules'>6.00 PM - 7.00 PM </span>
                             </div>
                             <div className="schedule-lessions">
                                 <span className="class-small-circle"></span>
-                                <span className='schedules'>Friday 6.00 PM - 7.00 PM</span>
+                                <span className='schedules'>Friday </span>
+                                <span className='schedules'>6.00 PM - 7.00 PM </span>
                             </div>
                   </div>
                   </>}
@@ -107,6 +110,7 @@ const MyClassViewPage = () => {
                     </div>
                     )}
               
+        </div>
         </div>
     </div>
   )

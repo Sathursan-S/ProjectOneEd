@@ -42,7 +42,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route
+        {/*<Route
           path="/"
           element={
             user ? (
@@ -73,7 +73,7 @@ function App() {
         />
           <Route path="/class-view-page/:classId" element={<ClassViewPage />} />
 
-          {/*<Route path="/my-class-page" element={<MyClassViewPage />} />*/}
+          <Route path="/my-class-page" element={<MyClassViewPage />} />
         <Route path="/explore-classes" element={<ExploreClassesPage />} />
         <Route path="/teachon-spaceed" element={<InstructorAuthPage />} />
         <Route path="/instructor-signup" element={<InstructorAuthPage />} />
@@ -90,13 +90,13 @@ function App() {
         <Route
           path="/my-class-space-page/:classSpaceId"
           element={user ? <MyClassSpacePage /> : <Navigate to="/home" />}
-        />
+        />*/}
       </Routes>
       {/* <MyClassSpacePage /> */}
       {/* <StudentHomePage/> */}
       {/* <InstructorHomePage/> */}
       {/* <InstructorAuthPage/> */}
-
+      <MyClassViewPage/>
       {/* <ExploreClassesPage/> */}
       {/* <LoginCard/> */}
       {/* <Navigation /> */}
