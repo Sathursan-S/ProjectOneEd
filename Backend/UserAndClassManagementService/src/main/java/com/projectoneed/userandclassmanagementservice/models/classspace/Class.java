@@ -21,6 +21,7 @@ public class Class {
     private String classId;
     @NonNull
     private String classSpaceId;
+    private String classPlanId;
     private String instructor;
     private String className;
     private String gradeCategory;
@@ -29,7 +30,7 @@ public class Class {
     private String medium;
     private double classFee;
     @UniqueElements
-    private List<String> enrolledStudents;
+    private List<String> enrolledStudents = new ArrayList<>();
     private List<Syllabus> syllabus;
     private List<TimeSlot> timeSlots;
     private List<Review> reviews;

@@ -94,6 +94,7 @@ public class ClassSpaceService {
 
 //            todo create subscription
 
+
             if (classSpace.getClasses() == null) {
                 classSpace.setClasses(new ArrayList<>());
             }
@@ -128,6 +129,7 @@ public class ClassSpaceService {
             joinRequestRepository.save(joinRequest);
 
 //            todo send request to instructor
+            classDetails.getJoinRequests().add(joinRequest);
 
 //            todo send notification to instructor
 

@@ -95,7 +95,7 @@ class ClassSpaceServiceTest {
 
         Class newClass = Class.builder()
                 .classId(UUID.randomUUID().toString())
-                .classSpaceId(classSpace)
+                .classSpaceId(classSpaceId)
                 .className("Math 101")
                 .classDescription("Basic Math Class")
                 .classFee(100.0)
