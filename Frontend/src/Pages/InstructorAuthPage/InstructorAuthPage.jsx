@@ -72,7 +72,7 @@ const InstructorAuthPage = () => {
         e.preventDefault();
         if (isStudentSignUpPage_02) {
             dispatch(signUp(data, navigate))
-            
+            console.log(data);
         } else {
             // Simulated login logic
             dispatch(logIn(data, navigate));
@@ -308,7 +308,7 @@ const InstructorAuthPage = () => {
                               <button
                                     className='Button'
                                     onClick={handleSubmit}
-                                    disabled={loading}
+                                    
                               >Get started</button>
                             </div>
                         </form>

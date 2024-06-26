@@ -8,6 +8,5 @@ export const reducers = combineReducers({
   authReducer,
 
   classSpaceReducer,
-  classData: classReducer,
   classReducer,
 });

@@ -7,7 +7,7 @@ import image from '../../Images/Card.png'
 import CreateClassModal from '../../Components/CreateClassModal/CreateClassModal';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClasses } from '../../Actions/CreateClassAction';
+import { getClasses } from '../../Actions/ClassActions';
 import RequestCard from '../../Components/RequestCard/RequestCard';
 
 const MyClassSpacePage = () => {
@@ -26,6 +26,7 @@ const MyClassSpacePage = () => {
     useEffect(() => {
       dispatch(getClasses(classSpaceId));
     }, []);
+  console.log(classes);
 
     
     

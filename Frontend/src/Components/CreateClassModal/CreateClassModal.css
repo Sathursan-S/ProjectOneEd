@@ -31,7 +31,7 @@
     margin-bottom: 5px;
 }
 .form-group 
-.form-group select{
+.form-group select {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -47,7 +47,7 @@ input[type="file"] {
 input[type="time"],[type="date"],[type="select"]{
     margin-right: 20px;
 }
-input[type="text"],[type="time"],[type="date"],[type="select"] {
+input[type="text"],[type="time"],[type="date"],[type="select"] ,[type="decimal"] {
     width: 95%;
     padding: 10px;
     border: 1px solid #ccc;

@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import './RequestCard.css'
 
-const RequestCard = ({studentName}) => {
-    
+const RequestCard = ({request}) => {
+    const { studentName, id, studentId, classId } = request;
   return (
       <div className='RequestCard'>
           <div className="student-name">

@@ -91,7 +91,7 @@
 }
 
 
-.class-card-button>button:nth-child(1){
+.request-button{
     width: 16rem;
     background: transparent;
     border: 2px solid #F5F3F8 ;
@@ -101,7 +101,7 @@
     margin-bottom: 1rem;
     
 }
-.class-card-button>button:nth-child(2){
+.add-visit-button{
     width: 16rem;
     background: #F5F3F8;
     border: 2px solid #F5F3F8 ;
@@ -118,13 +118,34 @@
     align-items: center;
 }
 
+.requested{
+    background: #8FFEAE;
+}
+.cancel-button{
+    width: 16rem;
+    background: #F5F3F8;
+    border: 2px solid #F5F3F8 ;
+    color: #451671 ;
+    height: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 10px;
+    
 
-
+}
 @media screen and (max-width:1000px) {
 .class-card-image>img{
     width: 20rem;
 }
-
+.requested{
+    background: #8FFEAE;
+    width: 16rem;
+   
+    border: 2px solid #F5F3F8 ;
+    color: #451671 ;
+    height: 2rem;
+    border-radius: 0.5rem;
+    
+}
 .class-card-button>button:nth-child(1){
     width: 16rem;
     background: transparent;
@@ -135,7 +156,7 @@
     margin-bottom: 1rem;
     
 }
-.class-card-button>button:nth-child(2){
+.request-button{
     width: 16rem;
     background: #F5F3F8;
     border: 2px solid #F5F3F8 ;
@@ -233,3 +254,4 @@
     padding-left: 1rem;
 }
 }
+

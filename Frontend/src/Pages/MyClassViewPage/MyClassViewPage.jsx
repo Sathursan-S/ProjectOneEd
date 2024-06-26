@@ -101,7 +101,7 @@ const MyClassViewPage = () => {
                     <div>
                         {classInfo?.joinRequests?.length > 0 ? (
                             classInfo.joinRequests.map((request, index) => (
-                                <RequestCard key={index} studentName={request.studentName} />
+                                <RequestCard key={index} request={request} />
                             ))
                         ) : (
                             <span>No join requests available.</span>

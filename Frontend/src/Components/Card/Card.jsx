@@ -8,20 +8,15 @@ import { fetchClasses } from '../../Actions/ClassActions';
 
 const Card = () => {
     const dispatch = useDispatch();
-    const classState = useSelector((state) => state.classData);
+    const classState = useSelector((state) => state.classReducer);
 
     useEffect(() => {
         dispatch(fetchClasses());
     }, [dispatch]);
 
-    if (classState.loading) {
-        return <div>Loading...</div>;
-    }
+    
 
-    if (classState.error) {
-        console.error('Fetch classes error:', classState.error);
-        return <div>Error: {classState.error}</div>;
-    }
+    
 
     return (
         <div className="card-container">
