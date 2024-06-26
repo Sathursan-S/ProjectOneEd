@@ -15,7 +15,7 @@ const StudentHomePage = () => {
     const [isEnrolledClasses, setEnrolledClasses] = useState(false);
     const [isPayments, setPayments] = useState(false);
     const user = useSelector((state) => state.authReducer.authData.details);
-    
+    const classes = useSelector((state) => state.classReducer.classes);
     const openEnrolledClasses = () => {
         setJoinClasses(false);
         setLearningSpace(false);
@@ -69,9 +69,7 @@ const StudentHomePage = () => {
                   <div className="recently-accesed-classes">
                       <span className='upcoming-classes-title'>Recently accesed classes</span>
                       <RecentlyAccesedClasses subject='Combined Mathematics'/>
-                      <RecentlyAccesedClasses subject='Information Technology'/>
-                      <RecentlyAccesedClasses subject='Physics'/>
-                      <RecentlyAccesedClasses subject='Chemistry'/>
+                     
                       
                   </div>
               </div>
@@ -85,34 +83,7 @@ const StudentHomePage = () => {
                           day='Monday'
                           date='30/03/2024'
                       />
-                      <UpComingClass
-                          subject='Combined Mathematics'
-                          timeFrom="01.00 PM"
-                          timeTo="02.00 PM"
-                          day='Monday'
-                          date='30/03/2024'
-                      />
-                      <UpComingClass
-                          subject='Combined Mathematics'
-                          timeFrom="01.00 PM"
-                          timeTo="02.00 PM"
-                          day='Monday'
-                          date='30/03/2024'
-                      />
-                      <UpComingClass
-                          subject='Combined Mathematics'
-                          timeFrom="01.00 PM"
-                          timeTo="02.00 PM"
-                          day='Monday'
-                          date='30/03/2024'
-                      />
-                      <UpComingClass
-                          subject='Combined Mathematics'
-                          timeFrom="01.00 PM"
-                          timeTo="02.00 PM"
-                          day='Monday'
-                          date='30/03/2024'
-                      />
+                      
                       <div className="view-all-button">
                           <button>View all   <FaArrowRight/></button>
                       </div>
@@ -133,89 +104,35 @@ const StudentHomePage = () => {
           </div>}
 
 
-          {isEnrolledClasses && <div className="enrolled-classes">
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-              <EnrolledClassCard
-                  image={image}
-              subject="A/L ICT - Paper class"
-              grade='2024 Batch - Advanced Level'
-              teacher='Himosh  '
-                    />
-          </div>}
+          {isEnrolledClasses && (
+            <div className="enrolled-classes">
+                {classes.map((classInfo, index) => (
+                    classInfo.enrolledStudents.includes(user.userId) && (
+                    <EnrolledClassCard key={index} classInfo={classInfo} />
+                    )
+                ))}
+            </div>
+      )}
 
         {isPayments && <div className="payments">
               PAYMENTS
           </div>}
-        {isJoinClasses && <div className="join-classes">
-              <div className="filterButton">
-                  
+          {isJoinClasses &&
+              <div className="join-classes">
+                <div className="filterButton">
+                    
+                </div>
+              {classes.map((classInfo, index) => (
+                classInfo.enrolledStudents.includes(user.userId) && (
+              <StudentJoinClassCard
+                key={index}
+                classInfo={classInfo}
+              />
+            )
+                ))}
+             
               </div>
-              <div className="joinClassCards">
-                  <StudentJoinClassCard
-                      subject="Combined Maths"
-                      date="30/04/2024"
-                      day="Monday"
-                      timeFrom="7.00PM"
-                      timeTo="8.00PM"
-                  />
-                  <StudentJoinClassCard
-                      subject="Combined Maths"
-                      date="30/04/2024"
-                      day="Monday"
-                      timeFrom="7.00PM"
-                      timeTo="8.00PM"
-                  />
-                  <StudentJoinClassCard
-                      subject="Combined Maths"
-                      date="30/04/2024"
-                      day="Monday"
-                      timeFrom="7.00PM"
-                      timeTo="8.00PM"
-                  />
-                  <StudentJoinClassCard
-                      subject="Combined Maths"
-                      date="30/04/2024"
-                      day="Monday"
-                      timeFrom="7.00PM"
-                      timeTo="8.00PM"
-                  />
-              </div>
-          </div>}
+          }
           
 
           

@@ -132,10 +132,32 @@
     
 
 }
+.unenroll-button{
+    width: 16rem;
+    background: #F5F3F8;
+    border: 2px solid #F5F3F8 ;
+    color: #451671 ;
+    height: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 10px;
+
+}
 @media screen and (max-width:1000px) {
 .class-card-image>img{
     width: 20rem;
 }
+
+.unenroll-button{
+    width: 16rem;
+    background: #F5F3F8;
+    border: 2px solid #F5F3F8 ;
+    color: #451671 ;
+    height: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 10px;
+
+}
+
 .requested{
     background: #8FFEAE;
     width: 16rem;

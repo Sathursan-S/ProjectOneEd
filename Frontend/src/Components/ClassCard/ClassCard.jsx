@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { requestAddmission, cancelAdmissionRequest } from '../../Actions/StudentClassActions';
+import { requestAddmission, cancelAdmissionRequest, unenrollClass } from '../../Actions/StudentClassActions';
 import './ClassCard.css';
 
 const ClassCard = ({ classInfo }) => {
   const user = useSelector((state) => state.authReducer.authData);
-  const { classId, subject, grade, teacher, medium, enrolls, fee, image, joinRequests } = classInfo;
+  const { classId, subject, grade, teacher, medium, enrolls, fee, image, joinRequests, enrolledStudents } = classInfo;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [requested, setRequested] = useState(false);
+  const [enrolled, setEnrolled] = useState(false);
 
   useEffect(() => {
-    if (user && joinRequests) {
-      const isRequested = joinRequests.some(request => request.studentId === user.userId);
+    if (user) {
+      const isRequested = joinRequests?.some(request => request.studentId === user.userId);
       setRequested(isRequested);
+
+      const isEnrolled = enrolledStudents?.some(studentId => studentId === user.userId);
+      setEnrolled(isEnrolled);
     }
-  }, [user, joinRequests]);
+  }, [user, joinRequests, enrolledStudents]);
 
   const handleRequest = () => {
     if (user) {
@@ -31,6 +35,13 @@ const ClassCard = ({ classInfo }) => {
     if (user) {
       setRequested(false);
       // dispatch(cancelAdmissionRequest(classId, user.userId));
+    }
+  };
+
+  const handleUnenroll = () => {
+    if (user) {
+      setEnrolled(false);
+      // dispatch(unenrollClass(classId, user.userId));
     }
   };
 
@@ -50,7 +61,7 @@ const ClassCard = ({ classInfo }) => {
           </div>
           <div className="class-card-enroll">
             <span>Enrolled Students</span>
-            <span>{enrolls}</span>
+            <span>{enrolls?.length || 0}</span>
           </div>
         </div>
         <div className="class-card-fee">
@@ -63,13 +74,21 @@ const ClassCard = ({ classInfo }) => {
       </div>
       <div className="class-card-button">
         <button>Add to visit list</button>
-        <button className={requested ? "requested" : "request-button"} onClick={handleRequest} disabled={requested}>
-          {requested ? "Request sent" : "Request admission"}
-        </button>
-        {requested && (
-          <button className="cancel-button" onClick={handleCancelRequest}>
-            Cancel Request
+        {enrolled ? (
+          <button className="unenroll-button" onClick={handleUnenroll}>
+            Unenroll
           </button>
+        ) : (
+          <>
+            <button className={requested ? "requested" : "request-button"} onClick={handleRequest} disabled={requested}>
+              {requested ? "Request sent" : "Request admission"}
+            </button>
+            {requested && (
+              <button className="cancel-button" onClick={handleCancelRequest}>
+                Cancel Request
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>

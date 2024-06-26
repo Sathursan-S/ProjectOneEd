@@ -23,6 +23,17 @@ export const getClasses = (id) => async (dispatch) => {
   }
 };
 
+export const requestAccepted = (payload) => async (dispatch) => {
+  try {
+    dispatch({ type: "ACCEPT_REQUEST" });
+    const { data } = await api.requestAccepted(payload);
+    dispatch({ type: "ACCEPT_SUCCESS", data });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "ACCEPT_FAIL", error });
+  }
+};
+
 ////////////////////////////////////////////////////
 
 // src/actions/classActions.js

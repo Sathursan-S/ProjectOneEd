@@ -3,6 +3,7 @@ import './MyClassViewPage.css';
 import cardimg from '../../Images/Card.png';
 import RequestCard from '../../Components/RequestCard/RequestCard';
 import { useLocation } from 'react-router-dom';
+import EnrolledStudent from '../../Components/EnrolledStudent/EnrolledStudent';
 
 const MyClassViewPage = () => {
     const [activeSection, setActiveSection] = useState('Class details');
@@ -107,6 +108,18 @@ const MyClassViewPage = () => {
                             <span>No join requests available.</span>
                         )}
                     </div>
+                )}
+
+                {activeSection === 'Enrolled students' && (
+                    <>
+                        {classInfo?.enrolledStudents?.length > 0 ? (
+                            classInfo.enrolledStudents.map((student, index) => (
+                                <EnrolledStudent key={index} enrolledStudent={student} />
+                            ))
+                        ) : (
+                            <span>No students enrolled.</span>
+                        )}
+                    </>
                 )}
             </div>
         </div>

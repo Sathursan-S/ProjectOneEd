@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import img from '../../Images/Card.png'
 
 const EnrolledClassCard = ({ classInfo }) => {
-  const {classId, instructorName, gradeCategory, className, enrolledStudent=[], joinRequest=[] } = classInfo;
+  const { instructorName, gradeCategory, className, enrolledStudents=[], joinRequests=[] } = classInfo;
   const user = useSelector((state) => state.authReducer.authData);
   const navigate = useNavigate();
   
@@ -15,7 +15,7 @@ const EnrolledClassCard = ({ classInfo }) => {
     navigate('/my-class-page', { state: { classInfo } });
   };
   const classViewPage = () => { 
-    navigate('/class-view-page');    
+    navigate(`/class-view-page/${classInfo.classId}`);    
   };
   
   return (
@@ -32,7 +32,7 @@ const EnrolledClassCard = ({ classInfo }) => {
         <div className="card-details">
               <div className="card-details-0">
                   <span className="card-name">Class</span>
-                  <span className="card-student-count">{enrolledStudent.length} Students</span>
+                  <span className="card-student-count">{enrolledStudents.length} Students</span>
               </div>
         </div>}
           <div className="card-details">
@@ -44,7 +44,7 @@ const EnrolledClassCard = ({ classInfo }) => {
         {user.role === 'INSTRUCTOR' &&
           <>
           <div className="join-requests">
-            <span className='request-count'>{joinRequest.length}</span>
+            <span className='request-count'>{joinRequests.length}</span>
               <span className='join-request'> Join requests</span>
               
           </div>
