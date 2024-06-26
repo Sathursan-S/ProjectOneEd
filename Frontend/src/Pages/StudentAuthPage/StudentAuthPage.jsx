@@ -62,10 +62,6 @@ const AuthPage = () => {
         
     }
 
-    
-
-
-
     return (
         <div className='AuthPage'>
             <div className="auth-page-details">
@@ -79,9 +75,9 @@ const AuthPage = () => {
                             : "Happy to see you again. Please log in to your account to access your SpaceEd classes."}
                     </span>
                 </div>
-                <div className="auth-page-details-img">
+                {/*<div className="auth-page-details-img">*/}
                     <img src={img} alt="" />
-                </div>
+                {/*</div>*/}
                 <div className="auth-page-details-home-button">
                     <Link to='/'>
                         <button className="auth-page-details-home-butt"><FaArrowLeft /> Go home</button>

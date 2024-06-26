@@ -23,7 +23,8 @@ const Navbar = () => {
     <div className='navbar'>
         <div className='navbar-logo'>
              <Link style={{ textDecoration: 'none' }} to='/home' ><p>SpaceEd</p></Link>           
-        </div>     
+        </div>
+        <div className='navbar-content'>
         <ul className='navbar-menu'>
         <li>
           <NavLink  exact to="/" activeClassName="active">
@@ -43,7 +44,6 @@ const Navbar = () => {
       </ul>
         <div className='navbar-button'>
         {user ?
-          
           (
           <>
           <button className='navbar-login' onClick={() => setShowModal(true)}>
@@ -67,6 +67,7 @@ const Navbar = () => {
             </span>
           </Link>
             </button>
+        </div>
         </div>
     </div>
   )

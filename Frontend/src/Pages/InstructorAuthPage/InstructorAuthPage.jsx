@@ -94,9 +94,9 @@ const InstructorAuthPage = () => {
                   </span>
                   
               </div>
-              <div className="auth-page-details-img">
+              {/*<div className="auth-page-details-img">*/}
                   <img src={img} alt="" />
-              </div>
+              {/*</div>*/}
               <div className="auth-page-details-home-button">
                   <button><FaArrowLeft/> Go home</button>
               </div>
