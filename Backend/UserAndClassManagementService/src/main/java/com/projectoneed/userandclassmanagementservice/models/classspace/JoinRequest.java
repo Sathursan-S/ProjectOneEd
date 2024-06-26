@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDate;
 
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 @Document(collection = "joinRequests")
 public class JoinRequest {
 
-    @Id
+    @MongoId
     private String id;
 
     private String classId;

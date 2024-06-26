@@ -26,7 +26,7 @@
       <module name="APIGateway" options="" />
       <module name="ClassManagementService" options="-parameters" />
       <module name="DiscoveryServer" options="" />
-      <module name="PaymentService" options="" />
+      <module name="PaymentService" options="-parameters" />
       <module name="SharedLibs" options="-parameters" />
       <module name="UserAndClassManagementService" options="-parameters" />
       <module name="UserManagementService" options="-parameters" />

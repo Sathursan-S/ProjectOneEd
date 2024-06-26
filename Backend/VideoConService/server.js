@@ -1,19 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const { createInstructorUser, createStudentUser, getTokenForStudent } = require('./createUser');
 const { createCall } = require('./createCall');
 const app = express();
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-app.get('/api', (req, res) => {
+app.get('/api/v1/videocon', (req, res) => {
   res.send('Hello from the API!');
 });
 
-app.post('/classdata', async (req, res) => {
+app.post('/api/v1/videocon/classdata', async (req, res) => {
   const classData = req.body;
   try {
     const createInstructorResults = await createInstructorUser(classData);
@@ -29,7 +27,7 @@ app.post('/classdata', async (req, res) => {
   }
 });
 
-app.post('/api/token', async (req, res) => {
+app.post('/api/v1/videocon/token', async (req, res) => {
   const { studentId } = req.body; // Destructure studentId from req.body
   console.log('Received request for studentId:', studentId); // Log the received studentId
 
