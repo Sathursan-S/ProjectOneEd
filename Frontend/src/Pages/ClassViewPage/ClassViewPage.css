@@ -5,23 +5,27 @@
 }
 .class-card{
     width: 25%;
-    position: fixed;
+    position: relative;
     margin-left: 2rem;
 }
+
 .class-details{
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 29rem;
+    margin-left: 8rem;
     margin-right: 2rem;
     align-items: flex-start;
-
+    font-family: poppins;
+    font-weight: 300;
+    font-size: 12px;
 }
 .class-description, .class-syllabus, .class-schedule{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: auto;
+    margin-top: 10px;
 }
 .class-description>hr, .class-syllabus>hr, .class-schedule>hr, .class-review>hr{
     width: 100%;
@@ -52,14 +56,14 @@
     flex-direction: row;
     align-items: flex-start;
 }
-.class-small-circle {
+/* .class-small-circle {
     margin-top: 7px;
   display: inline-block;
-  width: 10px; /* Adjust the size as needed */
-  height: 10px; /* Adjust the size as needed */
-  background-color: black; /* You can change the color */
-  border-radius: 50%; /* Ensures it's a circle */
-}
+  width: 10px;
+  height: 10px; 
+  background-color: black; 
+  border-radius: 50%; 
+} */
 
     .schedules{
         display: flex;
@@ -67,7 +71,7 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-
+        margin-top: 20px;
     }
     .class-schedule{
         display: flex;
@@ -79,21 +83,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
     /* margin-left: 29rem; */
     margin-right: auto;
     justify-content: flex-start;
 }
-/* .reviews{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 29rem;
-    margin-right: 2rem;
-    align-items: flex-start;
-} */
 
 .report-button{
     width: 100%;
+    margin-top: 20px;
     height: 1.5rem;
     border-radius: 6px;
     align-items: center;

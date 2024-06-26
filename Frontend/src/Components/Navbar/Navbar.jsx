@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './Navbar.css'
 import { Link,NavLink, useNavigate } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa';
+import Hamburger from 'hamburger-react'
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -9,6 +10,8 @@ const Navbar = () => {
   const user = useSelector((state) => state.authReducer.authData);
 
     const [showModal, setShowModal] = useState(false);
+    const [isOpen, setOpen] = useState(false)
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,9 +24,14 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
+      <div className="navbar-mobile">
         <div className='navbar-logo'>
              <Link style={{ textDecoration: 'none' }} to='/home' ><p>SpaceEd</p></Link>           
         </div>
+        <div className="nav-hamburger">
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+        </div>
+      </div>
         <div className='navbar-content'>
         <ul className='navbar-menu'>
         <li>
