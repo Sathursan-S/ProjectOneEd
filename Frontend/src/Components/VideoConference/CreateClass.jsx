@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import '@stream-io/video-react-sdk/dist/css/styles.css';
-import './InstructorJoinClassCard.css'
-import data from "../VideoConference/userData";
+import React, { useState } from 'react';
+// import data from "../userData";
 import axios from "axios";
-import './InstructorJoinClassCard.css';
 import {
     StreamCall,
     StreamVideo,
@@ -11,14 +8,11 @@ import {
     CallControls,
     SpeakerLayout,
     StreamTheme,
-    User,
 } from '@stream-io/video-react-sdk';
-import { MyVideoUI } from "../VideoConference/MyVideoUI";
-import { useNavigate } from 'react-router-dom';
-import CreateClass from '../VideoConference/CreateClass';
+import { MyVideoUI } from "./MyVideoUI";
 
-const InstructorJoinClassCard = ({ classInfo }) => {
-          const { classSpaceId, classId, instructor, enrolledStudents = [], timeSlots = [], className } = classInfo;
+const CreateClass = ({classInfo}) => {
+        const { classSpaceId, classId, instructor, enrolledStudents = [], timeSlots = [], className } = classInfo;
     const [response, setResponse] = useState(null);
     const [call, setCall] = useState(null);
     const [client, setClient] = useState(null);
@@ -66,10 +60,8 @@ const InstructorJoinClassCard = ({ classInfo }) => {
     };
 
     return (
-      <div className="container">
-        <span className='name'>{className}</span>
-        <span>{timeSlots.date}</span>
-            <button className='Join Button' onClick={createClass}>Join class</button>
+        <div className="container">
+            <button className='Button' onClick={createClass}>Create class</button>
             {response && (
                 <div className="class-container">
                     {call && (
@@ -88,6 +80,6 @@ const InstructorJoinClassCard = ({ classInfo }) => {
             )}
         </div>
     );
-}
+};
 
-export default InstructorJoinClassCard
+export default CreateClass;

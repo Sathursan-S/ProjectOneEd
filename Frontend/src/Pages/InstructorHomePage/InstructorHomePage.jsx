@@ -214,10 +214,8 @@ const InstructorHomePage = () => {
                                         classInfo.timeSlots.map((slot, index) => (
                                             <InstructorJoinClassCard
                                                 key={index}
-                                                subject={classInfo.className}
-                                                timeFrom={slot.startTime}
-                                                timeTo={slot.endTime}
-                                                date={slot.date}
+                                                classInfo={classInfo}
+                                                
                                             />
                                         ))
                                     ) : (

@@ -76,14 +76,19 @@ const StudentHomePage = () => {
               <div className="my-classes-right">
                   <div className="upcoming-classes">
                       <span className='upcoming-classes-title'>Upcoming classes</span>
-                      <UpComingClass
-                          subject='Combined Mathematics'
-                          timeFrom="01.00 PM"
-                          timeTo="02.00 PM"
-                          day='Monday'
-                          date='30/03/2024'
-                      />
-                      
+                      {classes.map((classInfo, index) => (
+                                classInfo.enrolledStudents.includes(user.userId) && 
+                                classInfo.timeSlots && classInfo.timeSlots.length > 0 && classInfo.timeSlots.map((slot, idx) => (
+                                    <UpComingClass
+                                        key={`${index}-${idx}`}
+                                        subject={classInfo.className}
+                                        timeFrom={slot.startTime}
+                                        timeTo={slot.endTime}
+                                        day={slot.day}
+                                        date={slot.date}
+                                    />
+                                ))
+                            ))}
                       <div className="view-all-button">
                           <button>View all   <FaArrowRight/></button>
                       </div>
@@ -91,10 +96,6 @@ const StudentHomePage = () => {
                   <div className="pending-fee">
                     <span className='upcoming-classes-title'>Pending Fee</span>
 
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500'/>
-                      <PendingFee month='October' fee='LKR 1500' />
                       
                       <div className="view-all-button">
                           <button>View all   <FaArrowRight/></button>

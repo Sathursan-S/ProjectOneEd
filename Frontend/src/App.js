@@ -23,6 +23,7 @@ import InstructorHomePage from "./Pages/InstructorHomePage/InstructorHomePage";
 import { jwtDecode } from "jwt-decode";
 import MyClassSpacePage from "./Pages/MyClassSpacePage/MyClassSpacePage";
 import MyClassViewPage from "./Pages/MyClassViewPage/MyClassViewPage";
+import VideoRenderPage from "./Pages/VideoRenderPage/VideoRenderPage";
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
 
@@ -83,6 +84,9 @@ function App() {
           path="/student-home"
           element={user ? <StudentHomePage /> : <Navigate to="/home" />}
         />
+
+        <Route path="/video-render-page" element={<VideoRenderPage />} />
+
         <Route
           path="/instructor-home"
           element={user ? <InstructorHomePage /> : <Navigate to="/home" />}
