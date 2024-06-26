@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { requestAddmission, cancelAdmissionRequest, unenrollClass } from '../../Actions/StudentClassActions';
 import './ClassCard.css';
+import Card from '../../Images/Card.png';   
 
 const ClassCard = ({ classInfo }) => {
   const user = useSelector((state) => state.authReducer.authData);
-  const { classId, subject, grade, teacher, medium, enrolls, fee, image, joinRequests, enrolledStudents } = classInfo;
+  const { classId, className, gradeCategory, instructorName, medium, enrolls, classFee, image, joinRequests, enrolledStudents } = classInfo;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [requested, setRequested] = useState(false);
@@ -46,15 +47,15 @@ const ClassCard = ({ classInfo }) => {
   };
 
   return (
-    <div className='Class-Card'>
-      <div className="class-card-image">
-        <img src={image} alt="" />
+    <div className='Class-Card-view'>
+      <div className="class-card-image-view">
+        <img src={Card} alt="" />
       </div>
-      <div className="card-details">
-        <span className="class-card-subject">{subject}</span>
-        <span className="class-card-grade">{grade}</span>
+      <div className="card-view-details">
+        <span className="class-card-subject">{className}</span>
+        <span className="class-card-grade">{gradeCategory}</span>
         <div className='tme'>
-          <span className="class-card-teacher">{teacher}</span>
+          <span className="class-card-teacher">Created by {instructorName}</span>
           <div className="class-card-medium">
             <span>Medium</span>
             <span>{medium}</span>
@@ -66,7 +67,7 @@ const ClassCard = ({ classInfo }) => {
         </div>
         <div className="class-card-fee">
           <span>Monthly fee</span>
-          <span>{fee}</span>
+          <span>{classFee}</span>
           <div className="published-butt">
             <button>Published</button>
           </div>

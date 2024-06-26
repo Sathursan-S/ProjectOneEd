@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import './Card.css';
 import { Link } from 'react-router-dom';
 import { fetchClasses } from '../../Actions/ClassActions';
-
+  
 const Card = () => {
     const dispatch = useDispatch();
     const classState = useSelector((state) => state.classReducer);
