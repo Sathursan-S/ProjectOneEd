@@ -43,6 +43,11 @@ spring:
           predicates:
             - Path=/eureka/**
 
+        - id: VideoConferenceService
+          uri: http://localhost:5000
+          predicates:
+            - Path=/api/v1/videocon/**
+
 eureka:
   client:
     service-url:
