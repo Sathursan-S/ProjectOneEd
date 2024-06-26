@@ -1,6 +1,7 @@
 package com.projectoneed.authservice.repository;
 
 import com.projectoneed.authservice.model.token.Token;
+import com.projectoneed.authservice.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,8 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
   List<Token> findAllValidTokenByUser(String id);
 
   Optional<Token> findByToken(String token);
+
+    void deleteAllByUser(User user);
 
 //  @Query(value = """
 //      select t from Token t inner join User u\s

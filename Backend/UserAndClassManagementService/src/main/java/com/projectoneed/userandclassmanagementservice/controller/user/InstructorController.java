@@ -58,4 +58,10 @@ public class InstructorController {
                 instructorService.getInstructorDashboard(instructorId)
         );
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteInstructor(@PathVariable String id) {
+        instructorService.deleteInstructor(id);
+        return ResponseEntity.ok().build();
+    }
 }

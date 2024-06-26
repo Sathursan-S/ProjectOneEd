@@ -53,6 +53,12 @@ public class AuthenticationController {
         authService.refreshToken(request, response);
     }
 
+    @DeleteMapping("/delete-user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
+        authService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(authService.getUserById(id));

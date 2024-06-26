@@ -20,4 +20,7 @@ public class ClassPlan {
     private String description;
     private double price;
 
+    private String classId;
+    private String productId;
+    private String priceId;
 }

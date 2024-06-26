@@ -10,11 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassPlan {
+public class ClassPlanDto {
     private String classPlanId;
     private String instructorId;
     private String name;
     private String description;
     private double price;
 
+    private String classId;
+    private String productId;
+    private String priceId;
 }

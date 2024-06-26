@@ -1,15 +1,18 @@
 package com.projectoneed.userandclassmanagementservice.service;
 
+import com.projectoneed.sharedlib.dto.payment.ClassPlanDto;
+import com.projectoneed.sharedlib.dto.payment.CreateClassPlanRequest;
+import com.projectoneed.userandclassmanagementservice.feignclients.PaymentClient;
 import com.projectoneed.userandclassmanagementservice.dto.ManageJoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.CreateClassSpaceRequest;
 import com.projectoneed.userandclassmanagementservice.dto.classpace.JoinRequestDto;
 import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
+import com.projectoneed.userandclassmanagementservice.models.classspace.ClassPlan;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import com.projectoneed.userandclassmanagementservice.models.classspace.JoinRequest;
-import com.projectoneed.userandclassmanagementservice.repository.ClassRepository;
-import com.projectoneed.userandclassmanagementservice.repository.ClassSpaceRepository;
-import com.projectoneed.userandclassmanagementservice.repository.JoinRequestRepository;
+import com.projectoneed.userandclassmanagementservice.models.user.student.Student;
+import com.projectoneed.userandclassmanagementservice.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,9 @@ public class ClassSpaceService {
     private final ClassSpaceRepository classSpaceRepository;
     private final ClassRepository classRepository;
     private final JoinRequestRepository joinRequestRepository;
+    private final StudentRepository studentRepository;
+    private final PaymentClient paymentClient;
+    private final ClassPlanRepository classPlanRepository;
 
     public List<ClassSpace> getAllClassSpaces() {
         try {
@@ -59,9 +65,19 @@ public class ClassSpaceService {
 
     public void deleteClassSpaceById(String id) {
         try {
+
             classSpaceRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Error while deleting class space with id " + id);
+        }
+    }
+
+    public void deleteClassById(String id) {
+        try {
+            paymentClient.deleteClassPlan(classPlanRepository.findById(id).get().getClassPlanId());
+            classRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error while deleting class with id " + id);
         }
     }
 
@@ -93,8 +109,29 @@ public class ClassSpaceService {
 
             classRepository.save(newClass);
 
-//            todo create subscription
+//            todo create subscription plan
+            CreateClassPlanRequest createClassPlanRequest = CreateClassPlanRequest.builder()
+                    .classId(newClass.getClassId())
+                    .className(newClass.getClassName())
+                    .description(newClass.getClassDescription())
+                    .instructorId(newClass.getInstructor())
+                    .build();
 
+           ClassPlanDto classPlan= paymentClient.createClassPlan(createClassPlanRequest);
+           log.info("Class plan created with id "+classPlan.getClassPlanId());
+
+           classPlanRepository.save(ClassPlan.builder().classId(classPlan.getClassId())
+                   .classPlanId(classPlan.getClassPlanId())
+                   .description(classPlan.getDescription())
+                   .instructorId(classPlan.getInstructorId())
+                   .name(classPlan.getName())
+                   .price(classPlan.getPrice())
+                   .productId(classPlan.getProductId())
+                   .priceId(classPlan.getPriceId())
+                   .build());
+
+           newClass.setClassPlanId(classPlan.getClassPlanId());
+              classRepository.save(newClass);
 
             if (classSpace.getClasses() == null) {
                 classSpace.setClasses(new ArrayList<>());
@@ -116,6 +153,17 @@ public class ClassSpaceService {
     }
 
     public JoinRequest joinClass(JoinRequestDto request) {
+        if(joinRequestRepository.findByStudentIdAndClassId(request.getStudentId(),request.getClassId()).isPresent()){
+            if(joinRequestRepository.findByStudentIdAndClassId(request.getStudentId(),request.getClassId()).get().getStatus().equals(JoinRequest.Status.PENDING)){
+                throw new RuntimeException("Join request already exists");
+            }
+            else if(joinRequestRepository.findByStudentIdAndClassId(request.getStudentId(),request.getClassId()).get().getStatus().equals(JoinRequest.Status.REJECTED)){
+                joinRequestRepository.findByStudentIdAndClassId(request.getStudentId(),request.getClassId()).get().setStatus(JoinRequest.Status.PENDING);
+                Class aClass = classRepository.findById(request.getClassId()).orElseThrow( ()-> new RuntimeException("Class not found"));
+                aClass.getJoinRequests().add(joinRequestRepository.findByStudentIdAndClassId(request.getStudentId(),request.getClassId()).get());
+                classRepository.save(aClass);
+            }
+        }
         try {
             Class classDetails = classRepository.findById(request.getClassId())
                     .orElseThrow(
@@ -123,14 +171,17 @@ public class ClassSpaceService {
                     );
 
             JoinRequest joinRequest = JoinRequest.builder()
+                    .id(UUID.randomUUID().toString())
                     .classId(request.getClassId())
                     .studentId(request.getStudentId())
+                    .studentName(studentRepository.findByUserId(request.getStudentId()).get().getFirstName())
                     .status(JoinRequest.Status.PENDING)
                     .build();
             joinRequestRepository.save(joinRequest);
 
 //            todo send request to instructor
             classDetails.getJoinRequests().add(joinRequest);
+            classRepository.save(classDetails);
 
 //            todo send notification to instructor
 
@@ -215,6 +266,27 @@ public class ClassSpaceService {
             return joinRequest;
         } catch (Exception e) {
             throw new RuntimeException("Error while managing join request " + e.getMessage());
+        }
+    }
+
+    public List<Class> getClassesByStudentId(String studentId) {
+        studentRepository.findByUserId(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        return classRepository.findAllByEnrolledStudents(studentId)
+                .orElseThrow(()->new RuntimeException("No classes found for student with id "+studentId));
+    }
+
+    public void cancelJoinRequest(String joinRequestId) {
+        JoinRequest joinRequest = joinRequestRepository.findById(joinRequestId)
+                .orElseThrow(() -> new RuntimeException("Join request not found"));
+        try {
+            classRepository.findById(joinRequest.getClassId())
+                    .orElseThrow(() -> new RuntimeException("Class not found"))
+                    .getJoinRequests().remove(joinRequest);
+            joinRequestRepository.deleteById(joinRequestId);
+        } catch (Exception e) {
+            throw new RuntimeException("Error while cancelling join request with id " + joinRequestId);
         }
     }
 }

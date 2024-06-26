@@ -30,7 +30,7 @@
       <module name="SharedLibs" options="-parameters" />
       <module name="UserAndClassManagementService" options="-parameters" />
       <module name="UserManagementService" options="-parameters" />
-      <module name="authservice" options="" />
+      <module name="authservice" options="-parameters" />
     </option>
   </component>
 </project>

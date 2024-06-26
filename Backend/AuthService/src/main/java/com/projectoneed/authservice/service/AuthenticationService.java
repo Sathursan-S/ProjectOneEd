@@ -180,4 +180,9 @@ public class AuthenticationService {
         }
         return user;
     }
+
+    public void deleteUser(String id) {
+        tokenRepository.deleteAllByUser(userRepository.findByUserId(id));
+        userRepository.deleteByUserId(id);
+    }
 }

@@ -9,21 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubscriptionDetails {
+public class SubscriptionDetailsDto {
     private String subscriptionId;
     private String studentId;
     private String classPlanId;
     private String classId;
-    private SubscriptionStatus status;
+    private Object status;
 
-    enum SubscriptionStatus {
-        INCOMPLETE,
-        INCOMPLETE_EXPIRED,
-        TRIALING,
-        ACTIVE,
-        PAST_DUE,
-        CANCELED,
-        UNPAID,
-        PAUSED
-    }
 }

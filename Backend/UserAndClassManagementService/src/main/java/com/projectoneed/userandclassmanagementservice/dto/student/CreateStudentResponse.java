@@ -1,6 +1,7 @@
 package com.projectoneed.userandclassmanagementservice.dto.student;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Builder

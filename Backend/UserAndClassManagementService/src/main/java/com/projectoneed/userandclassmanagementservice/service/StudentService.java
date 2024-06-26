@@ -103,7 +103,7 @@ public class StudentService {
                     .userEmail(student.getEmail())
                     .build();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get student dashboard");
+            throw new RuntimeException("Failed to get student dashboard "+ e.getMessage());
         }
     }
 }

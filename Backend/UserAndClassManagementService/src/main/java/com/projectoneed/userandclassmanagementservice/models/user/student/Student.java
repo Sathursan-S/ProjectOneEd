@@ -21,6 +21,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
+    private String stripeCustomerId;
     private int age;
     private String phoneNumber;
 }

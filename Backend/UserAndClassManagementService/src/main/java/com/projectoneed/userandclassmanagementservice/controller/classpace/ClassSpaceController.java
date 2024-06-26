@@ -8,6 +8,8 @@ import com.projectoneed.userandclassmanagementservice.models.classspace.Class;
 import com.projectoneed.userandclassmanagementservice.models.classspace.ClassSpace;
 import com.projectoneed.userandclassmanagementservice.service.ClassSpaceService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @RequestMapping("api/v1/class")
 @RequiredArgsConstructor
 public class ClassSpaceController {
+    private static final Logger log = LoggerFactory.getLogger(ClassSpaceController.class);
     private final ClassSpaceService classSpaceService;
 
     @GetMapping("/classspaces")
@@ -85,8 +88,12 @@ public class ClassSpaceController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteClassSpace(@PathVariable String id) {
-
         classSpaceService.deleteClassSpaceById(id);
+    }
+
+    @DeleteMapping("/delete-class/{id}")
+    public void deleteClass(@PathVariable String id) {
+        classSpaceService.deleteClassById(id);
     }
 
     @PutMapping("/join")
@@ -121,6 +128,29 @@ public class ClassSpaceController {
                     classSpaceService.getClassesByClassSpaceId(ClassSpaceId)
             );
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/class-by-student/{studentId}")
+    public ResponseEntity<List<Class>> getClassesByStudentId(@PathVariable String studentId) {
+        try {
+            return ResponseEntity.ok(
+                    classSpaceService.getClassesByStudentId(studentId)
+            );
+        } catch (Exception e) {
+            log.error("Failed to get classes by student id", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/cancel-join-request/{joinRequestId}")
+    public ResponseEntity<?> cancelJoinRequest(@PathVariable String joinRequestId) {
+        try {
+            classSpaceService.cancelJoinRequest(joinRequestId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            log.error("Failed to cancel join request", e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

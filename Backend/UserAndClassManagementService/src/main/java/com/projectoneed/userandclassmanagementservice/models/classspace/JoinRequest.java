@@ -21,10 +21,11 @@ import java.time.LocalDate;
 public class JoinRequest {
 
     @Id
-    private int id;
+    private String id;
 
     private String classId;
     private String studentId;
+    private String studentName;
 
     @CreatedDate
     private LocalDate createdAt;

@@ -1,8 +1,10 @@
 package com.projectoneed.userandclassmanagementservice.dto.instructor;
 
 import lombok.Builder;
+import lombok.Data;
 
 @Builder
+@Data
 public class GetAllInstructorsResponse {
     private String userId;
     private String username;

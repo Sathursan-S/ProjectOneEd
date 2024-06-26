@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.util.UUID;
-
 @Entity
 @Builder
 @Getter
@@ -19,6 +17,7 @@ public class Instructor {
     private String firstName;
     private String lastName;
     private String email;
+    private String stripeAccountId;
     private int age;
     private String phoneNumber;
 }

@@ -5,7 +5,11 @@ import com.projectoneed.userandclassmanagementservice.dto.DashboardResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateAndUpdateInstructorRequest;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.CreateInstructorResponse;
 import com.projectoneed.userandclassmanagementservice.dto.instructor.GetAllInstructorsResponse;
+import com.projectoneed.userandclassmanagementservice.feignclients.PaymentClient;
 import com.projectoneed.userandclassmanagementservice.models.user.instructor.Instructor;
+import com.projectoneed.userandclassmanagementservice.repository.ClassPlanRepository;
+import com.projectoneed.userandclassmanagementservice.repository.ClassRepository;
+import com.projectoneed.userandclassmanagementservice.repository.ClassSpaceRepository;
 import com.projectoneed.userandclassmanagementservice.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InstructorService {
     private final InstructorRepository instructorRepository;
+    private final ClassRepository classRepository;
+    private final ClassSpaceRepository classSpaceRepository;
+    private final ClassPlanRepository classPlanRepository;
+    private final PaymentClient paymentClient;
 
     public CreateUserRequest createInstructor(CreateUserRequest request) {
         instructorRepository.findByUserId(request.getUserId())
@@ -111,5 +119,28 @@ instructor.setFirstName(request.getFirstName());
                 .userLastName(instructor.getLastName())
                 .userEmail(instructor.getEmail())
                 .build();
+    }
+
+    public void deleteInstructor(String id) {
+        Instructor instructor = instructorRepository.findByUserId(id)
+                .orElseThrow(
+                        () -> new RuntimeException("Instructor not found")
+                );
+
+        classSpaceRepository.findClassSpacesByInstructorId(instructor.getUserId())
+                        .forEach(
+                                classSpace ->{
+                                    classSpace.getClasses().forEach(
+                                            aClass -> {
+                                                paymentClient.deleteClassPlan(aClass.getClassPlanId());
+                                                classPlanRepository.deleteById(aClass.getClassPlanId());
+                                                classRepository.delete(aClass);
+                                            }
+                                    );
+                                    classSpaceRepository.delete(classSpace);
+                                }
+                        );
+
+        instructorRepository.delete(instructor);
     }
 }

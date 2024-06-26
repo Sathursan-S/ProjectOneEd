@@ -1,15 +1,16 @@
 package com.projectoneed.paymentservice.service;
 
 import com.projectoneed.sharedlib.dto.payment.*;
+import com.stripe.exception.StripeException;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface PaymentService {
-    ClassPlan createClassPlan(CreateClassPlanRequest createClassPlanRequest);
-    ClassPlan updateClassPlan(UpdateClassPlanRequest updateClassPlanRequest);
-    void deleteClassPlan(String classPlanId);
+    ClassPlanDto createClassPlan(CreateClassPlanRequest createClassPlanRequest) throws StripeException;
+    ClassPlanDto updateClassPlan(UpdateClassPlanRequest updateClassPlanRequest) throws StripeException;
+    void deleteClassPlan(String classPlanId) throws StripeException;
 
-    SubscriptionDetails enrollClassPlan(EnrolClassPlanRequest enrolClassPlanRequest);
-    SubscriptionDetails getSubscriptionDetails(String subscriptionId);
-    SubscriptionDetails getSubscriptionDetails(String studentId, String classPlanId);
-    SubscriptionDetails renewSubscription(String subscriptionId);
-    void cancelSubscription(String subscriptionId);
+    SubscriptionDetailsDto enrollClassPlan(EnrolClassPlanRequest enrolClassPlanRequest) throws StripeException;
+    Object getSubscriptionDetails(String subscriptionId) throws StripeException;
+    void cancelSubscription(String subscriptionId) throws StripeException;
 }
