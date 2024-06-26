@@ -11,7 +11,7 @@ export const logIn = (formData, navigate) => async (dispatch) => {
     const user = jwtDecode(data.access_token);
 
     if (user.role === "STUDENT") {
-      // const detailsResponse = await AuthApi.fetchStudentDetails(user.userId);
+      const detailsResponse = await AuthApi.fetchStudentDetails(user.userId);
       const userDetails = detailsResponse.data;
       const combinedUserData = { ...user, details: userDetails };
 
@@ -40,7 +40,6 @@ export const signUp = (formData) => async (dispatch) => {
 
     const user = jwtDecode(data.access_token);
 
-    dispatch({ type: "AUTH_SUCCESS", data: combinedUserData });
     console.log(data);
     if (user.role === "STUDENT") {
       const detailsResponse = await AuthApi.fetchStudentDetails(user.userId);

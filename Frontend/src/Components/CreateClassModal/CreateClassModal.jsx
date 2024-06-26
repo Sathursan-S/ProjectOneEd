@@ -24,7 +24,7 @@ const CreateClassModal = ({ onClose, classSpaceId }) => {
         syllabus: [],
         classSchedule: [],
     };
-    console.log(user.userId)
+    
 
     const [data, setData] = useState(initialState);
     const [step, setStep] = useState(1);
@@ -84,12 +84,12 @@ const CreateClassModal = ({ onClose, classSpaceId }) => {
             };
             try {
                 dispatch(createClass(newClass));
-                reset();
+                // reset();
                 console.log(newClass); // Log the newClass data to check the format
             } catch (error) {
                 console.error("Error creating class:", error);
             }
-            onClose(); // Close modal after submission
+             // Close modal after submission
         }
     };
 
@@ -222,7 +222,7 @@ const CreateClassModal = ({ onClose, classSpaceId }) => {
                                     name="syllabusName"
                                     value={data.syllabusName}
                                     onChange={handleChange}
-                                    required
+                                    
                                 />
                             </div>
                             <div className="form-group">
@@ -232,7 +232,7 @@ const CreateClassModal = ({ onClose, classSpaceId }) => {
                                     name="syllabusDescription"
                                     value={data.syllabusDescription}
                                     onChange={handleChange}
-                                    required
+                                    
                                 />
                             </div>
                             <button
@@ -278,21 +278,21 @@ const CreateClassModal = ({ onClose, classSpaceId }) => {
                                         name="date"
                                         value={data.date}
                                         onChange={handleChange}
-                                        required
+                                        
                                     />
                                     <input
                                         type="time"
                                         name="startTime"
                                         value={data.startTime}
                                         onChange={handleChange}
-                                        required
+                                        
                                     />
                                     <input
                                         type="time"
                                         name="endTime"
                                         value={data.endTime}
                                         onChange={handleChange}
-                                        required
+                                        
                                     />
                                 </div>
                             </div>

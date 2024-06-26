@@ -57,15 +57,29 @@ const classReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case "CLASS_UPLOAD_START":
-      return { ...state, uploading: true };
+      return { ...state, uploading: true, loading: true };
     case "CLASS_UPLOAD_SUCCESS":
       return {
         ...state,
         uploading: false,
+        loading: false,
         classes: [...state.classes, action.data],
       };
     case "CLASS_UPLOAD_FAIL":
-      return { ...state, uploading: false, error: action.payload };
+      return {
+        ...state,
+        uploading: false,
+        loading: false,
+        error: action.payload,
+      };
+
+    case "FETCH_CLASS_START":
+      return { ...state, loading: true };
+    case "FETCH_CLASS_SUCCESS":
+      return { ...state, loading: false, classes: action.data };
+    case "FETCH_CLASS_FAIL":
+      return { ...state, loading: false, error: action.error };
+
     default:
       return state;
   }

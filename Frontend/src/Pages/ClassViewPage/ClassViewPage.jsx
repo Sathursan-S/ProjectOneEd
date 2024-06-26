@@ -11,7 +11,7 @@ const ClassViewPage = () => {
     const { classId } = useParams();
     console.log("Class ID:", classId); // Add this line
 
-    const classState = useSelector((state) => state.classData);
+    const classState = useSelector((state) => state.classReducer);
     const { loading, currentClass, error } = classState;
 
     useEffect(() => {
@@ -33,13 +33,7 @@ const ClassViewPage = () => {
         <div className='ClassViewPage'>
             <div className="class-card">
                 <ClassCard
-                    image={currentClass.image}
-                    subject={currentClass.subject}
-                    grade={currentClass.grade}
-                    teacher={currentClass.teacher}
-                    enrolls={currentClass.enrolls}
-                    medium={currentClass.medium}
-                    fee={currentClass.classFee}
+                    classInfo ={classState.currentClass}
                 />
             </div>
             <div className="class-details">
